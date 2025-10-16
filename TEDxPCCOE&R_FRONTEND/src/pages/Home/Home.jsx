@@ -143,7 +143,7 @@ export default function Home() {
         <div className={styles.timeline}>
           <div className={styles.whenWhere}>
             <p>
-              <strong>Date:</strong> 15 March 2025
+              <strong>Date:</strong> 22 January 2026
             </p>
             <p>
               <strong>Time:</strong> 09:30 – 18:00

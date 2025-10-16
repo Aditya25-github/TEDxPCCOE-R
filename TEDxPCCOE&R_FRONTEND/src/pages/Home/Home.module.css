@@ -1,10 +1,10 @@
 :root {
-  --bg: #0f1113; /* near-black for dark sections */
-  --bg-light: #ffffff; /* white */
-  --surface: #f3f4f6; /* light gray panels */
-  --text: #111111; /* dark text on light bg */
-  --muted: #6b7280; /* secondary text */
-  --ted-red: #e62b1e; /* TED Red */
+  --bg: #0f1113;
+  --bg-light: #ffffff;
+  --surface: #f3f4f6;
+  --text: #111111;
+  --muted: #6b7280;
+  --ted-red: #e62b1e;
   --ted-white: #ffffff;
 }
 
