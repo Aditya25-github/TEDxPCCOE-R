@@ -1,58 +1,90 @@
 .preloaderWrapper {
-  position: fixed;
-  inset: 0;
-  background: #000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  overflow: hidden;
+position: fixed;
+/* Use inset: 0 for full coverage */
+inset: 0;
+background: #000000;
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 9999;
+overflow: hidden;
+font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 .canvasShell {
-  width: 100vw;
-  height: 100vh;
+width: 100vw;
+height: 100vh;
+position: absolute;
+top: 0;
+left: 0;
 }
 
-.topPulse {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 4px;
-  width: 100%;
-  background: transparent;
-  overflow: hidden;
+.loadingText {
+position: absolute;
+/* Use a slightly higher bottom position to give space */
+bottom: 12%;
+left: 50%;
+transform: translateX(-50%);
+
+/* Increased size and brightened color for better visibility /
+font-size: 14px;
+font-weight: 600;
+color: rgba(255, 255, 255, 0.95);
+letter-spacing: 4px;
+text-transform: uppercase;
+text-align: center;
+z-index: 10;
+/ Add subtle text shadow to hint at glow */
+text-shadow: 0 0 2px rgba(255, 255, 255, 0.4);
 }
 
-.pulseFill {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to right, #ff2b1e, #ffffff);
-  animation: pulseGrow linear forwards;
+.loadingText span {
+display: inline-block;
+animation: gentlePulse 2.2s ease-in-out infinite; /* Slightly slower pulse */
 }
 
-@keyframes pulseGrow {
-  0% {
-    transform: scaleX(0);
-    transform-origin: left;
-  }
-  100% {
-    transform: scaleX(1);
-    transform-origin: left;
-  }
+@keyframes gentlePulse {
+0%, 100% {
+opacity: 0.7;
+transform: scale(1);
+}
+50% {
+opacity: 1;
+transform: scale(1.02); /* Subtle scale change */
+}
 }
 
-.pulseExit {
-  animation: pulseExit 0.8s ease-in forwards;
+.fadeOut {
+animation: textFadeOut 0.5s ease-out forwards !important;
 }
 
-@keyframes pulseExit {
-  0% {
-    transform: scaleX(1);
-    opacity: 1;
-  }
-  100% {
-    transform: scaleX(0);
-    opacity: 0;
-  }
+@keyframes textFadeOut {
+to {
+opacity: 0;
+/* Move slightly down as it fades */
+transform: translateY(10px) translateX(-50%);
+}
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+.loadingText {
+font-size: 11px;
+letter-spacing: 3px;
+bottom: 10%;
+}
+}
+
+@media (max-width: 480px) {
+.loadingText {
+font-size: 10px;
+letter-spacing: 2.5px;
+bottom: 8%;
+}
+}
+
+/* Ensure no scrollbars /
+/ Note: In the React file, this should be included as a global style if possible */
+body {
+overflow-x: hidden;
 }
