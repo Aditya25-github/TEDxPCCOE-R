@@ -2,7 +2,6 @@
    CSS CUSTOM PROPERTIES (DESIGN TOKENS)
    ============================================ */
 :root {
-<<<<<<< HEAD
   /* Colors */
   --bg-dark: #0f1113;
   --bg-light: #ffffff;
@@ -10,13 +9,6 @@
   --text-primary: #111111;
   --text-secondary: #6b7280;
   --text-muted: #9ca3af;
-=======
-  --bg: #0f1113;
-  --bg-light: #ffffff;
-  --surface: #f3f4f6;
-  --text: #111111;
-  --muted: #6b7280;
->>>>>>> 960f77391dd2a5689e9c9d567650826de64e170d
   --ted-red: #e62b1e;
   --ted-white: #ffffff;
   --border-light: #e5e7eb;
