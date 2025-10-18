@@ -5,24 +5,28 @@
   --muted: #cbd5e1;
 }
 
+/* Header */
 .header {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: var(--black); /* navbar color: black */
+  background: var(--black);
   color: var(--white);
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
+/* Inner: three-column layout with spacer in the middle */
 .inner {
   max-width: 1120px;
+  /* full-bleed centering without side margins squeezing space */
   margin: 0 auto;
   height: 90px;
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto 1fr auto; /* brand | spacer | nav */
   align-items: center;
-  gap: 12px;
-  padding: 0 16px;
+  /* increase horizontal gap between logo and nav */
+  column-gap: 28px;
+  padding: 0 20px; /* safe breathing room against viewport edge */
 }
 
 /* Brand lockup */
@@ -32,16 +36,16 @@
   min-width: 140px;
 }
 .logo {
-  height: 28px;
+  height: 50px;
   display: block;
 }
 
-/* Desktop nav */
+/* Desktop nav anchored to the far right */
 .nav {
   display: none;
   gap: 16px;
-  justify-content: flex-end;
   align-items: center;
+  justify-self: end; /* stick to right edge of the inner container */
 }
 .link {
   color: rgba(255, 255, 255, 0.92);
@@ -51,10 +55,9 @@
   border-radius: 8px;
   transition: color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
 }
-
 .link:hover,
 .link:focus-visible {
-  color: var(--ted-red); /* bright TEDx red on hover/focus */
+  color: var(--ted-red);
   outline: none;
 }
 
@@ -69,6 +72,7 @@
   background: rgba(255, 255, 255, 0.08);
 }
 
+/* CTA */
 .buy {
   color: #fff;
   background: var(--ted-red);
@@ -86,7 +90,7 @@
   outline: none;
 }
 
-/* Mobile burger */
+/* Mobile burger stays on the right-most column on small screens */
 .burger {
   display: inline-flex;
   width: 42px;
@@ -97,6 +101,7 @@
   justify-content: center;
   gap: 4px;
   cursor: pointer;
+  justify-self: end; /* ensure burger sits at the far right as well */
 }
 .burgerBar {
   width: 22px;

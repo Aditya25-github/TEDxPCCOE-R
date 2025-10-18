@@ -11,6 +11,7 @@ import Contact from "../../components/Contact/Contact";
 import Footer from "../../components/Footer/Footer";
 import { SPEAKERS, SLOTS, SPONSORS, TEAM, GALLERY } from "../../data/homeData";
 import styles from "./Home.module.css";
+import Countdown from "../../components/CountDown/Countdown";
 
 const scrollToId = (id) => {
   const el = document.getElementById(id);
@@ -22,6 +23,7 @@ export default function Home() {
     <main className={styles.page}>
       <Hero scrollToId={scrollToId} />
       <About />
+      <Countdown />
       <Trailer />
       <Speakers speakers={SPEAKERS} />
       <Schedule slots={SLOTS} />

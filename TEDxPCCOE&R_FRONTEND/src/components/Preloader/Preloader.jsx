@@ -13,18 +13,33 @@ import {
 // ============================================================================
 
 const BASE_SETTINGS = {
+<<<<<<< HEAD
   text: "TEDxPCCOER",
   totalPoints: 25000,
   cameraZoom: 100,
   formationDuration: 2000,
   holdDuration: 1200,
   explosionDuration: 1500,  // Reduced from 2500 to 1500
+=======
+  text: "TEDxPCCOE&R",
+  totalPoints: 14000,
+  cameraZoom: 100,
+  formationDuration: 1200,
+  holdDuration: 1200,
+  explosionDuration: 1200,
+>>>>>>> d563b09 (2nd commit)
   backgroundColor: "#000000",
   tedxColor: "#FF0000",
   pccoerColor: "#FFFFFF",
+<<<<<<< HEAD
   ambientLightIntensity: 5.0,
   pointLightIntensity: 7.0,
   explosionStrength: 50,
+=======
+  ambientLightIntensity: 1.2,
+  pointLightIntensity: 2.5,
+  explosionStrength: 40,
+>>>>>>> d563b09 (2nd commit)
 };
 
 // ============================================================================
@@ -37,7 +52,12 @@ const ParticleMaterial = shaderMaterial(
     uProgress: 0,
     uExplode: 0,
     uSize: 1.0,
+<<<<<<< HEAD
     uGlowIntensity: 5.0,
+=======
+    // New uniform for previous position to calculate speed
+    uPrevPosition: 0,
+>>>>>>> d563b09 (2nd commit)
   },
 
   // Vertex Shader
@@ -80,6 +100,7 @@ const ParticleMaterial = shaderMaterial(
       vec3 morphedPos = mix(initialPos, targetPos, smoothProgress) + swarmOffset;
 
       if (uExplode > 0.0) {
+<<<<<<< HEAD
         vec3 explosionDir = normalize(targetPos + vec3(0.0001));
         
         float randomX = random(targetPos + vec3(1.0, 0.0, 0.0)) - 0.5;
@@ -105,6 +126,14 @@ const ParticleMaterial = shaderMaterial(
         );
         
         morphedPos += rotatedDir * explosionStrength;
+=======
+        vec3 explosionDir = normalize(targetPos + vec3(0.001, 0.001, 0.001));
+        float velocity = aSpeed * aSpeed * 0.5; 
+        float explosionStrength = uExplode * uExplode * ${BASE_SETTINGS.explosionStrength.toFixed(
+          1
+        )} * velocity;
+        morphedPos += explosionDir * explosionStrength;
+>>>>>>> d563b09 (2nd commit)
       }
 
       vec4 mvPosition = modelViewMatrix * vec4(morphedPos, 1.0);
@@ -220,6 +249,7 @@ function usePrefersReducedMotion() {
   return prefers;
 }
 
+<<<<<<< HEAD
 // ============================================================================
 // TEXT TO PARTICLES CONVERSION
 // ============================================================================
@@ -230,6 +260,15 @@ function createTextParticles(text, totalPoints, viewportWidth) {
   const width = isMobile ? 2400 : 3600;
   const height = isMobile ? 480 : 680;
   
+=======
+function createTextParticles(text, totalPoints, viewportWidth) {
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+
+  // Dynamic canvas size based on screen
+  const width = isMobile ? 800 : 1000;
+  const height = isMobile ? 150 : 200;
+
+>>>>>>> d563b09 (2nd commit)
   const canvas = document.createElement("canvas");
   canvas.width = width;
   canvas.height = height;
@@ -238,8 +277,21 @@ function createTextParticles(text, totalPoints, viewportWidth) {
     alpha: true 
   });
 
+<<<<<<< HEAD
   const fontTEDx = `900 ${isMobile ? 200 : 300}px Inter, Helvetica, Arial, sans-serif`;
   const fontPCCOER = `900 ${isMobile ? 170 : 250}px Inter, Helvetica, Arial, sans-serif`;
+=======
+  // Dynamic font sizes that fit within screen bounds
+  const fontTED = `900 ${
+    isMobile ? 60 : 80
+  }px Inter, Helvetica, Arial, sans-serif`;
+  const fontX = `900 ${
+    isMobile ? 40 : 50
+  }px Inter, Helvetica, Arial, sans-serif`;
+  const fontRest = `900 ${
+    isMobile ? 50 : 70
+  }px Inter, Helvetica, Arial, sans-serif`;
+>>>>>>> d563b09 (2nd commit)
 
   const parts = splitTedxPCCOER(text);
   const centerX = width / 2;
@@ -250,9 +302,17 @@ function createTextParticles(text, totalPoints, viewportWidth) {
   ctx.font = fontPCCOER;
   const widthPCCOER = ctx.measureText(parts.pccoer).width;
 
+<<<<<<< HEAD
   const totalTextPixelWidth = widthTEDx + widthPCCOER + (isMobile ? 70 : 100);
+=======
+  // Calculate total pixel width used by the text
+  const totalTextPixelWidth =
+    widthTED + widthX + widthRest + (isMobile ? 15 : 25);
+
+  // Ensure text doesn't exceed canvas width (this is internal scaling, not world)
+>>>>>>> d563b09 (2nd commit)
   const pixelScaleFactor = Math.min(1, (width * 0.9) / totalTextPixelWidth);
-  
+
   let currentX = centerX - (totalTextPixelWidth * pixelScaleFactor) / 2;
 
   ctx.imageSmoothingEnabled = true;
@@ -277,11 +337,22 @@ function createTextParticles(text, totalPoints, viewportWidth) {
   
   currentX += scaledTEDxWidth + (isMobile ? 30 : 44);
 
+<<<<<<< HEAD
   ctx.shadowColor = "rgba(255, 255, 255, 0.2)";
   ctx.shadowBlur = 8;
   ctx.shadowOffsetX = 4;
   ctx.shadowOffsetY = 4;
   ctx.strokeStyle = BASE_SETTINGS.pccoerColor;
+=======
+  // Draw x in red
+  ctx.fillStyle = BASE_SETTINGS.tedColor;
+  ctx.font = fontX;
+  const scaledXWidth = widthX * pixelScaleFactor;
+  ctx.fillText(parts.x, currentX, centerY + (isMobile ? 8 : 12));
+  currentX += scaledXWidth + (isMobile ? 5 : 8);
+
+  // Draw PCCOE&R in white
+>>>>>>> d563b09 (2nd commit)
   ctx.fillStyle = BASE_SETTINGS.pccoerColor;
   ctx.font = fontPCCOER;
   ctx.strokeText(parts.pccoer, currentX, centerY);
@@ -291,16 +362,37 @@ function createTextParticles(text, totalPoints, viewportWidth) {
   const sampledPoints = [];
   const sampledColors = [];
 
+<<<<<<< HEAD
   const step = isMobile ? 0.5 : 0.35;
   
   const tedxEndX = centerX - (totalTextPixelWidth * pixelScaleFactor) / 2 + scaledTEDxWidth + (isMobile ? 20 : 30);
   const targetWorldWidth = viewportWidth * 0.82;
   const actualDrawnTextPixelWidth = totalTextPixelWidth * pixelScaleFactor;
   const worldScale = targetWorldWidth / actualDrawnTextPixelWidth; 
+=======
+  const step = isMobile ? 1.8 : 1.5;
+  const tedxEnd =
+    centerX -
+    (totalTextPixelWidth * pixelScaleFactor) / 2 +
+    scaledTEDWidth +
+    scaledXWidth +
+    (isMobile ? 10 : 16);
+
+  // --- RESPONSIVENESS FIX: Calculate world scale based on viewport ---
+  // We want the text to occupy about 80% of the viewport width.
+  const targetWorldWidth = viewportWidth * 0.8;
+  const actualDrawnTextPixelWidth = totalTextPixelWidth * pixelScaleFactor;
+
+  // Calculate the scale factor from drawn pixels to world units
+  const worldScale = targetWorldWidth / actualDrawnTextPixelWidth;
+  // Safety factor for height scaling
+  const worldScaleY = worldScale * 1.5;
+>>>>>>> d563b09 (2nd commit)
 
   for (let y = 0; y < height; y += step) {
     for (let x = 0; x < width; x += step) {
       const alphaIndex = (Math.floor(y) * width + Math.floor(x)) * 4 + 3;
+<<<<<<< HEAD
       
       if (imageData[alphaIndex] > 60) {
         const relativeX = x - centerX;
@@ -308,6 +400,16 @@ function createTextParticles(text, totalPoints, viewportWidth) {
         const worldX = relativeX * worldScale; 
         const worldY = relativeY * worldScale; 
         
+=======
+      if (imageData[alphaIndex] > 120) {
+        // Transform pixel coordinates relative to the center (0,0)
+        const relativeX = x - centerX;
+        const relativeY = centerY - y;
+
+        // Scale to dynamic world coordinates
+        const worldX = relativeX * worldScale;
+        const worldY = relativeY * worldScale;
+>>>>>>> d563b09 (2nd commit)
         sampledPoints.push(worldX, worldY, 0);
 
         const isTEDx = x < tedxEndX;
@@ -329,14 +431,24 @@ function createTextParticles(text, totalPoints, viewportWidth) {
   const delays = new Float32Array(numPoints);
   const speeds = new Float32Array(numPoints);
 
+<<<<<<< HEAD
   const wideXY = 20; 
   
+=======
+  const wideXY = 12;
+
+>>>>>>> d563b09 (2nd commit)
   for (let i = 0; i < numPoints; i++) {
     const j = i * 3;
     const randomIndex = Math.floor(Math.random() * numSampled);
     const rj = randomIndex * 3;
 
+<<<<<<< HEAD
     const deepZ = -(28 + Math.random() * 28);
+=======
+    // Initial positions: Distributed widely in X/Y and placed far back in Z
+    const deepZ = -(20 + Math.random() * 20); // Z between -20 and -40
+>>>>>>> d563b09 (2nd commit)
     positions[j] = (Math.random() - 0.5) * wideXY;
     positions[j + 1] = (Math.random() - 0.5) * wideXY;
     positions[j + 2] = deepZ;
@@ -349,19 +461,26 @@ function createTextParticles(text, totalPoints, viewportWidth) {
     colors[j + 1] = sampledColors[rj + 1];
     colors[j + 2] = sampledColors[rj + 2];
 
-    delays[i] = Math.pow(Math.random(), 2.0) * 0.4; 
-    speeds[i] = 0.5 + Math.random(); 
+    delays[i] = Math.pow(Math.random(), 2.0) * 0.4;
+    speeds[i] = 0.5 + Math.random();
   }
 
   return { positions, targets, colors, delays, speeds, numPoints };
 }
 
+<<<<<<< HEAD
 // ============================================================================
 // PARTICLE TEXT COMPONENT
 // ============================================================================
 
 function ParticleText({ text, explode, totalPoints, particleSize }) {
   const { viewport } = useThree(); 
+=======
+// --- PARTICLE TEXT COMPONENT ---
+function ParticleText({ text, explode, totalPoints, particleSize }) {
+  const { viewport } = useThree();
+
+>>>>>>> d563b09 (2nd commit)
   const pointsRef = useRef();
   const materialRef = useRef();
   const clockStart = useRef(performance.now());
@@ -409,9 +528,10 @@ function ParticleText({ text, explode, totalPoints, particleSize }) {
       elapsed / (BASE_SETTINGS.formationDuration / 1000),
       1.0
     );
-    const easedFormProgress = formProgress < 0.5
-      ? 2.0 * formProgress * formProgress
-      : 1.0 - Math.pow(-2.0 * formProgress + 2.0, 2.0) / 2.0;
+    const easedFormProgress =
+      formProgress < 0.5
+        ? 2.0 * formProgress * formProgress
+        : 1.0 - Math.pow(-2.0 * formProgress + 2.0, 2.0) / 2.0;
     material.uniforms.uProgress.value = easedFormProgress;
 
     if (explode) {
@@ -442,10 +562,14 @@ function ParticleText({ text, explode, totalPoints, particleSize }) {
   );
 }
 
+<<<<<<< HEAD
 // ============================================================================
 // MAIN PRELOADER COMPONENT
 // ============================================================================
 
+=======
+// --- MAIN PRELOADER COMPONENT ---
+>>>>>>> d563b09 (2nd commit)
 export default function Preloader({ onFinish }) {
   const [done, setDone] = useState(false);
   const [explode, setExplode] = useState(false);
@@ -453,7 +577,11 @@ export default function Preloader({ onFinish }) {
   const particleSize = useMemo(() => {
     if (typeof window === "undefined") return 5.0;
     const isMobile = window.innerWidth < 768;
+<<<<<<< HEAD
     return isMobile ? 8.5 : 12.0;
+=======
+    return isMobile ? 3.5 : 5.0;
+>>>>>>> d563b09 (2nd commit)
   }, []);
 
   const [cameraZoom, setCameraZoom] = useState(BASE_SETTINGS.cameraZoom);
@@ -464,16 +592,21 @@ export default function Preloader({ onFinish }) {
       
       const width = window.innerWidth;
       let scale;
+<<<<<<< HEAD
       
       if (width < 768) {
         scale = Math.min(0.7, Math.max(0.5, width / 1100)); 
+=======
+      if (w < 768) {
+        scale = Math.min(0.7, Math.max(0.5, w / 1100));
+>>>>>>> d563b09 (2nd commit)
       } else {
         scale = Math.min(1.0, Math.max(0.7, width / 1300));
       }
       
       setCameraZoom(BASE_SETTINGS.cameraZoom * scale);
     }
-    
+
     updateZoom();
     window.addEventListener("resize", updateZoom);
     return () => window.removeEventListener("resize", updateZoom);
@@ -506,11 +639,15 @@ export default function Preloader({ onFinish }) {
 
   return (
     <div className="preloader-wrapper">
+<<<<<<< HEAD
+=======
+      {/* Embedded Styles for structure and animation */}
+>>>>>>> d563b09 (2nd commit)
       <style jsx global>{`
         body {
           overflow: hidden;
         }
-        
+
         .preloader-wrapper {
           position: fixed;
           inset: 0;
@@ -520,7 +657,7 @@ export default function Preloader({ onFinish }) {
           align-items: center;
           z-index: 9999;
           overflow: hidden;
-          font-family: 'Inter', sans-serif;
+          font-family: "Inter", sans-serif;
         }
 
         .canvas-shell {
@@ -533,6 +670,7 @@ export default function Preloader({ onFinish }) {
       `}</style>
 
       <div className="canvas-shell">
+<<<<<<< HEAD
         <Canvas 
           gl={{ 
             antialias: true,
@@ -548,6 +686,19 @@ export default function Preloader({ onFinish }) {
         >
           <color attach="background" args={[BASE_SETTINGS.backgroundColor]} />
           
+=======
+        <Canvas
+          gl={{
+            antialias: true,
+            alpha: false,
+            powerPreference: "high-performance",
+          }}
+          dpr={[1, 2]}
+        >
+          <color attach="background" args={[BASE_SETTINGS.backgroundColor]} />
+
+          {/* Subtle lighting for better depth perception */}
+>>>>>>> d563b09 (2nd commit)
           <ambientLight intensity={BASE_SETTINGS.ambientLightIntensity} />
           
           <pointLight
@@ -555,18 +706,22 @@ export default function Preloader({ onFinish }) {
             intensity={BASE_SETTINGS.pointLightIntensity}
             color="#FF0000"
           />
+<<<<<<< HEAD
           <pointLight position={[-6, -5, 7]} intensity={6.0} color="#FFFFFF" />
           <pointLight position={[0, 0, 12]} intensity={5.5} color="#FFFFFF" />
           <pointLight position={[0, 7, 6]} intensity={4.0} color="#FFFFFF" />
           <pointLight position={[0, -7, 6]} intensity={4.0} color="#FFFFFF" />
           <pointLight position={[8, 0, 6]} intensity={3.5} color="#FF0000" />
           
+=======
+
+>>>>>>> d563b09 (2nd commit)
           <OrthographicCamera
             makeDefault
             position={[0, 0, 10]}
             zoom={cameraZoom}
           />
-          
+
           <ParticleText
             text={BASE_SETTINGS.text}
             explode={explode}

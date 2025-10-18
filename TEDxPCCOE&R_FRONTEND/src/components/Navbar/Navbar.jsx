@@ -20,7 +20,7 @@ export default function Navbar() {
         <a href="/" className={styles.brand} aria-label="TEDxPCCOE&R Home">
           {/* Use the official lockup asset (SVG/PNG) here */}
           <img
-            src="/brand/tedx_lockup.svg"
+            src="./logo-white.png"
             alt="TEDxPCCOE&R"
             className={styles.logo}
           />

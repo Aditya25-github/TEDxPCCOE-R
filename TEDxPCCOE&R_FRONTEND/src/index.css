@@ -1,0 +1,14 @@
+html,
+body {
+  margin: 0; /* remove default UA margins */
+  padding: 0; /* remove default UA padding */
+  width: 100%;
+  height: 100%;
+  background: var(--bg-light); /* or #000 if using dark */
+}
+#root,
+#__next {
+  width: 100%;
+  min-height: 100%;
+  isolation: isolate; /* avoid unwanted stacking bleed */
+}
