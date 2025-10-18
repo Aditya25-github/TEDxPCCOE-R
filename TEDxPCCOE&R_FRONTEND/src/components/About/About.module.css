@@ -1,38 +1,85 @@
 .about {
-  background: #ffffff;
-  padding: clamp(32px, 6vw, 80px) 16px;
+  position: relative; /* create stacking context */
+  background-image: url("/bg2.jpeg"); /* prefer public path */
+  background-size: cover; /* responsive fill */ /* [web:72] */
+  background-position: center;
+  background-repeat: no-repeat; /* no tiling */ /* [web:57] */
+  padding: clamp(56px, 8vw, 120px) 16px; /* more vertical space */
+  min-height: min(1200px, 80vh); /* make it tall and immersive */
+  color: #f5f7fa; /* default light text on dark image */
+  scroll-behavior: smooth;
 }
 
+.about::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+      1200px 600px at 15% 20%,
+      rgba(0, 0, 0, 0.35),
+      transparent 60%
+    ),
+    radial-gradient(
+      1200px 600px at 85% 60%,
+      rgba(0, 0, 0, 0.35),
+      transparent 60%
+    ),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.65)); /* layered tint for readability */ /* [web:58][web:61] */
+  z-index: 0;
+}
+
+/* Foreground wrapper ensures content sits above overlay */
+.about > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Grid */
 .aboutGrid {
   max-width: 1120px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr;
-  gap: clamp(20px, 4vw, 28px);
+  gap: clamp(24px, 4vw, 40px);
+  align-items: center;
 }
 
+/* Create a subtle card behind the text block for stronger contrast */
+.aboutGrid > div:first-child {
+  background: rgba(17, 17, 17, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(6px);
+  border-radius: clamp(10px, 1.5vw, 16px);
+  padding: clamp(20px, 3.5vw, 36px);
+}
+
+/* Typography tuned for dark background */
 .sectionTitle {
-  font-weight: 800;
-  font-size: clamp(24px, 5vw, 36px);
-  margin: 0 0 clamp(8px, 1.5vw, 12px);
-  color: #111111;
-  line-height: 1.2;
+  font-weight: 900;
+  font-size: clamp(28px, 5.5vw, 44px);
+  margin: 0 0 clamp(10px, 1.8vw, 14px);
+  color: #ffffff;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.6);
 }
 
 .lede {
-  color: #6b7280;
-  margin: 0 0 clamp(12px, 2vw, 16px);
-  line-height: 1.7;
-  font-size: clamp(14px, 1.8vw, 16px);
+  color: rgba(245, 247, 250, 0.92);
+  margin: 0 0 clamp(14px, 2.2vw, 18px);
+  line-height: 1.75;
+  font-size: clamp(15px, 1.9vw, 18px);
 }
 
 .muted {
-  color: #6b7280;
+  color: rgba(245, 247, 250, 0.75);
   margin: 0;
-  font-size: clamp(12px, 1.6vw, 14px);
-  line-height: 1.6;
+  font-size: clamp(13px, 1.7vw, 15px);
+  line-height: 1.65;
 }
 
+/* Media block */
 .aboutMedia {
   width: 100%;
 }
@@ -41,25 +88,40 @@
 .aboutMedia video {
   width: 100%;
   height: auto;
-  border-radius: clamp(8px, 1.5vw, 12px);
+  border-radius: clamp(10px, 1.5vw, 16px);
   display: block;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.35);
+  outline: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Add a subtle float effect on hover for large screens */
+@media (hover: hover) and (pointer: fine) {
+  .aboutMedia img {
+    transition: transform 300ms ease, box-shadow 300ms ease;
+  }
+  .aboutMedia img:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 64px rgba(0, 0, 0, 0.4);
+  }
 }
 
 /* Tablet and up (768px+) */
 @media (min-width: 768px) {
   .aboutGrid {
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
+    grid-template-columns: 1.15fr 0.85fr; /* give text more width */
+    gap: clamp(28px, 5vw, 48px);
   }
 }
 
-/* Desktop and up (1024px+) */
+/* Desktop (1024px+) */
 @media (min-width: 1024px) {
-  .aboutGrid {
-    grid-template-columns: 1.2fr 1fr;
-  }
-  
   .about {
-    padding: clamp(60px, 8vw, 80px) 20px;
+    padding: clamp(80px, 9vw, 140px) 20px;
+    background-attachment: fixed; /* parallax-like; desktop only */ /* [web:57] */
   }
+}
+
+/* Prevent header overlap when using scrollIntoView */
+#about {
+  scroll-margin-top: clamp(60px, 8vh, 100px); /* [web:30][web:33] */
 }

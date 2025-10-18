@@ -5,7 +5,7 @@ export const SPEAKERS = [
     title: "Founder, X Labs",
     topic: "Reimagining Energy",
     bio: "Short bio goes here.",
-    photo: "/media/speakers/s1.jpg",
+    photo: "https://api.dicebear.com/9.x/micah/svg?seed=Vivian",
     video: "",
   },
   {
@@ -14,7 +14,7 @@ export const SPEAKERS = [
     title: "Scientist, Y Institute",
     topic: "AI for Climate",
     bio: "Short bio goes here.",
-    photo: "/media/speakers/s2.jpg",
+    photo: "https://api.dicebear.com/9.x/micah/svg?seed=Maria",
     video: "",
   },
   {
@@ -23,7 +23,7 @@ export const SPEAKERS = [
     title: "Author",
     topic: "Human Potential",
     bio: "Short bio goes here.",
-    photo: "/media/speakers/s3.jpg",
+    photo: "https://api.dicebear.com/9.x/micah/svg?seed=Ryan",
     video: "",
   },
 ];
@@ -39,35 +39,35 @@ export const SLOTS = [
 ];
 
 export const SPONSORS = [
-  { id: 1, name: "Platinum Co.", logo: "/media/sponsors/p1.png", url: "#" },
-  { id: 2, name: "Gold Co.", logo: "/media/sponsors/g1.png", url: "#" },
-  { id: 3, name: "Silver Co.", logo: "/media/sponsors/s1.png", url: "#" },
+  { id: 1, name: "Platinum Co.", logo: "https://api.dicebear.com/9.x/icons/svg?seed=Avery", url: "#" },
+  { id: 2, name: "Gold Co.", logo: "https://api.dicebear.com/9.x/icons/svg?seed=Eden", url: "#" },
+  { id: 3, name: "Silver Co.", logo: "https://api.dicebear.com/9.x/icons/svg?seed=Katherine", url: "#" },
 ];
 
 export const TEAM = [
   {
     id: 1,
-    name: "Aditya Divate",
+    name: "Member 1",
     role: "Lead Organizer",
-    photo: "/media/team/t1.jpg",
+    photo: "https://api.dicebear.com/9.x/micah/svg?seed=Caleb",
   },
-  { id: 2, name: "Member Two", role: "Curation", photo: "/media/team/t2.jpg" },
+  { id: 2, name: "Member Two", role: "Curation", photo: "https://api.dicebear.com/9.x/micah/svg?seed=Leah" },
   {
     id: 3,
     name: "Member Three",
     role: "Production",
-    photo: "/media/team/t3.jpg",
+    photo: "https://api.dicebear.com/9.x/micah/svg?seed=Sophia",
   },
   {
     id: 4,
     name: "Member Four",
     role: "Partnerships",
-    photo: "/media/team/t4.jpg",
+    photo: "https://api.dicebear.com/9.x/micah/svg?seed=Destiny",
   },
 ];
 
 export const GALLERY = [
-  { id: 1, src: "/media/gallery/g1.jpg", alt: "TEDx stage photo" },
-  { id: 2, src: "/media/gallery/g2.jpg", alt: "Audience cheering" },
-  { id: 3, src: "/media/gallery/g3.jpg", alt: "Speaker on stage" },
+  { id: 1, src: "gallery_1.JPG", alt: "TEDx stage photo" },
+  { id: 2, src: "g4.jpeg ", alt: "Audience cheering" },
+  { id: 3, src: "gallery_2.jpg", alt: "Speaker on stage" },
 ];

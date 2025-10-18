@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className={styles.footer} role="contentinfo">
       <div className={styles.footerTop}>
         <a className={styles.brand} href="/">
-          <img src="/brand/tedx_lockup.svg" alt="TEDxPCCOE&R" />
+          <img src="./logo-white.png" alt="TEDxPCCOE&R" />
         </a>
         <nav aria-label="Footer">
           <ul className={styles.footerLinks}>

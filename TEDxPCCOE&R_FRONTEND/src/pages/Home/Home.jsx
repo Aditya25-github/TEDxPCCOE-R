@@ -22,8 +22,8 @@ export default function Home() {
   return (
     <main className={styles.page}>
       <Hero scrollToId={scrollToId} />
-      <About />
       <Countdown />
+      <About />
       <Trailer />
       <Speakers speakers={SPEAKERS} />
       <Schedule slots={SLOTS} />

@@ -1,104 +1,228 @@
+/* Section background with subtle vignette */
 .team {
-  background: #ffffff;
-  padding: clamp(32px, 6vw, 90px) 16px;
+  position: relative;
+  background: radial-gradient(
+      1200px 600px at 10% 0%,
+      rgba(255, 0, 0, 0.05),
+      transparent 60%
+    ),
+    radial-gradient(
+      900px 500px at 95% 100%,
+      rgba(255, 0, 0, 0.05),
+      transparent 60%
+    ),
+    #0b0b0c;
+  padding: clamp(56px, 8vw, 120px) 16px;
+  color: #e9eef3;
+}
+.team::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.65);
 }
 
+/* Head */
 .sectionHead {
+  position: relative;
+  z-index: 1;
   max-width: 1120px;
-  margin: 0 auto clamp(16px, 3vw, 24px);
-  padding: 0 4px;
+  margin: 0 auto clamp(24px, 4vw, 36px);
+  padding: 0 6px;
 }
-
 .sectionTitle {
-  font-weight: 800;
-  font-size: clamp(24px, 5vw, 36px);
-  margin: 0 0 clamp(6px, 1.5vw, 10px);
-  color: #111111;
-  line-height: 1.2;
+  font-weight: 900;
+  font-size: clamp(28px, 5.4vw, 44px);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin: 0 0 clamp(8px, 1.6vw, 12px);
+  color: #fff;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
 }
-
 .sectionDesc {
-  color: #6b7280;
+  color: rgba(233, 238, 243, 0.8);
+  font-size: clamp(14px, 2vw, 18px);
   margin: 0;
-  font-size: clamp(13px, 1.8vw, 15px);
-  line-height: 1.6;
 }
 
+/* Grid */
 .teamGrid {
+  position: relative;
+  z-index: 1;
   max-width: 1120px;
   margin: 0 auto;
-  padding: 0 4px;
+  padding: 0 6px;
   list-style: none;
   display: grid;
-  grid-template-columns: 1fr;
-  gap: clamp(14px, 2.5vw, 16px);
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: clamp(16px, 2.4vw, 24px);
 }
 
+/* Card */
 .teamCard {
-  background: #f3f4f6;
-  border-radius: clamp(10px, 1.5vw, 12px);
-  overflow: hidden;
+  position: relative;
   display: grid;
   grid-template-rows: auto 1fr;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-radius: clamp(12px, 1.8vw, 18px);
+  overflow: clip;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.04)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.35);
+  transition: transform 160ms ease, box-shadow 200ms ease,
+    border-color 200ms ease, background 200ms ease;
 }
-
+.teamCard::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: radial-gradient(
+    600px 200px at 0% 0%,
+    rgba(255, 74, 61, 0.18),
+    transparent 60%
+  );
+  pointer-events: none;
+  opacity: 0.65;
+}
 .teamCard:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.2);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.12),
+    rgba(255, 255, 255, 0.06)
+  );
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
 }
 
-.teamCard img {
+/* Media area with fixed ratio */
+.cardMedia {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: #0f1113;
+}
+.cardMedia img {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: clamp(180px, 30vw, 220px);
+  height: 100%;
   object-fit: cover;
-  display: block;
 }
 
+/* Subtle badge in corner */
+.badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  color: #0f1113;
+  background: #fff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Content */
+.cardBody {
+  display: grid;
+  gap: 6px;
+  padding: clamp(14px, 2.4vw, 18px);
+  background: linear-gradient(
+    180deg,
+    rgba(15, 17, 19, 0.35),
+    rgba(15, 17, 19, 0.15)
+  );
+}
 .teamName {
-  font-weight: 700;
-  margin: clamp(10px, 2vw, 12px) clamp(10px, 2vw, 12px) clamp(4px, 1vw, 6px);
-  color: #111111;
-  font-size: clamp(14px, 2vw, 16px);
+  color: #fff;
+  font-weight: 800;
+  font-size: clamp(15px, 2.1vw, 20px);
   line-height: 1.3;
+  margin: 0;
+  letter-spacing: -0.005em;
 }
-
 .teamRole {
-  margin: 0 clamp(10px, 2vw, 12px) clamp(10px, 2vw, 12px);
-  color: #6b7280;
-  font-size: clamp(12px, 1.6vw, 14px);
-  line-height: 1.5;
+  color: rgba(233, 238, 243, 0.8);
+  font-size: clamp(12px, 1.8vw, 16px);
+  margin: 0 0 clamp(6px, 1.6vw, 8px);
 }
 
-/* Mobile landscape (480px+) */
+/* Social buttons reveal */
+.socials {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+}
+.socialBtn {
+  display: inline-grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  transition: transform 160ms ease, background 160ms ease,
+    border-color 160ms ease, box-shadow 160ms ease;
+}
+.socialBtn:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.22);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+}
+
+/* Time-to-hover accent */
+.teamCard:hover .teamName {
+  text-shadow: 0 2px 12px rgba(255, 74, 61, 0.35);
+}
+
+/* Responsive columns */
 @media (min-width: 480px) {
   .teamGrid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
-
-/* Tablet (768px+) */
 @media (min-width: 768px) {
   .teamGrid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
-
-/* Desktop (1024px+) */
 @media (min-width: 1024px) {
   .teamGrid {
     grid-template-columns: repeat(4, 1fr);
-    padding: 0 20px;
+    padding: 0 10px;
   }
-  
   .sectionHead {
-    padding: 0 20px;
+    padding: 0 10px;
   }
 }
-
-/* Large desktop (1440px+) */
 @media (min-width: 1440px) {
   .teamGrid {
     grid-template-columns: repeat(5, 1fr);
   }
+}
+
+/* Focus states */
+.teamCard:focus-within,
+.socialBtn:focus-visible {
+  outline: 2px solid #ff4a3d;
+  outline-offset: 2px;
+}
+
+/* Optional: grayscale-to-color hover for avatars */
+.cardMedia img {
+  filter: saturate(0.85) contrast(1.05);
+  transition: filter 220ms ease, transform 220ms ease;
+}
+.teamCard:hover .cardMedia img {
+  filter: saturate(1.1) contrast(1.1);
+  transform: scale(1.02);
 }

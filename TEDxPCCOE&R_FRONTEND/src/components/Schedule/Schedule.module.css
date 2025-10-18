@@ -1,138 +1,203 @@
+/* Section container */
 .schedule {
-  background: #ffffff;
-  padding: clamp(32px, 6vw, 90px) 16px;
+  position: relative;
+  background-image: url("/bg1.jpeg"); /* place file in /public/media and use clean path */ /* [web:57] */
+  background-size: cover; /* responsive fill */ /* [web:72] */
+  background-position: center top;
+  background-repeat: no-repeat;
+  padding: clamp(72px, 8vw, 140px) 16px; /* more vertical space */
+  min-height: min(1400px, 120vh); /* immersive height */
+  color: #f5f7fa;
+  overflow: hidden; /* clip glow effects */
 }
 
+/* Readability overlays (vignette + tint) */
+.schedule::before,
+.schedule::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.schedule::before {
+  background: radial-gradient(
+      1200px 600px at 15% 10%,
+      rgba(0, 0, 0, 0.45),
+      transparent 60%
+    ),
+    radial-gradient(
+      1200px 700px at 90% 70%,
+      rgba(0, 0, 0, 0.4),
+      transparent 60%
+    ),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.75)); /* layered tint */ /* [web:58][web:61] */
+}
+.schedule::after {
+  box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.7); /* vignette edge */
+}
+
+/* Head */
 .sectionHead {
+  position: relative;
+  z-index: 1;
   max-width: 1120px;
-  margin: 0 auto clamp(16px, 3vw, 24px);
+  margin: 0 auto clamp(20px, 3.5vw, 28px);
   padding: 0 4px;
 }
-
 .sectionTitle {
-  font-weight: 800;
-  font-size: clamp(24px, 5vw, 36px);
-  margin: 0 0 clamp(6px, 1.5vw, 10px);
-  color: #111111;
-  line-height: 1.2;
+  font-weight: 900;
+  font-size: clamp(28px, 5.5vw, 44px);
+  margin: 0 0 clamp(8px, 1.8vw, 12px);
+  color: #fff;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.6);
 }
-
 .sectionDesc {
-  color: #6b7280;
+  color: rgba(245, 247, 250, 0.85);
   margin: 0;
-  font-size: clamp(13px, 1.8vw, 15px);
-  line-height: 1.6;
+  font-size: clamp(14px, 2vw, 18px);
+  line-height: 1.7;
 }
 
+/* Layout */
 .timeline {
+  position: relative;
+  z-index: 1;
   max-width: 1120px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr;
-  gap: clamp(16px, 3vw, 20px);
+  gap: clamp(16px, 3vw, 24px);
+  align-items: start;
 }
 
+/* Sidebar card (Date/Time/Venue) */
 .whenWhere {
-  background: #f9fafb;
-  padding: clamp(14px, 2.5vw, 18px);
-  border-radius: clamp(8px, 1.5vw, 10px);
-  border-left: 4px solid #e62b1e;
+  background: rgba(255, 255, 255, 0.06);
+  padding: clamp(16px, 2.5vw, 22px);
+  border-radius: clamp(10px, 1.5vw, 16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(6px);
 }
-
 .whenWhere p {
-  margin: 0 0 clamp(6px, 1.5vw, 8px);
-  color: #111111;
-  font-size: clamp(13px, 1.8vw, 15px);
-  line-height: 1.6;
+  margin: 0 0 clamp(8px, 1.6vw, 10px);
+  color: rgba(245, 247, 250, 0.92);
+  font-size: clamp(14px, 1.9vw, 18px);
+  line-height: 1.7;
 }
-
 .whenWhere p:last-child {
   margin-bottom: 0;
 }
-
 .whenWhere strong {
-  color: #e62b1e;
-  font-weight: 700;
+  color: #ff4a3d; /* TED red accent */
+  font-weight: 800;
 }
 
+/* Timeline slots */
 .slots {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  gap: clamp(8px, 1.5vw, 10px);
+  gap: clamp(10px, 1.8vw, 14px);
 }
 
+/* Card appearance */
 .slot {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: 92px 1fr;
   align-items: start;
-  gap: clamp(10px, 2vw, 14px);
-  padding: clamp(10px, 2vw, 12px);
-  background: #f3f4f6;
-  border-radius: clamp(8px, 1.5vw, 10px);
-  transition: background-color 0.2s ease;
+  gap: clamp(12px, 2vw, 16px);
+  padding: clamp(14px, 2.2vw, 18px);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: clamp(12px, 1.6vw, 18px);
+  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.35);
+  transition: transform 160ms ease, box-shadow 180ms ease,
+    background-color 180ms ease, border-color 180ms ease;
 }
-
 .slot:hover {
-  background: #e5e7eb;
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.22);
+  box-shadow: 0 16px 56px rgba(0, 0, 0, 0.4);
 }
 
+/* Time column pill */
 .slotTime {
-  font-weight: 700;
-  color: #e62b1e;
-  font-size: clamp(13px, 1.8vw, 15px);
+  font-weight: 900;
+  color: #ff4a3d;
+  font-size: clamp(14px, 2vw, 18px);
   white-space: nowrap;
-  min-width: 60px;
+  min-width: 92px;
+  padding-top: 4px;
 }
 
+/* Info */
 .slotInfo {
   min-width: 0;
 }
-
 .slotTitle {
   margin: 0 0 2px;
-  color: #111111;
-  font-size: clamp(14px, 1.8vw, 16px);
-  font-weight: 600;
-  line-height: 1.4;
+  color: #fff;
+  font-size: clamp(15px, 2.1vw, 20px);
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.005em;
 }
-
 .slotSpeaker {
   margin: 0;
-  color: #6b7280;
-  font-size: clamp(12px, 1.6vw, 14px);
-  line-height: 1.5;
+  color: rgba(245, 247, 250, 0.8);
+  font-size: clamp(13px, 1.9vw, 16px);
+  line-height: 1.6;
 }
 
-/* Tablet (768px+) */
+/* Decorative left bar for each slot */
+.slot::before {
+  content: "";
+  grid-column: 1 / -1;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 74, 61, 0.9),
+    rgba(255, 74, 61, 0) 60%
+  );
+  border-radius: 2px;
+  margin-bottom: clamp(8px, 1.4vw, 12px);
+}
+
+/* Tablet and up */
 @media (min-width: 768px) {
   .timeline {
-    grid-template-columns: 300px 1fr;
-    align-items: start;
+    grid-template-columns: 320px 1fr;
+    gap: clamp(20px, 4vw, 36px);
   }
-  
   .whenWhere {
     position: sticky;
-    top: 20px;
+    top: clamp(12px, 4vh, 32px);
   }
-  
-  .slot {
-    grid-template-columns: 90px 1fr;
-  }
-  
-  .slotTime {
-    min-width: 90px;
-  }
-}
-
-/* Desktop (1024px+) */
-@media (min-width: 1024px) {
   .slot {
     grid-template-columns: 110px 1fr;
   }
-  
   .slotTime {
     min-width: 110px;
   }
 }
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .slot {
+    grid-template-columns: 120px 1fr;
+  }
+  .slotTime {
+    min-width: 120px;
+  }
+}
+
+/* Anchor offset if scrolled to */
+#schedule-heading {
+  scroll-margin-top: clamp(60px, 8vh, 100px);
+} /* [web:30][web:33] */
