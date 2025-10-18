@@ -50,15 +50,17 @@ export default function Navbar() {
 
         {/* Mobile menu toggle */}
         <button
-          className={styles.burger}
-          aria-label="Toggle menu"
+          className={`${styles.burger} ${open ? styles.burgerOpen : ""}`}
+          aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           aria-controls="mobile-menu"
           onClick={() => setOpen((v) => !v)}
         >
-          <span className={styles.burgerBar} />
-          <span className={styles.burgerBar} />
-          <span className={styles.burgerBar} />
+          <span className={styles.burgerBox}>
+            <span className={styles.burgerBar} />
+            <span className={styles.burgerBar} />
+            <span className={styles.burgerBar} />
+          </span>
         </button>
       </div>
 
@@ -70,26 +72,29 @@ export default function Navbar() {
         aria-modal="true"
         aria-label="Mobile menu"
       >
-        <nav className={styles.drawerNav} onClick={closeMenu}>
-          <a className={styles.drawerLink} href="/">
-            Home
-          </a>
-          <a className={styles.drawerLink} href="/theme">
-            Theme
-          </a>
-          <a className={styles.drawerLink} href="/about">
-            About
-          </a>
-          <a className={styles.drawerLink} href="/speakers">
-            Speaker
-          </a>
-          <a className={styles.drawerLink} href="/contact">
-            Contact Us
-          </a>
-          <a className={styles.drawerBuy} href="/tickets">
-            Buy Ticket
-          </a>
-        </nav>
+        <div className={styles.drawerOverlay} onClick={() => setOpen(false)} />
+        <aside className={styles.drawerPanel}>
+          <nav className={styles.drawerNav} onClick={() => setOpen(false)}>
+            <a className={styles.drawerLink} href="/">
+              Home
+            </a>
+            <a className={styles.drawerLink} href="/theme">
+              Theme
+            </a>
+            <a className={styles.drawerLink} href="/about">
+              About
+            </a>
+            <a className={styles.drawerLink} href="/speakers">
+              Speaker
+            </a>
+            <a className={styles.drawerLink} href="/contact">
+              Contact Us
+            </a>
+            <a className={styles.drawerBuy} href="/tickets">
+              Buy Ticket
+            </a>
+          </nav>
+        </aside>
       </div>
     </header>
   );

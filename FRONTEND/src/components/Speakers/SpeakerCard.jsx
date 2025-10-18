@@ -1,15 +1,24 @@
 import React from "react";
 import styles from "./Speakers.module.css";
 
-export default function SpeakerCard({ speaker }) {
+export default function SpeakerCard({ speaker, isVisible, animationDelay }) {
   return (
     <li
-      className={styles.card}
+      className={`${styles.card} ${
+        isVisible ? styles.cardVisible : styles.cardHidden
+      }`}
+      style={{
+        animationDelay: `${animationDelay}s`,
+      }}
       tabIndex={0}
       aria-label={`${speaker.name}, ${speaker.title}`}
     >
       <figure className={styles.cardFigure}>
-        <img src={speaker.photo} alt={`${speaker.name} headshot`} loading="lazy" />
+        <img
+          src={speaker.photo}
+          alt={`${speaker.name} headshot`}
+          loading="lazy"
+        />
         <figcaption className={styles.cardOverlay}>
           <p className={styles.cardBio}>{speaker.bio}</p>
           {speaker.video && (

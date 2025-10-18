@@ -1,98 +1,142 @@
+/* Section: keep your color */
 .sponsors {
   background: #0b0b0b;
   color: #fff;
-  padding: clamp(32px, 6vw, 90px) 16px;
+  padding: clamp(60px, 8vw, 140px) 16px; /* taller section */
 }
 
+/* Header with center layout and soft glass banner */
 .sectionHead {
   max-width: 1120px;
-  margin: 0 auto clamp(16px, 3vw, 24px);
-  padding: 0 4px;
+  margin: 0 auto clamp(28px, 4vw, 40px);
+  text-align: center;
+  padding: 0 8px;
 }
-
 .sectionTitle {
-  font-weight: 800;
-  font-size: clamp(24px, 5vw, 36px);
-  margin: 0 0 clamp(6px, 1.5vw, 10px);
+  font-weight: 900;
+  font-size: clamp(30px, 6vw, 56px); /* larger like screenshot */
+  margin: 0 0 clamp(10px, 1.6vw, 14px);
   color: #ffffff;
-  line-height: 1.2;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
 }
-
 .sectionDesc {
-  color: #9ca3af;
+  display: inline-block;
   margin: 0;
-  font-size: clamp(13px, 1.8vw, 15px);
+  color: rgba(233, 238, 243, 0.92);
+  font-size: clamp(14px, 2vw, 18px);
   line-height: 1.6;
+  padding: clamp(10px, 2vw, 14px) clamp(14px, 3vw, 22px);
+  border-radius: 14px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.04)
+  ); /* glass look */
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
 }
 
+/* Grid: more generous gaps and taller tiles */
 .sponsorGrid {
   max-width: 1120px;
-  margin: 0 auto;
-  padding: 0 4px;
+  margin: clamp(26px, 4vw, 40px) auto 0;
+  padding: 0 8px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: clamp(12px, 2vw, 16px);
+  gap: clamp(18px, 3vw, 28px);
+  align-items: stretch;
 }
 
+/* Card: keep your colors, just size/spacing/hover polish */
 .sponsorItem {
-  background: #101010;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: clamp(8px, 1.5vw, 10px);
+  background: #101010; /* unchanged */
+  border: 1px solid rgba(255, 255, 255, 0.06); /* unchanged */
+  border-radius: clamp(12px, 1.8vw, 16px); /* slightly rounder */
   display: grid;
-  place-items: center;
-  padding: clamp(10px, 2vw, 12px);
-  min-height: clamp(70px, 12vw, 88px);
-  transition: transform 0.2s ease, box-shadow 0.2s ease,
-    background-color 0.2s ease;
+  grid-template-rows: auto 1fr auto; /* label, logo, name */
+  justify-items: center;
+  padding: clamp(18px, 3vw, 26px); /* bigger paddings */
+  min-height: clamp(160px, 24vw, 260px); /* larger cards */
+  transition: transform 160ms ease, box-shadow 180ms ease,
+    background-color 180ms ease, border-color 180ms ease;
   text-decoration: none;
 }
 
+/* Hover: subtle lift */
 .sponsorItem:hover,
 .sponsorItem:focus {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
-  background: #141414;
+  transform: translateY(-4px);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.45);
+  background: #141414; /* unchanged family */
+  border-color: rgba(255, 255, 255, 0.12);
+  outline: none;
 }
 
+/* Optional top label (e.g., Title Sponsor) from data attribute */
+.sponsorItem::before {
+  content: attr(data-label); /* set via data-label if provided */
+  display: block;
+  min-height: 1em;
+  margin-bottom: clamp(8px, 1.5vw, 10px);
+  font-size: clamp(12px, 1.8vw, 14px);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: none; /* looks like screenshot */
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Larger logos */
 .sponsorItem img {
-  max-width: 100%;
-  max-height: clamp(32px, 6vw, 42px);
+  max-width: clamp(160px, 28vw, 300px); /* bigger width cap */
+  max-height: clamp(90px, 12vw, 140px); /* bigger height cap */
   width: auto;
   height: auto;
-  opacity: 0.95;
-  filter: grayscale(10%);
+  opacity: 0.98; /* near full */
+  filter: none; /* keep brand colors */
   object-fit: contain;
+  margin: clamp(8px, 1.8vw, 14px) 0;
 }
 
-/* Mobile landscape (480px+) */
+/* Bottom name line: use title attribute if you don’t pass text */
+.sponsorItem::after {
+  content: attr(data-name);
+  display: block;
+  margin-top: clamp(8px, 1.6vw, 12px);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: clamp(13px, 1.9vw, 16px);
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Responsive columns */
 @media (min-width: 480px) {
   .sponsorGrid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
-
-/* Tablet (768px+) */
 @media (min-width: 768px) {
   .sponsorGrid {
-    grid-template-columns: repeat(4, 1fr);
-  }
+    grid-template-columns: repeat(3, 1fr);
+  } /* 3 wide for chunky tiles */
 }
-
-/* Desktop (1024px+) */
 @media (min-width: 1024px) {
   .sponsorGrid {
-    grid-template-columns: repeat(5, 1fr);
-    padding: 0 20px;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 0 12px;
   }
-  
   .sectionHead {
-    padding: 0 20px;
+    padding: 0 12px;
+  }
+}
+@media (min-width: 1440px) {
+  .sponsorGrid {
+    grid-template-columns: repeat(5, 1fr);
   }
 }
 
-/* Large desktop (1440px+) */
-@media (min-width: 1440px) {
-  .sponsorGrid {
-    grid-template-columns: repeat(6, 1fr);
-  }
+/* Focus visibility */
+.sponsorItem:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
 }

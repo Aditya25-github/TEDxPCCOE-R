@@ -1,79 +1,29 @@
-import React, { useRef, useEffect, useState } from "react";
+import React from "react";
 import styles from "./Background.module.css";
 
-export default function Background({
-  type = "video",
-  src,
-  imageSrc,
-  fallbackColor = "linear-gradient(135deg, #1a1a1a 0%, #2d1b1b 100%)",
-  brightness = 0.7,
-  children,
-}) {
-  const videoRef = useRef(null);
-  const [mediaLoaded, setMediaLoaded] = useState(false);
-
-  useEffect(() => {
-    if (type === "video" && videoRef.current) {
-      const video = videoRef.current;
-
-      const handleLoadedData = () => {
-        setMediaLoaded(true);
-        video.play().catch((error) => {
-          console.log("Video autoplay failed:", error);
-        });
-      };
-
-      const handleError = () => {
-        console.error("Background video failed to load");
-        setMediaLoaded(true);
-      };
-
-      video.addEventListener("loadeddata", handleLoadedData);
-      video.addEventListener("error", handleError);
-
-      return () => {
-        video.removeEventListener("loadeddata", handleLoadedData);
-        video.removeEventListener("error", handleError);
-      };
-    } else if (type === "image") {
-      setMediaLoaded(true);
-    }
-  }, [type]);
-
-  return (
-    <div className={styles.backgroundContainer}>
-      <div className={styles.backgroundMedia}>
-        {type === "video" && (
-          <video
-            ref={videoRef}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            className={`${styles.backgroundVideo} ${
-              mediaLoaded ? styles.mediaLoaded : ""
-            }`}
-            src={src}
-            style={{ filter: `brightness(${brightness})` }}
-          />
-        )}
-        {type === "image" && (
-          <img
-            src={imageSrc}
-            alt=""
-            className={`${styles.backgroundImage} ${
-              mediaLoaded ? styles.mediaLoaded : ""
-            }`}
-            style={{ filter: `brightness(${brightness})` }}
-          />
-        )}
+export default function Background({ type, src, brightness = 1, children }) {
+  if (type === "video") {
+    return (
+      <div className={styles.backgroundContainer}>
+        <video
+          className={styles.backgroundVideo}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+        >
+          <source src={src} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
         <div
-          className={styles.backgroundFallback}
-          style={{ background: fallbackColor }}
+          className={styles.overlay}
+          style={{ backgroundColor: `rgba(0, 0, 0, ${1 - brightness})` }}
         />
+        <div className={styles.content}>{children}</div>
       </div>
-      {children}
-    </div>
-  );
+    );
+  }
+
+  return <div className={styles.backgroundContainer}>{children}</div>;
 }
