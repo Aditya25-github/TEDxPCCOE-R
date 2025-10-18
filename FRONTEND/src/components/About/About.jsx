@@ -27,7 +27,11 @@ export default function About() {
           </p>
         </div>
         <div className={styles.aboutMedia}>
-          <img src="Ted X.MP4" alt="Audience at TEDxPCCOE&R" loading="lazy" />
+          <iframe
+            width="420"
+            height="315"
+            src="https://www.youtube.com/embed/hiii7hkbQ4Q?si=8kmEQaq7LSabaUa3"
+          ></iframe>
         </div>
       </div>
     </section>

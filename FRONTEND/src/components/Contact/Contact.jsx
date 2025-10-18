@@ -25,7 +25,8 @@ export default function Contact() {
             </div>
             <h3 className={styles.cardTitle}>Our Address</h3>
             <p className={styles.cardText}>
-              NH 62, Surpura Bypass Road, Karwar, Rajasthan 342030
+              Plot No. B, Sector no. 110, Gate no.1, Laxminagar, Ravet, Haveli,
+              Pune - 412101.
             </p>
           </div>
 
@@ -36,7 +37,7 @@ export default function Contact() {
               </div>
               <h4 className={styles.cardTitle}>Email Us</h4>
               <p className={styles.cardText}>
-                Official Email: tedx@pccoer.ac.in
+                Official Email: tedxpccoer@gmail.com
               </p>
             </div>
 
@@ -46,9 +47,9 @@ export default function Contact() {
               </div>
               <h4 className={styles.cardTitle}>Call Us</h4>
               <p className={styles.cardText}>
-                Organizer: +91 98390 16553
+                Organizer: +91 8788289660 (Pranav)
                 <br />
-                Co‑Organizer: +91 84465 96855
+                Co‑Organizer: +91 9272999555 (Shashank)
               </p>
             </div>
           </div>

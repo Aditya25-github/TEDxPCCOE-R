@@ -13,9 +13,17 @@
   gap: clamp(14px, 2.5vw, 16px);
 }
 
+.brand {
+  display: inline-flex;
+  align-items: flex-start;
+  max-width: clamp(120px, 14vw, 200px); /* cap container width */
+}
 .brand img {
-  height: 20px;
   display: block;
+  width: 100%; /* fill brand container */
+  height: auto; /* keep aspect ratio */
+  max-height: clamp(20px, 3.2vw, 40px); /* vertical cap */
+  object-fit: contain;
 }
 
 .footerLinks {
