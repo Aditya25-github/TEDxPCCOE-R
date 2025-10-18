@@ -25,10 +25,12 @@ export default function Hero({ scrollToId }) {
             </button>
             <a
               className={styles.btnPrimary}
-              href="/tickets"
-              aria-label="Get Tickets"
+              href="https://www.grooviti.com"
+              aria-label="Buy Ticket"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              Get Tickets
+              Get Ticket
             </a>
             <button
               className={styles.btnGhost}
