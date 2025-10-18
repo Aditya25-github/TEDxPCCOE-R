@@ -43,7 +43,13 @@ export default function Navbar() {
           <a className={styles.link} href="/contact">
             Contact Us
           </a>
-          <a className={styles.buy} href="/tickets" aria-label="Buy Ticket">
+          <a
+            className={styles.buy}
+            href="https://www.grooviti.com"
+            aria-label="Buy Ticket"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Buy Ticket
           </a>
         </nav>
@@ -90,7 +96,12 @@ export default function Navbar() {
             <a className={styles.drawerLink} href="/contact">
               Contact Us
             </a>
-            <a className={styles.drawerBuy} href="/tickets">
+            <a
+              className={styles.drawerBuy}
+              href="https://www.grooviti.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Buy Ticket
             </a>
           </nav>
