@@ -1,0 +1,36 @@
+.backgroundContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.backgroundMedia {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.backgroundVideo,
+.backgroundImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.backgroundVideo.mediaLoaded,
+.backgroundImage.mediaLoaded {
+  opacity: 1;
+}
+
+.backgroundFallback {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 1;
+}

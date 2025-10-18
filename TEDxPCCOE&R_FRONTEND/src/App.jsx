@@ -9,15 +9,12 @@ function App() {
   return (
     <>
       {!loadingFinished && (
-        <Preloader
-          duration={1000} // animation duration
-          onFinish={() => setLoadingFinished(true)}
-        />
+        <Preloader onFinish={() => setLoadingFinished(true)} />
       )}
       {loadingFinished && (
         <div>
-          <Navbar></Navbar>
-          <Home></Home>
+          <Navbar />
+          <Home />
         </div>
       )}
     </>
