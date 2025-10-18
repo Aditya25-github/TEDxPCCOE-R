@@ -8,33 +8,39 @@ import {
   AdditiveBlending,
 } from "three";
 
-// --- BASE SETTINGS ---
+// ============================================================================
+// CONFIGURATION SETTINGS
+// ============================================================================
+
 const BASE_SETTINGS = {
-  text: "TEDxPCCOE&R",
-  totalPoints: 8000,
+  text: "TEDxPCCOER",
+  totalPoints: 25000,
   cameraZoom: 100,
   formationDuration: 2000,
-  holdDuration: 1200,      
-  explosionDuration: 2000,  
+  holdDuration: 1200,
+  explosionDuration: 1500,  // Reduced from 2500 to 1500
   backgroundColor: "#000000",
-  tedColor: "#FF2B1E",
+  tedxColor: "#FF0000",
   pccoerColor: "#FFFFFF",
-  ambientLightIntensity: 1.2,
-  pointLightIntensity: 2.5,
-  explosionStrength: 40,   
+  ambientLightIntensity: 5.0,
+  pointLightIntensity: 7.0,
+  explosionStrength: 50,
 };
 
-// --- SHADER MATERIAL (TRAIL EFFECT ADDED) ---
+// ============================================================================
+// PARTICLE SHADER MATERIAL
+// ============================================================================
+
 const ParticleMaterial = shaderMaterial(
   {
     uTime: 0,
     uProgress: 0,
     uExplode: 0,
     uSize: 1.0,
-    // New uniform for previous position to calculate speed
-    uPrevPosition: 0, 
+    uGlowIntensity: 5.0,
   },
-  /* Vertex Shader */
+
+  // Vertex Shader
   `
     attribute vec3 aTarget;
     attribute vec3 aColor;
@@ -43,86 +49,140 @@ const ParticleMaterial = shaderMaterial(
     
     varying vec3 vColor;
     varying float vAlpha;
+    varying float vGlow;
+    varying float vExplode;
     
     uniform float uTime;
     uniform float uProgress;
     uniform float uExplode;
     uniform float uSize;
+    uniform float uGlowIntensity;
+
+    float random(vec3 co) {
+      return fract(sin(dot(co, vec3(12.9898, 78.233, 45.5432))) * 43758.5453);
+    }
 
     void main() {
       vColor = aColor;
+      vExplode = uExplode;
       vec3 initialPos = position;
       vec3 targetPos = aTarget;
 
-      // 1. Staggered progress with Easing
       float adjustedProgress = clamp((uProgress - aDelay) / (1.0 - aDelay), 0.0, 1.0);
       float smoothProgress = adjustedProgress * adjustedProgress * (3.0 - 2.0 * adjustedProgress);
 
-      // 2. Swarm/Jitter Effect (Reduced intensity for better readability)
-      float swarmIntensity = 0.025 * (1.0 - uExplode); 
-      
-      float offsetZ = sin(uTime * 1.0 + aSpeed * 10.0) * aSpeed * swarmIntensity * 0.5;
-      float offsetX = cos(uTime * 1.5 + aSpeed * 8.0) * aSpeed * swarmIntensity;
-      float offsetY = sin(uTime * 1.2 + aSpeed * 9.0) * aSpeed * swarmIntensity;
+      float swarmIntensity = 0.004 * (1.0 - uExplode); 
+      float offsetZ = sin(uTime * 0.8 + aSpeed * 8.0) * aSpeed * swarmIntensity * 0.15;
+      float offsetX = cos(uTime * 1.2 + aSpeed * 6.0) * aSpeed * swarmIntensity * 0.8;
+      float offsetY = sin(uTime * 1.0 + aSpeed * 7.0) * aSpeed * swarmIntensity * 0.8;
       
       vec3 swarmOffset = vec3(offsetX, offsetY, offsetZ);
-
-      // 3. Formation Mix
       vec3 morphedPos = mix(initialPos, targetPos, smoothProgress) + swarmOffset;
 
-      // 4. Explosion Effect (Spatial movement)
       if (uExplode > 0.0) {
-        vec3 explosionDir = normalize(targetPos + vec3(0.001, 0.001, 0.001));
-        float velocity = aSpeed * aSpeed * 0.5; 
-        float explosionStrength = uExplode * uExplode * ${BASE_SETTINGS.explosionStrength.toFixed(1)} * velocity;
-        morphedPos += explosionDir * explosionStrength;
+        vec3 explosionDir = normalize(targetPos + vec3(0.0001));
+        
+        float randomX = random(targetPos + vec3(1.0, 0.0, 0.0)) - 0.5;
+        float randomY = random(targetPos + vec3(0.0, 1.0, 0.0)) - 0.5;
+        float randomZ = random(targetPos + vec3(0.0, 0.0, 1.0)) - 0.5;
+        vec3 randomDir = normalize(vec3(randomX, randomY, randomZ));
+        
+        explosionDir = normalize(mix(explosionDir, randomDir, 0.6));
+        
+        float velocity = aSpeed * 0.8;
+        float explosionProgress = uExplode * uExplode;
+        float explosionStrength = explosionProgress * ${BASE_SETTINGS.explosionStrength.toFixed(1)} * velocity;
+        
+        float gravity = explosionProgress * explosionProgress * 5.0;
+        
+        float angle = uExplode * 1.5 * aSpeed;
+        float cosA = cos(angle);
+        float sinA = sin(angle);
+        vec3 rotatedDir = vec3(
+          explosionDir.x * cosA - explosionDir.z * sinA,
+          explosionDir.y - gravity * 0.1,
+          explosionDir.x * sinA + explosionDir.z * cosA
+        );
+        
+        morphedPos += rotatedDir * explosionStrength;
       }
 
       vec4 mvPosition = modelViewMatrix * vec4(morphedPos, 1.0);
       gl_Position = projectionMatrix * mvPosition;
 
-      // Dynamic point size: flash dramatically during explosion
       float depth = max(-mvPosition.z, 0.1);
-      float sizeMultiplier = mix(1.0, 1.5, smoothProgress) + uExplode * 30.0; 
+      float sizeMultiplier = mix(3.0, 5.0, smoothProgress);
+      
+      if (uExplode > 0.0) {
+        sizeMultiplier = 5.0 + uExplode * uExplode * 35.0;
+      }
 
-      // --- TRAIL EFFECT ---
-      // Apply a speed factor during the formation (uProgress < 1.0)
-      // Velocity is roughly proportional to (1.0 - smoothProgress)
-      float speedFactor = (1.0 - smoothProgress) * 5.0; // 5.0 is the stretch magnitude
-      
-      // Calculate how much to stretch the point in X (or screen direction)
-      // Since the stream is mostly Z-axis focused, we'll just boost the size temporarily.
-      float trailBoost = smoothstep(0.0, 0.7, 1.0 - smoothProgress) * 4.0; 
-      
+      float trailBoost = smoothstep(0.0, 0.7, 1.0 - smoothProgress) * (1.0 - uExplode) * 8.0; 
       sizeMultiplier += trailBoost;
 
       gl_PointSize = uSize * sizeMultiplier / depth;
       
-      // Fade out during explosion with a steeper curve
-      vAlpha = 1.0 - pow(uExplode, 3.0); 
+      vGlow = uGlowIntensity * (2.0 + smoothProgress * 1.5);
+      vAlpha = 1.0 - smoothstep(0.5, 1.0, uExplode);
     }
   `,
-  /* Fragment Shader */
+
+  // Fragment Shader
   `
+    #ifdef GL_OES_standard_derivatives
+      #extension GL_OES_standard_derivatives : enable
+    #endif
+    
+    precision highp float;
+    
     varying vec3 vColor;
     varying float vAlpha;
+    varying float vGlow;
+    varying float vExplode;
     
     void main() {
       vec2 center = gl_PointCoord - vec2(0.5);
       float dist = length(center);
       
-      // Use gl_PointCoord.y to create a vertical streak/ribbon, giving a slight tail
-      float alphaVertical = 1.0 - smoothstep(0.0, 0.5, abs(gl_PointCoord.y - 0.5) * 2.0);
+      float radius = 0.5;
+      float edge = 0.0;
       
-      // Gaussian fade (circular glow)
-      float alphaCircular = 1.0 - smoothstep(0.0, 0.6, dist);
+      #ifdef GL_OES_standard_derivatives
+        float delta = fwidth(dist);
+        edge = 1.0 - smoothstep(radius - delta, radius + delta, dist);
+      #else
+        edge = 1.0 - smoothstep(radius - 0.05, radius, dist);
+      #endif
       
-      // Combine circular glow with vertical streak
-      float alpha = max(alphaCircular, alphaVertical * 0.5); 
-      alpha = pow(alpha, 0.8);
+      float coreAlpha = 1.0 - smoothstep(0.0, 0.5, dist);
+      coreAlpha = pow(coreAlpha, 0.4);
       
-      float glow = exp(-dist * 8.0) * 0.6; 
-      vec3 finalColor = vColor + vColor * glow;
+      float glow1 = exp(-dist * 3.0) * 2.0;
+      float glow2 = exp(-dist * 6.0) * 3.0;
+      float glow3 = exp(-dist * 10.0) * 1.5;
+      
+      float totalGlow = max(max(glow1, glow2), glow3);
+      float alpha = max(coreAlpha, totalGlow * 0.8) * edge;
+      
+      vec3 boostedColor = vColor;
+      
+      if (vColor.r > 0.9 && vColor.g < 0.3 && vColor.b < 0.3) {
+        boostedColor.r *= 1.8;
+        boostedColor.g *= 0.6;
+        boostedColor.b *= 0.6;
+      }
+      
+      vec3 baseColor = boostedColor * (2.0 + vGlow * 2.5);
+      vec3 finalColor = baseColor + boostedColor * totalGlow;
+      
+      finalColor = finalColor * 4.5;
+      
+      float hotCenter = 1.0 - smoothstep(0.0, 0.25, dist);
+      finalColor += boostedColor * hotCenter * 2.0;
+      
+      if (vExplode > 0.3) {
+        finalColor += boostedColor * (1.0 - dist * 2.0) * vExplode * 2.0;
+      }
       
       gl_FragColor = vec4(finalColor, alpha * vAlpha);
     }
@@ -131,128 +191,131 @@ const ParticleMaterial = shaderMaterial(
 
 extend({ ParticleMaterial });
 
-// Helper functions (splitTedx, usePrefersReducedMotion, createTextParticles) remain unchanged
-function splitTedx(s) {
-  const idx = s.indexOf("x");
-  if (idx === -1) return { ted: s.toUpperCase(), x: "", rest: "" };
+// ============================================================================
+// UTILITY FUNCTIONS
+// ============================================================================
+
+function splitTedxPCCOER(text) {
   return {
-    ted: s.slice(0, idx).toUpperCase(),
-    x: s.slice(idx, idx + 1),
-    rest: s.slice(idx + 1).toUpperCase(),
+    tedx: "TEDx",
+    pccoer: "PCCOER"
   };
 }
 
 function usePrefersReducedMotion() {
   const [prefers, setPrefers] = useState(false);
+  
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const onChange = () => setPrefers(!!mq.matches);
-    onChange();
-    mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
+    
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const handleChange = () => setPrefers(!!mediaQuery.matches);
+    
+    handleChange();
+    mediaQuery.addEventListener("change", handleChange);
+    
+    return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
+  
   return prefers;
 }
 
+// ============================================================================
+// TEXT TO PARTICLES CONVERSION
+// ============================================================================
 
 function createTextParticles(text, totalPoints, viewportWidth) {
   const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
   
-  // Dynamic canvas size based on screen
-  const width = isMobile ? 800 : 1000;
-  const height = isMobile ? 150 : 200;
+  const width = isMobile ? 2400 : 3600;
+  const height = isMobile ? 480 : 680;
   
   const canvas = document.createElement("canvas");
   canvas.width = width;
   canvas.height = height;
-  const ctx = canvas.getContext("2d", { willReadFrequently: true });
+  const ctx = canvas.getContext("2d", { 
+    willReadFrequently: true,
+    alpha: true 
+  });
 
-  // Dynamic font sizes that fit within screen bounds
-  const fontTED = `900 ${isMobile ? 60 : 80}px Inter, Helvetica, Arial, sans-serif`;
-  const fontX = `900 ${isMobile ? 40 : 50}px Inter, Helvetica, Arial, sans-serif`;
-  const fontRest = `900 ${isMobile ? 50 : 70}px Inter, Helvetica, Arial, sans-serif`;
+  const fontTEDx = `900 ${isMobile ? 200 : 300}px Inter, Helvetica, Arial, sans-serif`;
+  const fontPCCOER = `900 ${isMobile ? 170 : 250}px Inter, Helvetica, Arial, sans-serif`;
 
-  const parts = splitTedx(text);
+  const parts = splitTedxPCCOER(text);
   const centerX = width / 2;
   const centerY = height / 2;
 
-  // Measure text widths
-  ctx.font = fontTED;
-  const widthTED = ctx.measureText(parts.ted).width;
-  ctx.font = fontX;
-  const widthX = ctx.measureText(parts.x).width;
-  ctx.font = fontRest;
-  const widthRest = ctx.measureText(parts.rest).width;
+  ctx.font = fontTEDx;
+  const widthTEDx = ctx.measureText(parts.tedx).width;
+  ctx.font = fontPCCOER;
+  const widthPCCOER = ctx.measureText(parts.pccoer).width;
 
-  // Calculate total pixel width used by the text
-  const totalTextPixelWidth = widthTED + widthX + widthRest + (isMobile ? 15 : 25);
-  
-  // Ensure text doesn't exceed canvas width (this is internal scaling, not world)
+  const totalTextPixelWidth = widthTEDx + widthPCCOER + (isMobile ? 70 : 100);
   const pixelScaleFactor = Math.min(1, (width * 0.9) / totalTextPixelWidth);
   
   let currentX = centerX - (totalTextPixelWidth * pixelScaleFactor) / 2;
 
-  ctx.fillStyle = "#fff";
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = 'high';
+
+  ctx.shadowColor = "rgba(255, 0, 0, 0.3)";
+  ctx.shadowBlur = 12;
+  ctx.shadowOffsetX = 6;
+  ctx.shadowOffsetY = 6;
   ctx.textAlign = "left";
   ctx.textBaseline = "middle";
 
-  // Draw TED in red
-  ctx.fillStyle = BASE_SETTINGS.tedColor;
-  ctx.font = fontTED;
-  const scaledTEDWidth = widthTED * pixelScaleFactor;
-  ctx.fillText(parts.ted, currentX, centerY);
-  currentX += scaledTEDWidth + (isMobile ? 5 : 8);
+  ctx.strokeStyle = BASE_SETTINGS.tedxColor;
+  ctx.lineWidth = 12;
+  ctx.fillStyle = BASE_SETTINGS.tedxColor;
+  ctx.font = fontTEDx;
+  
+  const scaledTEDxWidth = widthTEDx * pixelScaleFactor;
+  ctx.strokeText(parts.tedx, currentX, centerY);
+  ctx.fillText(parts.tedx, currentX, centerY);
+  ctx.fillText(parts.tedx, currentX, centerY);
+  
+  currentX += scaledTEDxWidth + (isMobile ? 30 : 44);
 
-  // Draw x in red
-  ctx.fillStyle = BASE_SETTINGS.tedColor;
-  ctx.font = fontX;
-  const scaledXWidth = widthX * pixelScaleFactor;
-  ctx.fillText(parts.x, currentX, centerY + (isMobile ? 8 : 12)); 
-  currentX += scaledXWidth + (isMobile ? 5 : 8);
-
-  // Draw PCCOE&R in white
+  ctx.shadowColor = "rgba(255, 255, 255, 0.2)";
+  ctx.shadowBlur = 8;
+  ctx.shadowOffsetX = 4;
+  ctx.shadowOffsetY = 4;
+  ctx.strokeStyle = BASE_SETTINGS.pccoerColor;
   ctx.fillStyle = BASE_SETTINGS.pccoerColor;
-  ctx.font = fontRest;
-  ctx.fillText(parts.rest, currentX, centerY);
+  ctx.font = fontPCCOER;
+  ctx.strokeText(parts.pccoer, currentX, centerY);
+  ctx.fillText(parts.pccoer, currentX, centerY);
 
   const imageData = ctx.getImageData(0, 0, width, height).data;
   const sampledPoints = [];
   const sampledColors = [];
 
-  const step = isMobile ? 1.8 : 1.5;
-  const tedxEnd = centerX - (totalTextPixelWidth * pixelScaleFactor) / 2 + scaledTEDWidth + scaledXWidth + (isMobile ? 10 : 16);
+  const step = isMobile ? 0.5 : 0.35;
   
-  // --- RESPONSIVENESS FIX: Calculate world scale based on viewport ---
-  // We want the text to occupy about 80% of the viewport width.
-  const targetWorldWidth = viewportWidth * 0.8;
+  const tedxEndX = centerX - (totalTextPixelWidth * pixelScaleFactor) / 2 + scaledTEDxWidth + (isMobile ? 20 : 30);
+  const targetWorldWidth = viewportWidth * 0.82;
   const actualDrawnTextPixelWidth = totalTextPixelWidth * pixelScaleFactor;
-  
-  // Calculate the scale factor from drawn pixels to world units
   const worldScale = targetWorldWidth / actualDrawnTextPixelWidth; 
-  // Safety factor for height scaling
-  const worldScaleY = worldScale * 1.5; 
 
   for (let y = 0; y < height; y += step) {
     for (let x = 0; x < width; x += step) {
       const alphaIndex = (Math.floor(y) * width + Math.floor(x)) * 4 + 3;
-      if (imageData[alphaIndex] > 120) {
-        
-        // Transform pixel coordinates relative to the center (0,0)
+      
+      if (imageData[alphaIndex] > 60) {
         const relativeX = x - centerX;
         const relativeY = centerY - y;
-        
-        // Scale to dynamic world coordinates
         const worldX = relativeX * worldScale; 
         const worldY = relativeY * worldScale; 
+        
         sampledPoints.push(worldX, worldY, 0);
 
-        // Color based on position
-        const isTEDx = x < tedxEnd;
-        const color = new Color(
-          isTEDx ? BASE_SETTINGS.tedColor : BASE_SETTINGS.pccoerColor
-        ).toArray();
-        sampledColors.push(...color);
+        const isTEDx = x < tedxEndX;
+        if (isTEDx) {
+          sampledColors.push(1.0, 0.0, 0.0);
+        } else {
+          sampledColors.push(1.0, 1.0, 1.0);
+        }
       }
     }
   }
@@ -266,15 +329,14 @@ function createTextParticles(text, totalPoints, viewportWidth) {
   const delays = new Float32Array(numPoints);
   const speeds = new Float32Array(numPoints);
 
-  const wideXY = 12; 
+  const wideXY = 20; 
   
   for (let i = 0; i < numPoints; i++) {
     const j = i * 3;
     const randomIndex = Math.floor(Math.random() * numSampled);
     const rj = randomIndex * 3;
 
-    // Initial positions: Distributed widely in X/Y and placed far back in Z 
-    const deepZ = -(20 + Math.random() * 20); // Z between -20 and -40
+    const deepZ = -(28 + Math.random() * 28);
     positions[j] = (Math.random() - 0.5) * wideXY;
     positions[j + 1] = (Math.random() - 0.5) * wideXY;
     positions[j + 2] = deepZ;
@@ -294,11 +356,12 @@ function createTextParticles(text, totalPoints, viewportWidth) {
   return { positions, targets, colors, delays, speeds, numPoints };
 }
 
+// ============================================================================
+// PARTICLE TEXT COMPONENT
+// ============================================================================
 
-// --- PARTICLE TEXT COMPONENT ---
 function ParticleText({ text, explode, totalPoints, particleSize }) {
   const { viewport } = useThree(); 
-
   const pointsRef = useRef();
   const materialRef = useRef();
   const clockStart = useRef(performance.now());
@@ -309,29 +372,31 @@ function ParticleText({ text, explode, totalPoints, particleSize }) {
     [text, totalPoints, viewport.width]
   );
 
-  const geom = useMemo(() => {
-    const g = new BufferGeometry();
-    g.setAttribute("position", new BufferAttribute(positions, 3));
-    g.setAttribute("aTarget", new BufferAttribute(targets, 3));
-    g.setAttribute("aColor", new BufferAttribute(colors, 3));
-    g.setAttribute("aDelay", new BufferAttribute(delays, 1));
-    g.setAttribute("aSpeed", new BufferAttribute(speeds, 1));
-    return g;
+  const geometry = useMemo(() => {
+    const geom = new BufferGeometry();
+    geom.setAttribute("position", new BufferAttribute(positions, 3));
+    geom.setAttribute("aTarget", new BufferAttribute(targets, 3));
+    geom.setAttribute("aColor", new BufferAttribute(colors, 3));
+    geom.setAttribute("aDelay", new BufferAttribute(delays, 1));
+    geom.setAttribute("aSpeed", new BufferAttribute(speeds, 1));
+    return geom;
   }, [positions, targets, colors, delays, speeds]);
 
   useEffect(() => {
-    const m = materialRef.current;
-    if (!m || !m.uniforms) return;
-    m.uniforms.uSize.value = particleSize;
-    m.uniforms.uProgress.value = 0;
-    m.uniforms.uExplode.value = 0;
+    const material = materialRef.current;
+    if (!material || !material.uniforms) return;
+    
+    material.uniforms.uSize.value = particleSize;
+    material.uniforms.uProgress.value = 0;
+    material.uniforms.uExplode.value = 0;
+    material.uniforms.uGlowIntensity.value = 5.0;
   }, [particleSize]);
 
   useFrame(() => {
     const material = materialRef.current;
     if (!material || !material.uniforms) return;
+    
     const elapsed = (performance.now() - clockStart.current) / 1000;
-
     material.uniforms.uTime.value = elapsed;
 
     if (prefersReducedMotion) {
@@ -340,7 +405,6 @@ function ParticleText({ text, explode, totalPoints, particleSize }) {
       return;
     }
 
-    // Formation progress with smooth ease-in-out
     const formProgress = Math.min(
       elapsed / (BASE_SETTINGS.formationDuration / 1000),
       1.0
@@ -350,7 +414,6 @@ function ParticleText({ text, explode, totalPoints, particleSize }) {
       : 1.0 - Math.pow(-2.0 * formProgress + 2.0, 2.0) / 2.0;
     material.uniforms.uProgress.value = easedFormProgress;
 
-    // Explosion progress
     if (explode) {
       const timeSinceExplosion =
         elapsed -
@@ -360,13 +423,15 @@ function ParticleText({ text, explode, totalPoints, particleSize }) {
           (BASE_SETTINGS.explosionDuration / 1000),
         1.0
       );
-      const easedExplodeProgress = 1.0 - Math.pow(1.0 - explodeProgress, 3);
+      const easedExplodeProgress = explodeProgress < 0.5
+        ? 2.0 * explodeProgress * explodeProgress
+        : 1.0 - Math.pow(-2.0 * explodeProgress + 2.0, 2.0) / 2.0;
       material.uniforms.uExplode.value = easedExplodeProgress;
     }
   });
 
   return (
-    <points ref={pointsRef} geometry={geom} frustumCulled={false}>
+    <points ref={pointsRef} geometry={geometry} frustumCulled={false}>
       <particleMaterial
         ref={materialRef}
         transparent
@@ -377,29 +442,35 @@ function ParticleText({ text, explode, totalPoints, particleSize }) {
   );
 }
 
+// ============================================================================
+// MAIN PRELOADER COMPONENT
+// ============================================================================
 
-// --- MAIN PRELOADER COMPONENT ---
 export default function Preloader({ onFinish }) {
   const [done, setDone] = useState(false);
   const [explode, setExplode] = useState(false);
 
   const particleSize = useMemo(() => {
-    if (typeof window === "undefined") return 2.0;
+    if (typeof window === "undefined") return 5.0;
     const isMobile = window.innerWidth < 768;
-    return isMobile ? 3.5 : 5.0; 
+    return isMobile ? 8.5 : 12.0;
   }, []);
 
   const [cameraZoom, setCameraZoom] = useState(BASE_SETTINGS.cameraZoom);
+  
   useEffect(() => {
     function updateZoom() {
       if (typeof window === "undefined") return;
-      const w = window.innerWidth;
+      
+      const width = window.innerWidth;
       let scale;
-      if (w < 768) {
-        scale = Math.min(0.7, Math.max(0.5, w / 1100)); 
+      
+      if (width < 768) {
+        scale = Math.min(0.7, Math.max(0.5, width / 1100)); 
       } else {
-        scale = Math.min(1.0, Math.max(0.7, w / 1300));
+        scale = Math.min(1.0, Math.max(0.7, width / 1300));
       }
+      
       setCameraZoom(BASE_SETTINGS.cameraZoom * scale);
     }
     
@@ -417,14 +488,13 @@ export default function Preloader({ onFinish }) {
     BASE_SETTINGS.formationDuration + BASE_SETTINGS.holdDuration;
 
   useEffect(() => {
-    const explodeTimeout = setTimeout(
-      () => setExplode(true),
-      explosionStartTime
-    );
+    const explodeTimeout = setTimeout(() => setExplode(true), explosionStartTime);
+    
+    // Trigger onFinish 100ms before animation completes to prevent blank screen
     const finishTimeout = setTimeout(() => {
       setDone(true);
       onFinish?.();
-    }, totalDuration);
+    }, totalDuration - 100);
 
     return () => {
       clearTimeout(explodeTimeout);
@@ -436,10 +506,7 @@ export default function Preloader({ onFinish }) {
 
   return (
     <div className="preloader-wrapper">
-      
-      {/* Embedded Styles for structure and animation */}
       <style jsx global>{`
-        /* Apply smooth scrolling and hidden overflow to body when preloader is active */
         body {
           overflow: hidden;
         }
@@ -468,26 +535,31 @@ export default function Preloader({ onFinish }) {
       <div className="canvas-shell">
         <Canvas 
           gl={{ 
-            antialias: true, 
+            antialias: true,
             alpha: false,
-            powerPreference: "high-performance"
+            powerPreference: "high-performance",
+            preserveDrawingBuffer: false,
+            precision: "highp",
+            stencil: false,
+            depth: true
           }} 
-          dpr={[1, 2]}
+          dpr={Math.min(window.devicePixelRatio, 2)}
+          frameloop="always"
         >
           <color attach="background" args={[BASE_SETTINGS.backgroundColor]} />
           
-          {/* Subtle lighting for better depth perception */}
           <ambientLight intensity={BASE_SETTINGS.ambientLightIntensity} />
+          
           <pointLight
-            position={[3, 3, 5]}
+            position={[6, 6, 8]}
             intensity={BASE_SETTINGS.pointLightIntensity}
-            color={BASE_SETTINGS.tedColor}
+            color="#FF0000"
           />
-          <pointLight
-            position={[-3, -2, 4]}
-            intensity={1.5}
-            color={BASE_SETTINGS.pccoerColor}
-          />
+          <pointLight position={[-6, -5, 7]} intensity={6.0} color="#FFFFFF" />
+          <pointLight position={[0, 0, 12]} intensity={5.5} color="#FFFFFF" />
+          <pointLight position={[0, 7, 6]} intensity={4.0} color="#FFFFFF" />
+          <pointLight position={[0, -7, 6]} intensity={4.0} color="#FFFFFF" />
+          <pointLight position={[8, 0, 6]} intensity={3.5} color="#FF0000" />
           
           <OrthographicCamera
             makeDefault
