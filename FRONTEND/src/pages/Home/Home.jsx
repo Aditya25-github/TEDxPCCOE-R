@@ -37,7 +37,7 @@ export default function Home() {
       </section>
 
       {/* 🔹 Trailer Section */}
-      <section
+      {/* <section
         id="trailer"
         style={{
           position: "relative",
@@ -49,7 +49,7 @@ export default function Home() {
         }}
       >
         <Trailer />
-      </section>
+      </section> */}
 
       {/* 🔹 Speakers Section */}
       <section id="speakers">

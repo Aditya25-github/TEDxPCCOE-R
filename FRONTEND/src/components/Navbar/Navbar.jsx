@@ -31,21 +31,24 @@ export default function Navbar() {
 
         {/* Desktop Navigation */}
         <nav className={styles.nav} aria-label="Primary">
-          <button className={styles.link} onClick={() => scrollToSection("home")}>
+          <a className={styles.link} onClick={() => scrollToSection("home")}>
             Home
-          </button>
-          <button className={styles.link} onClick={() => scrollToSection("theme")}>
+          </a>
+          <a className={styles.link} onClick={() => scrollToSection("theme")}>
             Theme
-          </button>
-          <button className={styles.link} onClick={() => scrollToSection("about")}>
+          </a>
+          <a className={styles.link} onClick={() => scrollToSection("about")}>
             About
-          </button>
-          <button className={styles.link} onClick={() => scrollToSection("speakers")}>
+          </a>
+          <a
+            className={styles.link}
+            onClick={() => scrollToSection("speakers")}
+          >
             Speaker
-          </button>
-          <button className={styles.link} onClick={() => scrollToSection("contact")}>
+          </a>
+          <a className={styles.link} onClick={() => scrollToSection("contact")}>
             Contact Us
-          </button>
+          </a>
           <a
             className={styles.buy}
             href="https://www.grooviti.com"
@@ -83,19 +86,34 @@ export default function Navbar() {
         <div className={styles.drawerOverlay} onClick={() => setOpen(false)} />
         <aside className={styles.drawerPanel}>
           <nav className={styles.drawerNav}>
-            <button className={styles.drawerLink} onClick={() => scrollToSection("home")}>
+            <button
+              className={styles.drawerLink}
+              onClick={() => scrollToSection("home")}
+            >
               Home
             </button>
-            <button className={styles.drawerLink} onClick={() => scrollToSection("theme")}>
+            <button
+              className={styles.drawerLink}
+              onClick={() => scrollToSection("theme")}
+            >
               Theme
             </button>
-            <button className={styles.drawerLink} onClick={() => scrollToSection("about")}>
+            <button
+              className={styles.drawerLink}
+              onClick={() => scrollToSection("about")}
+            >
               About
             </button>
-            <button className={styles.drawerLink} onClick={() => scrollToSection("speakers")}>
+            <button
+              className={styles.drawerLink}
+              onClick={() => scrollToSection("speakers")}
+            >
               Speaker
             </button>
-            <button className={styles.drawerLink} onClick={() => scrollToSection("contact")}>
+            <button
+              className={styles.drawerLink}
+              onClick={() => scrollToSection("contact")}
+            >
               Contact Us
             </button>
             <a
