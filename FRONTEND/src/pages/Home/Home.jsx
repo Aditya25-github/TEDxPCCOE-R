@@ -56,16 +56,15 @@ export default function Home() {
         <Speakers speakers={SPEAKERS} />
       </section>
 
-      {/* 🔹 Contact Section */}
-      <section id="contact">
-        <Contact />
-      </section>
-
       {/* 🔹 Remaining Sections */}
       <Schedule slots={SLOTS} />
       <Sponsors sponsors={SPONSORS} />
       <Team team={TEAM} />
       <Gallery gallery={GALLERY} />
+      {/* 🔹 Contact Section */}
+      <section id="contact">
+        <Contact />
+      </section>
       <Footer />
     </main>
   );
