@@ -1,52 +1,54 @@
-// src/components/Navbar/Navbar.jsx
 import React, { useState, useEffect } from "react";
 import styles from "./Navbar.module.css";
+import logoWhite from "../../assets/logo-white.png";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     document.documentElement.style.overflow = open ? "hidden" : "";
     return () => (document.documentElement.style.overflow = "");
   }, [open]);
 
-  const closeMenu = () => setOpen(false);
+  const scrollToSection = (id) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+      setOpen(false); // close mobile menu after click
+    }
+  };
 
   return (
     <header className={styles.header}>
       <div className={styles.inner}>
-        {/* Left: Brand lockup on solid black per guidelines */}
-        <a href="/" className={styles.brand} aria-label="TEDxPCCOE&R Home">
-          {/* Use the official lockup asset (SVG/PNG) here */}
-          <img
-            src="./logo-white.png"
-            alt="TEDxPCCOE&R"
-            className={styles.logo}
-          />
+        <a
+          onClick={() => scrollToSection("home")}
+          className={styles.brand}
+          aria-label="TEDxPCCOE&R Home"
+        >
+          <img src={logoWhite} alt="TEDxPCCOE&R" className={styles.logo} />
         </a>
 
-        {/* Desktop nav */}
+        {/* Desktop Navigation */}
         <nav className={styles.nav} aria-label="Primary">
-          <a className={styles.link} href="/">
+          <button className={styles.link} onClick={() => scrollToSection("home")}>
             Home
-          </a>
-          <a className={styles.link} href="/theme">
+          </button>
+          <button className={styles.link} onClick={() => scrollToSection("theme")}>
             Theme
-          </a>
-          <a className={styles.link} href="/about">
+          </button>
+          <button className={styles.link} onClick={() => scrollToSection("about")}>
             About
-          </a>
-          <a className={styles.link} href="/speakers">
+          </button>
+          <button className={styles.link} onClick={() => scrollToSection("speakers")}>
             Speaker
-          </a>
-          <a className={styles.link} href="/contact">
+          </button>
+          <button className={styles.link} onClick={() => scrollToSection("contact")}>
             Contact Us
-          </a>
+          </button>
           <a
             className={styles.buy}
             href="https://www.grooviti.com"
-            aria-label="Buy Ticket"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -54,13 +56,13 @@ export default function Navbar() {
           </a>
         </nav>
 
-        {/* Mobile menu toggle */}
+        {/* Mobile Menu Button */}
         <button
           className={`${styles.burger} ${open ? styles.burgerOpen : ""}`}
+          onClick={() => setOpen(!open)}
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           aria-controls="mobile-menu"
-          onClick={() => setOpen((v) => !v)}
         >
           <span className={styles.burgerBox}>
             <span className={styles.burgerBar} />
@@ -70,7 +72,7 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile drawer */}
+      {/* Mobile Drawer */}
       <div
         id="mobile-menu"
         className={`${styles.drawer} ${open ? styles.open : ""}`}
@@ -80,22 +82,22 @@ export default function Navbar() {
       >
         <div className={styles.drawerOverlay} onClick={() => setOpen(false)} />
         <aside className={styles.drawerPanel}>
-          <nav className={styles.drawerNav} onClick={() => setOpen(false)}>
-            <a className={styles.drawerLink} href="/">
+          <nav className={styles.drawerNav}>
+            <button className={styles.drawerLink} onClick={() => scrollToSection("home")}>
               Home
-            </a>
-            <a className={styles.drawerLink} href="/theme">
+            </button>
+            <button className={styles.drawerLink} onClick={() => scrollToSection("theme")}>
               Theme
-            </a>
-            <a className={styles.drawerLink} href="/about">
+            </button>
+            <button className={styles.drawerLink} onClick={() => scrollToSection("about")}>
               About
-            </a>
-            <a className={styles.drawerLink} href="/speakers">
+            </button>
+            <button className={styles.drawerLink} onClick={() => scrollToSection("speakers")}>
               Speaker
-            </a>
-            <a className={styles.drawerLink} href="/contact">
+            </button>
+            <button className={styles.drawerLink} onClick={() => scrollToSection("contact")}>
               Contact Us
-            </a>
+            </button>
             <a
               className={styles.drawerBuy}
               href="https://www.grooviti.com"

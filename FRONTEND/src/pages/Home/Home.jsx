@@ -21,16 +21,51 @@ const scrollToId = (id) => {
 export default function Home() {
   return (
     <main className={styles.page}>
-      <Hero scrollToId={scrollToId} />
-      <Countdown />
-      <About />
-      <Trailer />
-      <Speakers speakers={SPEAKERS} />
+      {/* 🔹 Home Section */}
+      <section id="home">
+        <Hero scrollToId={scrollToId} />
+      </section>
+
+      {/* 🔹 Theme Section */}
+      <section id="theme">
+        <Countdown />
+      </section>
+
+      {/* 🔹 About Section */}
+      <section id="about">
+        <About />
+      </section>
+
+      {/* 🔹 Trailer Section */}
+      <section
+        id="trailer"
+        style={{
+          position: "relative",
+          width: "100%",
+          minHeight: "100vh",
+          backgroundColor: "#000",
+          overflow: "hidden",
+          zIndex: 1,
+        }}
+      >
+        <Trailer />
+      </section>
+
+      {/* 🔹 Speakers Section */}
+      <section id="speakers">
+        <Speakers speakers={SPEAKERS} />
+      </section>
+
+      {/* 🔹 Contact Section */}
+      <section id="contact">
+        <Contact />
+      </section>
+
+      {/* 🔹 Remaining Sections */}
       <Schedule slots={SLOTS} />
       <Sponsors sponsors={SPONSORS} />
       <Team team={TEAM} />
       <Gallery gallery={GALLERY} />
-      <Contact />
       <Footer />
     </main>
   );

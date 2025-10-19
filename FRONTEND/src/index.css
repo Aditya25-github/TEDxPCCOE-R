@@ -12,3 +12,8 @@ body {
   min-height: 100%;
   isolation: isolate; /* avoid unwanted stacking bleed */
 }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* Adjust if navbar overlaps sections */
+}

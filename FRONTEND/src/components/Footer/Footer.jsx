@@ -1,32 +1,36 @@
 import React from "react";
 import styles from "./Footer.module.css";
+import logoWhite from "../../assets/logo-white.png"; // ✅ Correct import path
 
 export default function Footer() {
   return (
     <footer className={styles.footer} role="contentinfo">
       <div className={styles.footerTop}>
-        <a className={styles.brand} href="/">
-          <img src="./logo-white.png" alt="TEDxPCCOE&R" />
+        <a className={styles.brand} href="#home">
+          {/* ✅ Use imported image */}
+          <img src={logoWhite} alt="TEDxPCCOE&R" />
         </a>
+
         <nav aria-label="Footer">
           <ul className={styles.footerLinks}>
             <li>
-              <a href="/about">About</a>
+              <a href="#about">About</a>
             </li>
             <li>
-              <a href="/speakers">Speakers</a>
+              <a href="#speakers">Speakers</a>
             </li>
             <li>
-              <a href="/schedule">Schedule</a>
+              <a href="#schedule">Schedule</a>
             </li>
             <li>
-              <a href="/sponsors">Sponsors</a>
+              <a href="#sponsors">Sponsors</a>
             </li>
             <li>
-              <a href="/blog">Blog</a>
+              <a href="#contact">Contact</a>
             </li>
           </ul>
         </nav>
+
         <div className={styles.socials} aria-label="Social links">
           <a aria-label="Instagram" href="https://instagram.com/">
             IG
@@ -39,6 +43,7 @@ export default function Footer() {
           </a>
         </div>
       </div>
+
       <div className={styles.footerBottom}>
         <p className={styles.license}>
           This independent TEDx event is operated under license from TED.
