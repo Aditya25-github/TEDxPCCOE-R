@@ -1,203 +1,364 @@
-/* Section container */
+/* Section container with clean background */
 .schedule {
   position: relative;
-  background-image: url("/bg1.jpeg"); /* place file in /public/media and use clean path */ /* [web:57] */
-  background-size: cover; /* responsive fill */ /* [web:72] */
-  background-position: center top;
-  background-repeat: no-repeat;
-  padding: clamp(72px, 8vw, 140px) 16px; /* more vertical space */
-  min-height: min(1400px, 120vh); /* immersive height */
-  color: #f5f7fa;
-  overflow: hidden; /* clip glow effects */
+  background: #0a0a14;
+  padding: clamp(80px, 10vw, 160px) 16px;
+  min-height: min(1400px, 120vh);
+  color: #ffffff;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Readability overlays (vignette + tint) */
-.schedule::before,
-.schedule::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-}
-.schedule::before {
-  background: radial-gradient(
-      1200px 600px at 15% 10%,
-      rgba(0, 0, 0, 0.45),
-      transparent 60%
-    ),
-    radial-gradient(
-      1200px 700px at 90% 70%,
-      rgba(0, 0, 0, 0.4),
-      transparent 60%
-    ),
-    linear-gradient(180deg, rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.75)); /* layered tint */ /* [web:58][web:61] */
-}
-.schedule::after {
-  box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.7); /* vignette edge */
+.schedule.sectionVisible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-/* Head */
+/* Clean section head */
 .sectionHead {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   max-width: 1120px;
-  margin: 0 auto clamp(20px, 3.5vw, 28px);
+  margin: 0 auto clamp(48px, 6vw, 80px);
   padding: 0 4px;
-}
-.sectionTitle {
-  font-weight: 900;
-  font-size: clamp(28px, 5.5vw, 44px);
-  margin: 0 0 clamp(8px, 1.8vw, 12px);
-  color: #fff;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
-  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.6);
-}
-.sectionDesc {
-  color: rgba(245, 247, 250, 0.85);
-  margin: 0;
-  font-size: clamp(14px, 2vw, 18px);
-  line-height: 1.7;
+  text-align: center;
 }
 
-/* Layout */
-.timeline {
+.titleWrapper {
   position: relative;
-  z-index: 1;
-  max-width: 1120px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: clamp(16px, 3vw, 24px);
-  align-items: start;
+  display: inline-block;
+  margin-bottom: 24px;
 }
 
-/* Sidebar card (Date/Time/Venue) */
-.whenWhere {
-  background: rgba(255, 255, 255, 0.06);
-  padding: clamp(16px, 2.5vw, 22px);
-  border-radius: clamp(10px, 1.5vw, 16px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
-  backdrop-filter: blur(6px);
-}
-.whenWhere p {
-  margin: 0 0 clamp(8px, 1.6vw, 10px);
-  color: rgba(245, 247, 250, 0.92);
-  font-size: clamp(14px, 1.9vw, 18px);
-  line-height: 1.7;
-}
-.whenWhere p:last-child {
-  margin-bottom: 0;
-}
-.whenWhere strong {
-  color: #ff4a3d; /* TED red accent */
+.sectionTitle {
   font-weight: 800;
+  font-size: clamp(36px, 7vw, 64px);
+  margin: 0 0 16px;
+  color: #fff;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-family: 'Inter', 'SF Pro Display', -apple-system, sans-serif;
 }
 
-/* Timeline slots */
-.slots {
-  list-style: none;
+.titleUnderline {
+  width: 100px;
+  height: 3px;
+  background: #e62b1e;
+  margin: 0 auto;
+  border-radius: 2px;
+}
+
+.sectionDesc {
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0 auto;
+  font-size: clamp(18px, 3vw, 22px);
+  line-height: 1.6;
+  max-width: 600px;
+  font-weight: 400;
+  font-family: 'Inter', 'SF Pro Text', -apple-system, sans-serif;
+}
+
+.scheduleRed { 
+  color: #e62b1e;
+}
+
+/* Clean timeline */
+.timelineWrapper {
+  position: relative;
+  margin: 0 auto;
+  padding: 60px 0;
+  width: 100%;
+  max-width: 1400px;
+  z-index: 2;
+}
+
+.timelineLine {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(to bottom, 
+    transparent 0%, 
+    rgba(255, 255, 255, 0.3) 10%, 
+    rgba(255, 255, 255, 0.6) 50%, 
+    rgba(255, 255, 255, 0.3) 90%, 
+    transparent 100%);
+  z-index: 1;
+  transform: translateX(-50%);
+}
+
+.timelineList {
+  position: relative;
+  z-index: 3;
   margin: 0;
   padding: 0;
-  display: grid;
-  gap: clamp(10px, 1.8vw, 14px);
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }
 
-/* Card appearance */
-.slot {
-  display: grid;
-  grid-template-columns: 92px 1fr;
-  align-items: start;
-  gap: clamp(12px, 2vw, 16px);
-  padding: clamp(14px, 2.2vw, 18px);
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: clamp(12px, 1.6vw, 18px);
-  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.35);
-  transition: transform 160ms ease, box-shadow 180ms ease,
-    background-color 180ms ease, border-color 180ms ease;
-}
-.slot:hover {
-  transform: translateY(-2px);
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.22);
-  box-shadow: 0 16px 56px rgba(0, 0, 0, 0.4);
-}
-
-/* Time column pill */
-.slotTime {
-  font-weight: 900;
-  color: #ff4a3d;
-  font-size: clamp(14px, 2vw, 18px);
-  white-space: nowrap;
-  min-width: 92px;
-  padding-top: 4px;
-}
-
-/* Info */
-.slotInfo {
-  min-width: 0;
-}
-.slotTitle {
-  margin: 0 0 2px;
-  color: #fff;
-  font-size: clamp(15px, 2.1vw, 20px);
-  font-weight: 700;
-  line-height: 1.35;
-  letter-spacing: -0.005em;
-}
-.slotSpeaker {
+.timelineItem {
+  min-height: 140px;
   margin: 0;
-  color: rgba(245, 247, 250, 0.8);
-  font-size: clamp(13px, 1.9vw, 16px);
-  line-height: 1.6;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition-delay: var(--animation-delay);
 }
 
-/* Decorative left bar for each slot */
-.slot::before {
-  content: "";
-  grid-column: 1 / -1;
-  height: 2px;
-  background: linear-gradient(
-    90deg,
-    rgba(255, 74, 61, 0.9),
-    rgba(255, 74, 61, 0) 60%
-  );
-  border-radius: 2px;
-  margin-bottom: clamp(8px, 1.4vw, 12px);
+.timelineItem.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-/* Tablet and up */
-@media (min-width: 768px) {
-  .timeline {
-    grid-template-columns: 320px 1fr;
-    gap: clamp(20px, 4vw, 36px);
+/* Clean slot layouts */
+.leftSlot,
+.rightSlot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 140px;
+  gap: 40px;
+}
+
+.leftSlot { flex-direction: row; }
+.rightSlot { flex-direction: row-reverse; }
+
+.spacer {
+  width: 480px;
+  max-width: 480px;
+}
+
+/* Clean professional cards */
+.card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border-radius: 12px;
+  padding: 0;
+  width: 100%;
+  max-width: 480px;
+  font-size: 1rem;
+  font-weight: 400;
+  margin: 0;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.cardContent {
+  padding: 24px;
+}
+
+.cardTitle { 
+  margin: 0 0 8px 0;
+  font-size: 1.25rem; 
+  line-height: 1.4;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.cardSpeaker { 
+  font-size: 1rem; 
+  font-weight: 500; 
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.cardDescription {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+/* Clean center section */
+.centerPart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 120px;
+  min-width: 120px;
+  margin: 0;
+  user-select: none;
+  z-index: 4;
+}
+
+.iconCircle {
+  width: 50px;
+  height: 50px;
+  background: #e62b1e;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  z-index: 4;
+  transition: all 0.3s ease;
+}
+
+.iconInner {
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.timeLabel {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 1rem;
+  text-align: center;
+  line-height: 1.4;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.timelineItem:hover .iconCircle {
+  transform: scale(1.1);
+  background: #ff3b2e;
+}
+
+.timelineItem:hover .timeLabel {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .timelineLine {
+    left: 120px;
   }
-  .whenWhere {
-    position: sticky;
-    top: clamp(12px, 4vh, 32px);
+  
+  .card {
+    max-width: 420px;
   }
-  .slot {
-    grid-template-columns: 110px 1fr;
+  
+  .centerPart { 
+    width: 100px; 
+    min-width: 100px; 
   }
-  .slotTime {
-    min-width: 110px;
+  
+  .iconCircle {
+    width: 45px;
+    height: 45px;
   }
 }
 
-/* Desktop */
-@media (min-width: 1024px) {
-  .slot {
-    grid-template-columns: 120px 1fr;
+@media (max-width: 768px) {
+  .timelineWrapper { 
+    padding: 40px 0; 
   }
-  .slotTime {
-    min-width: 120px;
+  
+  .timelineLine { 
+    left: 80px; 
+  }
+  
+  .timelineList { 
+    gap: 32px;
+  }
+  
+  .leftSlot, .rightSlot { 
+    flex-direction: row; 
+    min-height: 120px;
+    gap: 24px;
+  }
+  
+  .card {
+    max-width: none;
+  }
+  
+  .cardContent {
+    padding: 20px;
+  }
+  
+  .centerPart { 
+    width: 80px; 
+    min-width: 80px;
+  }
+  
+  .iconCircle {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
+  }
+  
+  .timeLabel {
+    font-size: 0.9rem;
+    padding: 6px 12px;
+  }
+  
+  .cardTitle {
+    font-size: 1.1rem;
+  }
+  
+  .cardSpeaker {
+    font-size: 0.95rem;
   }
 }
 
-/* Anchor offset if scrolled to */
+@media (max-width: 480px) {
+  .schedule {
+    padding: 60px 12px;
+  }
+  
+  .timelineLine { 
+    left: 60px; 
+  }
+  
+  .leftSlot, .rightSlot { 
+    min-height: 110px;
+    gap: 16px;
+  }
+  
+  .cardContent {
+    padding: 16px;
+  }
+  
+  .centerPart { 
+    width: 60px; 
+    min-width: 60px;
+  }
+  
+  .iconCircle {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .iconInner {
+    font-size: 0.9rem;
+  }
+  
+  .timeLabel {
+    font-size: 0.85rem;
+    padding: 5px 10px;
+  }
+}
+
+/* Anchor offset */
 #schedule-heading {
-  scroll-margin-top: clamp(60px, 8vh, 100px);
-} /* [web:30][web:33] */
+  scroll-margin-top: clamp(80px, 10vh, 120px);
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

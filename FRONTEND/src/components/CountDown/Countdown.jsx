@@ -1,8 +1,6 @@
-// src/components/Countdown/Countdown.jsx
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import styles from "./Countdown.module.css";
 
-// Format with leading zeros
 const pad = (n) => (n < 10 ? `0${n}` : `${n}`);
 
 function diffParts(target) {
@@ -18,12 +16,7 @@ function diffParts(target) {
   return { ms: clamped, days, hours, minutes, seconds };
 }
 
-export default function Countdown({
-  eventDate = "2026-01-22T09:30:00",
-  title = "HELLO EXPLORER",
-  subtitle = "Are you ready to unravel the unexplored?",
-  className = "",
-}) {
+export default function Countdown({ eventDate = "2026-01-22T10:00:00" }) {
   const target = useMemo(() => new Date(eventDate), [eventDate]);
   const [parts, setParts] = useState(() => diffParts(target));
   const tickRef = useRef(null);
@@ -37,20 +30,26 @@ export default function Countdown({
   const isOver = parts.ms <= 0;
 
   return (
-    <section
-      className={`${styles.wrap} ${className}`}
-      aria-label="Event countdown"
-    >
+    <section className={styles.wrap} aria-label="Event countdown">
       <div className={styles.container}>
-        {/* Hero section */}
+        {/* Hero Section */}
         <div className={styles.hero}>
           <h1 className={styles.title}>
-            <span className={styles.red}>HELLO</span> EXPLORER
+            <span className={styles.red}>Rise</span> Beyond Ordinary
           </h1>
-          <p className={styles.subtitle}>{subtitle}</p>
+          <p className={styles.subtitle}>
+            Are you ready to step into the spotlight?
+          </p>
+          <p className={styles.eventInfo}>
+            Join us on <strong>January 22, 2026</strong> at{" "}
+            <strong>Ga Di Madgulkar Natyagruha, Pradhikaran, Nigdi</strong>
+          </p>
+          <p className={styles.timing}>
+            Doors Open: <span>10:00 AM</span>
+          </p>
         </div>
 
-        {/* Countdown cards */}
+        {/* Countdown Cards */}
         <div
           className={styles.cards}
           role="timer"
@@ -63,12 +62,12 @@ export default function Countdown({
           <Card value={pad(parts.seconds)} label="Seconds" isActive={!isOver} />
         </div>
 
-        {/* Body text */}
+        {/* Body Text */}
         <div className={styles.bodyWrapper}>
           <p className={styles.body}>
-            To unlock the untapped opportunities and experience an unrestricted
-            rush, TEDxPCCOE&R invites you to step into the spotlight and explore
-            what lies beyond the obvious.
+            A journey of expression, identity, and resonance. Step into the
+            arena where every idea, every thought, and every heartbeat takes
+            center stage.
           </p>
         </div>
       </div>
@@ -83,9 +82,7 @@ function Card({ value, label, isActive }) {
       aria-label={`${value} ${label}`}
     >
       <div className={styles.cardInner}>
-        <div className={styles.value} aria-hidden="true">
-          {value}
-        </div>
+        <div className={styles.value}>{value}</div>
         <div className={styles.label}>{label}</div>
       </div>
     </div>

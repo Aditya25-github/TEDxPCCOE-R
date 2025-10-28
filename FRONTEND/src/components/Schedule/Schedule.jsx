@@ -1,36 +1,44 @@
 import React from "react";
-import TimeSlot from "./TimeSlot";
-import styles from "./Schedule.module.css";
+import {
+  VerticalTimeline,
+  VerticalTimelineElement,
+} from "react-vertical-timeline-component";
+import "react-vertical-timeline-component/style.min.css";
+import { BsFillAlarmFill } from "react-icons/bs";
+import { SLOTS } from "../../data/homeData";  // Import the slots from your data
 
-export default function Schedule({ slots }) {
+export default function Schedule() {
   return (
-    <section className={styles.schedule} aria-labelledby="schedule-heading">
-      <div className={styles.sectionHead}>
-        <h2 id="schedule-heading" className={styles.sectionTitle}>
-          Schedule
-        </h2>
-        <p className={styles.sectionDesc}>
-          Date, time, venue, and program timeline.
-        </p>
-      </div>
-      <div className={styles.timeline}>
-        <div className={styles.whenWhere}>
-          <p>
-            <strong>Date:</strong> 15 March 2025
-          </p>
-          <p>
-            <strong>Time:</strong> 09:30 – 18:00
-          </p>
-          <p>
-            <strong>Venue:</strong> PCCOE&amp;R Auditorium
-          </p>
-        </div>
-        <ul className={styles.slots} aria-label="Program timeline">
-          {slots.map((slot, i) => (
-            <TimeSlot key={i} slot={slot} />
-          ))}
-        </ul>
-      </div>
+    <section id="event" style={{ background: "#000", padding: "40px 0" }}>
+      <h2
+        style={{
+          fontWeight: "bold",
+          color: "#fff",
+          textAlign: "center",
+          fontSize: "2.6rem",
+          marginBottom: "32px",
+          fontFamily: "Montserrat, Arial, sans-serif",
+        }}
+      >
+        Program <span style={{ color: "#FE2A06" }}>Schedule</span>
+      </h2>
+      <VerticalTimeline>
+        {SLOTS.map((slot, idx) => (
+          <VerticalTimelineElement
+            key={idx}
+            contentStyle={{ background: "#FE2A06", color: "#fff" }}
+            contentArrowStyle={{ borderRight: "7px solid #FE2A06" }}
+            date={slot.time}
+            iconStyle={{ background: "#FE2A06", color: "#fff" }}
+            icon={<BsFillAlarmFill />}
+          >
+            <h3 className="vertical-timeline-element-subtitle">{slot.title}</h3>
+            {slot.speaker && (
+              <h4 style={{ fontWeight: "bold" }}>{slot.speaker}</h4>
+            )}
+          </VerticalTimelineElement>
+        ))}
+      </VerticalTimeline>
     </section>
   );
 }

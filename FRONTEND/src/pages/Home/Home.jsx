@@ -12,6 +12,7 @@ import Footer from "../../components/Footer/Footer";
 import { SPEAKERS, SLOTS, SPONSORS, TEAM, GALLERY } from "../../data/homeData";
 import styles from "./Home.module.css";
 import Countdown from "../../components/CountDown/Countdown";
+import ThemeCards from "../../components/ThemeCards/ThemeCards"; // <-- add this
 
 const scrollToId = (id) => {
   const el = document.getElementById(id);
@@ -29,27 +30,13 @@ export default function Home() {
       {/* 🔹 Theme Section */}
       <section id="theme">
         <Countdown />
+        <ThemeCards />
       </section>
 
       {/* 🔹 About Section */}
       <section id="about">
         <About />
       </section>
-
-      {/* 🔹 Trailer Section */}
-      {/* <section
-        id="trailer"
-        style={{
-          position: "relative",
-          width: "100%",
-          minHeight: "100vh",
-          backgroundColor: "#000",
-          overflow: "hidden",
-          zIndex: 1,
-        }}
-      >
-        <Trailer />
-      </section> */}
 
       {/* 🔹 Speakers Section */}
       <section id="speakers">
