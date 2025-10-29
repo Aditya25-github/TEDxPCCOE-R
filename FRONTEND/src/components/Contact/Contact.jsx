@@ -1,6 +1,7 @@
 // src/components/Contact/Contact.jsx
 import React from "react";
 import styles from "./Contact.module.css";
+import ContactForm from "./ContactForm";
 
 export default function Contact() {
   return (
@@ -33,7 +34,7 @@ export default function Contact() {
           <div className={styles.rowCards}>
             <div className={styles.cardSm}>
               <div className={styles.iconWrap} aria-hidden="true">
-                ✉️
+                ✉
               </div>
               <h4 className={styles.cardTitle}>Email Us</h4>
               <p className={styles.cardText}>
@@ -49,67 +50,17 @@ export default function Contact() {
               <p className={styles.cardText}>
                 Organizer: +91 8788289660 (Pranav)
                 <br />
-                Co‑Organizer: +91 9272999555 (Shashank)
+                Co-Organizer: +91 9272999555 (Shashank)
               </p>
             </div>
           </div>
         </div>
 
-        {/* Right column: form block */}
+        {/* Right column: contact form */}
         <div className={styles.formCol}>
           <ContactForm />
         </div>
       </div>
     </section>
-  );
-}
-
-function ContactForm() {
-  const onSubmit = (e) => {
-    e.preventDefault();
-    // TODO: hook to backend / email service
-  };
-
-  return (
-    <form className={styles.form} onSubmit={onSubmit} aria-label="Contact form">
-      <div className={styles.row2}>
-        <input
-          className={styles.input}
-          name="name"
-          type="text"
-          placeholder="Your Name"
-          required
-        />
-        <input
-          className={styles.input}
-          name="email"
-          type="email"
-          placeholder="Your Email"
-          required
-        />
-      </div>
-
-      <input
-        className={styles.input}
-        name="subject"
-        type="text"
-        placeholder="Subject"
-        required
-      />
-
-      <textarea
-        className={`${styles.input} ${styles.textarea}`}
-        name="message"
-        placeholder="Message"
-        rows={6}
-        required
-      />
-
-      <div className={styles.actions}>
-        <button className={styles.btn} type="submit">
-          Send Message
-        </button>
-      </div>
-    </form>
   );
 }
