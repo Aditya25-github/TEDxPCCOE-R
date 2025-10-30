@@ -1,5 +1,6 @@
 // src/components/Contact/ContactForm.jsx
 import React, { useState } from "react";
+import emailjs from "emailjs-com";
 import styles from "./Contact.module.css";
 
 export default function ContactForm() {
@@ -7,41 +8,38 @@ export default function ContactForm() {
   const [statusMessage, setStatusMessage] = useState("");
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     setIsSending(true);
     setStatusMessage("");
     setShowSuccessAlert(false);
 
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData.entries());
-
-    try {
-      const res = await fetch("http://localhost:5000/api/send-mail", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-
-      if (res.ok) {
-        setStatusMessage("🎉 Message sent successfully!");
-        setShowSuccessAlert(true);
-        e.target.reset();
-        
-        // Auto-hide success message after 5 seconds
-        setTimeout(() => {
-          setShowSuccessAlert(false);
-          setStatusMessage("");
-        }, 5000);
-      } else {
-        setStatusMessage("❌ Failed to send message. Try again later.");
-      }
-    } catch (error) {
-      console.error("SendMail Error:", error);
-      setStatusMessage("❌ Something went wrong. Try again later.");
-    } finally {
-      setIsSending(false);
-    }
+    emailjs
+      .sendForm(
+        "service_x1y2z3a", // Service ID
+        "template_abc123", // Template ID
+        e.target,
+        "zXI_s1A7E6MXJ6l7s" // Public Key
+      )
+      .then(
+        () => {
+          setIsSending(false);
+          setStatusMessage("✅ Message sent successfully!");
+          setShowSuccessAlert(true);
+          e.target.reset();
+          
+          // Auto-hide success alert after 5 seconds
+          setTimeout(() => {
+            setShowSuccessAlert(false);
+            setStatusMessage("");
+          }, 5000);
+        },
+        (error) => {
+          setIsSending(false);
+          setStatusMessage("❌ Failed to send message. Try again later.");
+          console.error("EmailJS Error:", error.text);
+        }
+      );
   };
 
   return (
@@ -51,18 +49,23 @@ export default function ContactForm() {
         <div className={styles.tedxAlert} role="alert">
           <div className={styles.alertContent}>
             <div className={styles.alertHeader}>
-              <span className={styles.alertIcon}>✓</span>
-              <span className={styles.tedxLogo}>TED<strong>x</strong></span>
+              <div className={styles.alertIcon}>
+                ✓
+              </div>
+              <div>
+                <div className={styles.tedxLogo}>TED<strong>x</strong>PCCOER</div>
+                <div className={styles.alertTitle}>Message Successfully Sent!</div>
+              </div>
             </div>
+            
             <div className={styles.alertBody}>
-              <h4 className={styles.alertTitle}>Ideas Worth Spreading</h4>
               <p className={styles.alertText}>
-                <strong>Your message has been delivered!</strong> Thank you for reaching out. 
-                We're excited to connect with you and will respond shortly.
+                <strong>Thank you for reaching out!</strong> Your message has been delivered to the TEDxPCCOER team. We appreciate you taking the time to contact us.
               </p>
             </div>
+            
             <div className={styles.alertFooter}>
-              <span className={styles.alertTag}>#TEDxPccoer</span>
+              <span className={styles.alertTag}>#IdeasWorthSpreading</span>
               <button 
                 className={styles.alertClose}
                 onClick={() => setShowSuccessAlert(false)}
@@ -126,10 +129,11 @@ export default function ContactForm() {
           </button>
         </div>
 
+        {/* Regular status message (for errors) */}
         {statusMessage && !showSuccessAlert && (
           <p
             className={`${styles.status} ${
-              statusMessage.startsWith("🎉") ? styles.statusSuccess : styles.statusError
+              statusMessage.startsWith("✅") ? styles.statusSuccess : styles.statusError
             }`}
           >
             {statusMessage}
