@@ -12,7 +12,8 @@ import Footer from "../../components/Footer/Footer";
 import { SPEAKERS, SLOTS, SPONSORS, TEAM, GALLERY } from "../../data/homeData";
 import styles from "./Home.module.css";
 import Countdown from "../../components/CountDown/Countdown";
-import ThemeCards from "../../components/ThemeCards/ThemeCards"; // <-- add this
+import ThemeCards from "../../components/ThemeCards/ThemeCards";
+import HowWeDoIt from "../../components/HowWeDoIt/HowWeDoIt";
 
 const scrollToId = (id) => {
   const el = document.getElementById(id);
@@ -27,9 +28,13 @@ export default function Home() {
         <Hero scrollToId={scrollToId} />
       </section>
 
+      {/* 🔹 Countdown Section */}
+      <section id="countdown">
+        <Countdown />
+      </section>
+
       {/* 🔹 Theme Section */}
       <section id="theme">
-        <Countdown />
         <ThemeCards />
       </section>
 
@@ -38,20 +43,40 @@ export default function Home() {
         <About />
       </section>
 
+      {/* 🔹 This is how we do it section */}
+      <section id="how-we-do-it">
+        {" "}
+        {/* Corrected to have unique id */}
+        <HowWeDoIt />
+      </section>
+
       {/* 🔹 Speakers Section */}
       <section id="speakers">
         <Speakers speakers={SPEAKERS} />
       </section>
 
       {/* 🔹 Remaining Sections */}
-      <Schedule slots={SLOTS} />
-      <Sponsors sponsors={SPONSORS} />
-      <Team team={TEAM} />
-      <Gallery gallery={GALLERY} />
+      <section id="schedule">
+        <Schedule slots={SLOTS} />
+      </section>
+
+      <section id="sponsors">
+        <Sponsors sponsors={SPONSORS} />
+      </section>
+
+      <section id="Team">
+        <Team team={TEAM} />
+      </section>
+
+      <section id="gallery">
+        <Gallery gallery={GALLERY} />
+      </section>
+
       {/* 🔹 Contact Section */}
       <section id="contact">
         <Contact />
       </section>
+
       <Footer />
     </main>
   );

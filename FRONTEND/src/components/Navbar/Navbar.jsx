@@ -1,57 +1,93 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Navbar.module.css";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import logoWhite from "../../assets/logo-white.png";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     document.documentElement.style.overflow = open ? "hidden" : "";
     return () => (document.documentElement.style.overflow = "");
   }, [open]);
 
-  const scrollToSection = (id) => {
-    const section = document.getElementById(id);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-      setOpen(false);
+  const scrollToId = (id) => {
+    // scroll page to section id if on home route
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  const handleNav = (route, id = null) => {
+    if (location.pathname !== "/") {
+      navigate(route);
+      if (id) {
+        setTimeout(() => scrollToId(id), 200);
+      }
+    } else {
+      if (id) scrollToId(id);
     }
+    setOpen(false);
   };
 
   return (
     <header className={styles.header}>
       <div className={styles.inner}>
-        <a
-          onClick={() => scrollToSection("home")}
+        <Link
+          to="/"
           className={styles.brand}
           aria-label="TEDxPCCOE&R Home"
+          onClick={() => setOpen(false)}
         >
           <img src={logoWhite} alt="TEDxPCCOE&R" className={styles.logo} />
-        </a>
+        </Link>
 
         {/* Desktop Navigation */}
         <nav className={styles.nav} aria-label="Primary">
-          <a className={styles.link} onClick={() => scrollToSection("home")}>
-            Home
-          </a>
-          <a className={styles.link} onClick={() => scrollToSection("theme")}>
-            Theme
-          </a>
-          <a className={styles.link} onClick={() => scrollToSection("about")}>
-            About
-          </a>
-          <a
+          <button
             className={styles.link}
-            onClick={() => scrollToSection("speakers")}
+            onClick={() => handleNav("/", "home")}
           >
-            Speaker
-          </a>
-          <a className={styles.link} onClick={() => scrollToSection("contact")}>
+            Home
+          </button>
+          <button
+            className={styles.link}
+            onClick={() => handleNav("/", "theme")}
+          >
+            Theme
+          </button>
+          <button
+            className={styles.link}
+            onClick={() => handleNav("/", "about")}
+          >
+            About
+          </button>
+          <button
+            className={styles.link}
+            onClick={() => handleNav("/", "speakers")}
+          >
+            Speakers
+          </button>
+          <button
+            className={styles.link}
+            onClick={() => handleNav("/", "Team")}
+          >
+            Team
+          </button>
+          <button
+            className={styles.link}
+            onClick={() => handleNav("/", "contact")}
+          >
             Contact Us
-          </a>
-          <a className={styles.buy} href="#" rel="noopener noreferrer">
+          </button>
+          <Link
+            className={styles.buy}
+            to="/apply"
+            onClick={() => setOpen(false)}
+          >
             Apply Now
-          </a>
+          </Link>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -83,42 +119,41 @@ export default function Navbar() {
           <nav className={styles.drawerNav}>
             <button
               className={styles.drawerLink}
-              onClick={() => scrollToSection("home")}
+              onClick={() => handleNav("/", "home")}
             >
               Home
             </button>
             <button
               className={styles.drawerLink}
-              onClick={() => scrollToSection("theme")}
+              onClick={() => handleNav("/", "theme")}
             >
               Theme
             </button>
             <button
               className={styles.drawerLink}
-              onClick={() => scrollToSection("about")}
+              onClick={() => handleNav("/", "about")}
             >
               About
             </button>
             <button
               className={styles.drawerLink}
-              onClick={() => scrollToSection("speakers")}
+              onClick={() => handleNav("/", "speakers")}
             >
-              Speaker
+              Speakers
             </button>
             <button
               className={styles.drawerLink}
-              onClick={() => scrollToSection("contact")}
+              onClick={() => handleNav("/", "contact")}
             >
               Contact Us
             </button>
-            <a
+            <Link
               className={styles.drawerBuy}
-              href="https://www.grooviti.com"
-              target="_blank"
-              rel="noopener noreferrer"
+              to="/apply"
+              onClick={() => setOpen(false)}
             >
-              Buy Ticket
-            </a>
+              Apply Now
+            </Link>
           </nav>
         </aside>
       </div>

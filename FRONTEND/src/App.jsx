@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Preloader from "./components/Preloader/Preloader.jsx";
 import Home from "./pages/Home/Home.jsx";
 import Navbar from "./components/Navbar/Navbar.jsx";
+import ApplyServices from "./pages/ApplyNow/ApplyServices.jsx";
 
 function App() {
   const [loadingFinished, setLoadingFinished] = useState(false);
@@ -12,10 +14,13 @@ function App() {
         <Preloader onFinish={() => setLoadingFinished(true)} />
       )}
       {loadingFinished && (
-        <div>
+        <Router>
           <Navbar />
-          <Home />
-        </div>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/apply" element={<ApplyServices />} />
+          </Routes>
+        </Router>
       )}
     </>
   );

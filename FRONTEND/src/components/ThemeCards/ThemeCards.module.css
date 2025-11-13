@@ -3,6 +3,10 @@
   background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
   position: relative;
   overflow: hidden;
+  background-image: url("/bg1.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 /* Section Header */
@@ -20,7 +24,7 @@
   margin: 0 0 20px;
   line-height: 1.1;
   letter-spacing: -0.02em;
-  font-family: 'Inter', -apple-system, sans-serif;
+  font-family: "Inter", -apple-system, sans-serif;
 }
 
 .accent {
@@ -118,8 +122,15 @@
 }
 
 @keyframes gentlePulse {
-  0%, 100% { opacity: 0.5; transform: scale(1); }
-  50% { opacity: 0.8; transform: scale(1.1); }
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.1);
+  }
 }
 
 .exploreText {
@@ -240,18 +251,18 @@
   .themeCards {
     padding: 60px 16px;
   }
-  
+
   .cardsGrid {
     grid-template-columns: 1fr;
     max-width: 400px;
     gap: 25px;
   }
-  
+
   .card {
     min-height: 350px;
     padding: 30px 25px;
   }
-  
+
   .cardGraphic {
     min-height: 140px;
     margin-bottom: 25px;
@@ -262,12 +273,12 @@
   .themeCards {
     padding: 50px 12px;
   }
-  
+
   .card {
     min-height: 320px;
     padding: 25px 20px;
   }
-  
+
   .cardGraphic {
     min-height: 120px;
   }
@@ -278,15 +289,15 @@
   .card {
     transition: none;
   }
-  
+
   .card:hover {
     transform: none;
   }
-  
+
   .mysteryIcon {
     animation: none;
   }
-  
+
   svg * {
     animation: none !important;
   }
