@@ -30,7 +30,7 @@ export default function About() {
           <iframe
             width="420"
             height="315"
-            src="https://www.youtube.com/embed/hiii7hkbQ4Q?si=8kmEQaq7LSabaUa3"
+            src="https://www.youtube.com/embed/zDE-OXZ5NDQ?si=e0pukrTzaaBDf3Ze"
           ></iframe>
         </div>
       </div>

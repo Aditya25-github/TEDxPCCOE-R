@@ -35,18 +35,18 @@ export default function Countdown({ eventDate = "2026-01-22T10:00:00" }) {
         {/* Hero Section */}
         <div className={styles.hero}>
           <h1 className={styles.title}>
-            <span className={styles.red}>Rise</span> Beyond Ordinary
+            <span className={styles.red}>Hello</span> Everyone
           </h1>
           <p className={styles.subtitle}>
             Are you ready to step into the spotlight?
           </p>
-          <p className={styles.eventInfo}>
+          {/* <p className={styles.eventInfo}>
             Join us on <strong>January 22, 2026</strong> at{" "}
             <strong>Ga Di Madgulkar Natyagruha, Pradhikaran, Nigdi</strong>
           </p>
           <p className={styles.timing}>
             Doors Open: <span>10:00 AM</span>
-          </p>
+          </p> */}
         </div>
 
         {/* Countdown Cards */}

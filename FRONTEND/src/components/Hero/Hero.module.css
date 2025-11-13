@@ -12,7 +12,7 @@
   padding: 0;
   margin: 0;
   background: transparent !important;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .heroInner {
@@ -97,7 +97,7 @@
 
 /* Glow effect for TEDx */
 .tedxRed::after {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background: radial-gradient(circle, rgba(230, 43, 30, 0.4), transparent 70%);
@@ -109,7 +109,8 @@
 }
 
 @keyframes glowPulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.3;
     transform: scale(1);
   }
@@ -212,18 +213,24 @@
 
 /* Shimmer effect on primary button */
 .btnPrimary::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
   animation: shimmer 3s ease-in-out 2s infinite;
 }
 
 @keyframes shimmer {
-  0%, 100% {
+  0%,
+  100% {
     left: -100%;
   }
   50% {
@@ -589,5 +596,41 @@
   .btnGhost:hover,
   .btnGhost:focus {
     transform: none;
+  }
+}
+
+/* -----------------------------------POP UP OF GET TICKETS-------------------------- */
+
+.ticketPopup {
+  position: fixed;
+  bottom: 650px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(255, 0, 0, 0.9);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  animation: fadeInOut 2s ease-in-out;
+  z-index: 1000;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 20px);
+  }
+  10% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  90% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, 20px);
   }
 }

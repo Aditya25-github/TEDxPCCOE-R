@@ -26,6 +26,52 @@ export const SPEAKERS = [
     photo: "https://api.dicebear.com/9.x/micah/svg?seed=Ryan",
     video: "",
   },
+  {
+    id: 4,
+    name: "Speaker Four",
+    title: "Author",
+    topic: "Human Potential",
+    bio: "Short bio goes here.",
+    photo: "https://api.dicebear.com/9.x/micah/svg?seed=Sara",
+    video: "",
+  },
+  {
+    id: 5,
+    name: "Speaker Five",
+    title: "Author",
+    topic: "Human Potential",
+    bio: "Short bio goes here.",
+    photo: "https://api.dicebear.com/9.x/micah/svg?seed=Aidan",
+    video: "",
+  },
+  {
+    id: 6,
+    name: "Speaker Six",
+    title: "Author",
+    topic: "Human Potential",
+    bio: "Short bio goes here.",
+    photo: "https://api.dicebear.com/9.x/micah/svg?seed=Liam",
+    video: "",
+  },
+  {
+    id: 7,
+    name: "Speaker Seven",
+    title: "Author",
+    topic: "Human Potential",
+    bio: "Short bio goes here.",
+    photo: "https://api.dicebear.com/9.x/micah/svg?seed=Chase",
+    video: "",
+  },
+  {
+    id: 8,
+    name: "Speaker Eight",
+    title: "Author",
+    topic: "Human Potential",
+    bio: "Short bio goes here.",
+    photo: "https://api.dicebear.com/9.x/micah/svg?seed=Andrea",
+    video: "",
+  },
+
 ];
 
 export const SLOTS = [
@@ -63,6 +109,12 @@ export const TEAM = [
     name: "Member Four",
     role: "Partnerships",
     photo: "https://api.dicebear.com/9.x/micah/svg?seed=Destiny",
+  },
+  {
+    id: 5,
+    name: "Member Five",
+    role: "Curation",
+    photo: "https://api.dicebear.com/9.x/micah/svg?seed=Sara",
   },
 ];
 

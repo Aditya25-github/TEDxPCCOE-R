@@ -14,7 +14,7 @@ export default function Navbar() {
     const section = document.getElementById(id);
     if (section) {
       section.scrollIntoView({ behavior: "smooth" });
-      setOpen(false); // close mobile menu after click
+      setOpen(false);
     }
   };
 
@@ -49,13 +49,8 @@ export default function Navbar() {
           <a className={styles.link} onClick={() => scrollToSection("contact")}>
             Contact Us
           </a>
-          <a
-            className={styles.buy}
-            href="https://www.grooviti.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Buy Ticket
+          <a className={styles.buy} href="#" rel="noopener noreferrer">
+            Apply Now
           </a>
         </nav>
 

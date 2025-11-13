@@ -1,5 +1,6 @@
+// SpeakerCard.js
 import React from "react";
-import styles from "./Speakers.module.css";
+import styles from "./SpeakerCard.module.css";
 
 export default function SpeakerCard({ speaker, isVisible, animationDelay }) {
   return (
@@ -7,26 +8,16 @@ export default function SpeakerCard({ speaker, isVisible, animationDelay }) {
       className={`${styles.card} ${
         isVisible ? styles.cardVisible : styles.cardHidden
       }`}
+      tabIndex={0}
       style={{
         animationDelay: `${animationDelay}s`,
       }}
-      tabIndex={0}
-      aria-label={`${speaker.name}, ${speaker.title}`}
     >
       <figure className={styles.cardFigure}>
-        <img
-          src={speaker.photo}
-          alt={`${speaker.name} headshot`}
-          loading="lazy"
-        />
-        <figcaption className={styles.cardOverlay}>
+        <img src={speaker.photo} alt={speaker.name} />
+        <div className={styles.cardOverlay}>
           <p className={styles.cardBio}>{speaker.bio}</p>
-          {speaker.video && (
-            <a className={styles.cardLink} href={speaker.video}>
-              Watch talk
-            </a>
-          )}
-        </figcaption>
+        </div>
       </figure>
       <div className={styles.cardBody}>
         <h3 className={styles.cardName}>{speaker.name}</h3>
