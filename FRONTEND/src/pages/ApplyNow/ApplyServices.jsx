@@ -47,12 +47,6 @@ const services = [
     link: "mailto:tedxpccoer@gmail.com",
     desc: "Send us your queries or feedback.",
   },
-  {
-    label: "TEDxPCCOER 2025 Recap",
-    icon: <FaRegNewspaper />,
-    link: "https://www.instagram.com/reels/DOTbnK1CJ4r/",
-    desc: "Recap on the 2025 event.",
-  },
 ];
 
 export default function ApplyServices() {
@@ -64,7 +58,7 @@ export default function ApplyServices() {
         </h1>
         <h2 className={styles.subtitle}>Ideas Worth Spreading</h2>
       </div>
-      <section className={styles.services}>
+      <section className={styles.servicesGrid}>
         {services.map((service, idx) => (
           <a
             key={service.label}

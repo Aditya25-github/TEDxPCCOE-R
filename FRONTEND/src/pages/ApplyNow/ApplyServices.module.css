@@ -1,28 +1,24 @@
 .bgWrap {
   min-height: 100vh;
-  /* background: url("/img/bg-redcloud.jpg") center/cover, #120002; Swap with your image */
-  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0;
   background-color: #120002;
 }
+
 .header {
   margin: 40px 0 32px 0;
   text-align: center;
 }
-.logo {
-  width: 380px;
-  max-width: 90vw;
-  margin-bottom: 12px;
-  object-fit: contain;
-}
+
 .red {
   color: #e62b1e;
   font-weight: 800;
   font-size: 2.7rem;
   letter-spacing: -2px;
 }
+
 .header h1 {
   font-size: 3.1rem;
   color: #fff;
@@ -30,6 +26,7 @@
   margin: 0 0 8px 0;
   letter-spacing: -1px;
 }
+
 .subtitle {
   font-family: "Georgia", serif;
   color: #fff;
@@ -38,67 +35,117 @@
   margin-bottom: 24px;
   text-shadow: 1px 2px 4px #680909;
 }
-.services {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  width: 90vw;
-  max-width: 850px;
-  margin-bottom: 32px;
+
+/* --- MAIN SERVICES GRID --- */
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 28px;
+  width: 95vw;
+  max-width: 1100px;
+  padding: 10px 0 24px 0;
+  margin: 0 auto 32px auto;
+  justify-items: center;
+  align-items: stretch;
 }
+
 .serviceCard {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   background: rgba(255, 255, 255, 0.98);
-  border-radius: 40px;
-  box-shadow: 0 8px 40px rgba(100, 0, 16, 0.23);
+  border-radius: 22px;
+  box-shadow: 0 8px 36px rgba(230, 43, 30, 0.13);
   text-decoration: none;
-  padding: 24px 32px;
+  padding: 24px 26px 20px 26px;
+  width: 100%;
+  min-width: 220px;
+  max-width: 330px;
   transition: transform 0.12s, box-shadow 0.2s;
   cursor: pointer;
+  min-height: 160px;
 }
+
 .serviceCard:hover,
 .serviceCard:focus {
-  transform: translateY(-3px) scale(1.04);
-  box-shadow: 0 12px 48px rgba(230, 43, 30, 0.23);
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 12px 48px rgba(230, 43, 30, 0.19);
 }
+
 .cardIcon {
-  font-size: 2.4rem;
+  font-size: 2.2rem;
   color: #e62b1e;
-  margin-right: 22px;
-  flex-shrink: 0;
+  margin-bottom: 14px;
   display: flex;
   align-items: center;
   border-radius: 50%;
-  background: rgba(230, 43, 30, 0.09);
-  padding: 16px;
+  background: rgba(230, 43, 30, 0.08);
+  padding: 12px;
 }
+
 .cardContent h3 {
   margin: 0 0 7px 0;
-  font-size: 1.25rem;
+  font-size: 1.09rem;
   font-weight: 700;
   color: #191818;
 }
+
 .cardContent p {
   margin: 0;
-  font-size: 1rem;
+  font-size: 0.98rem;
   color: #44232e;
   font-weight: 400;
   letter-spacing: 0.01em;
 }
-@media (max-width: 600px) {
-  .header h1 {
-    font-size: 2rem;
+
+/* --- RESPONSIVENESS --- */
+@media (max-width: 1200px) {
+  .servicesGrid {
+    max-width: 900px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   }
-  .subtitle {
-    font-size: 1.2rem;
+}
+
+@media (max-width: 900px) {
+  .servicesGrid {
+    max-width: 650px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 18px;
   }
   .serviceCard {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 16px 14px;
+    min-width: 0;
+    max-width: 100%;
+    font-size: 0.95rem;
+    padding: 19px 13px 14px 13px;
   }
-  .cardIcon {
-    margin: 0 0 7px 0;
+}
+
+@media (max-width: 700px) {
+  .header h1 {
+    font-size: 1.5rem;
+  }
+  .subtitle {
+    font-size: 1rem;
+  }
+  .servicesGrid {
+    width: 99vw;
+    max-width: 490px;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+}
+
+@media (max-width: 500px) {
+  .servicesGrid {
+    grid-template-columns: 1fr;
+    max-width: 350px;
+    gap: 10px;
+  }
+  .serviceCard {
+    padding: 13px 7px 8px 7px;
+    border-radius: 13px;
+  }
+  .header {
+    margin: 18px 0 12px 0;
   }
 }
