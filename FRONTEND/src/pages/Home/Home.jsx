@@ -14,6 +14,7 @@ import styles from "./Home.module.css";
 import Countdown from "../../components/CountDown/Countdown";
 import ThemeCards from "../../components/ThemeCards/ThemeCards";
 import HowWeDoIt from "../../components/HowWeDoIt/HowWeDoIt";
+import TEDxTalksSection from "../../components/TEDxTalksSection/TEDxTalksSection";
 
 const scrollToId = (id) => {
   const el = document.getElementById(id);
@@ -66,6 +67,10 @@ export default function Home() {
 
       <section id="Team">
         <Team team={TEAM} />
+      </section>
+
+      <section id="TedxTalks">
+        <TEDxTalksSection team={TEDxTalksSection} />
       </section>
 
       <section id="gallery">

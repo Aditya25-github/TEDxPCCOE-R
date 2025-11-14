@@ -52,9 +52,9 @@ export default function Hero({ scrollToId }) {
 
             <button
               className={styles.btnGhost}
-              onClick={() => scrollToId("trailer")}
+              onClick={() => scrollToId("TedxTalks")}
             >
-              Watch Trailer
+              Glimpses
             </button>
           </div>
         </div>
