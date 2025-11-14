@@ -1,7 +1,7 @@
 :root {
   --black: #000000;
   --white: #ffffff;
-  --ted-red: #e62b1e; /* TED Red */
+  --ted-red: #e62b1e;
   --muted: #cbd5e1;
 }
 
@@ -22,38 +22,37 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 70px;
+  padding: 0 clamp(20px, 4vw, 70px);
 }
 
-/* ===========================
-     Brand
-     =========================== */
+/* Brand */
 .brand {
   display: inline-flex;
   align-items: center;
   min-width: 140px;
+  z-index: 1001;
 }
+
 .logo {
   height: 50px;
   display: block;
 }
 
-/* ===========================
-     Desktop navigation
-     =========================== */
+/* Desktop Navigation */
 .nav {
   display: none;
   gap: 18px;
   align-items: center;
-  justify-content: flex-end; /* Ensure nav is as far right as possible */
+  justify-content: flex-end;
 }
 
 button.link {
   background: transparent;
-  border: none; /* Removes default browser button border */
+  border: none;
   outline: none;
   cursor: pointer;
 }
+
 .link {
   color: rgba(255, 255, 255, 0.92);
   text-decoration: none;
@@ -63,14 +62,17 @@ button.link {
   border-radius: 8px;
   transition: color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
 }
+
 .link:hover,
 .link:focus-visible {
   color: var(--ted-red);
   outline: none;
 }
+
 .link:focus-visible {
   box-shadow: 0 0 0 3px rgba(230, 43, 30, 0.35);
 }
+
 .linkActive {
   color: var(--ted-red);
   background: rgba(255, 255, 255, 0.08);
@@ -84,9 +86,10 @@ button.link {
   border-radius: 999px;
   text-decoration: none;
   font-weight: 700;
-  transition: transform 0.15s ease, box-shadow 0.2s ease,
-    background-color 0.2s ease;
+  font-size: 16px;
+  transition: transform 0.15s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
+
 .buy:hover,
 .buy:focus-visible {
   transform: translateY(-1px);
@@ -95,10 +98,10 @@ button.link {
 }
 
 /* ===========================
-     Hamburger (mobile)
-     =========================== */
+   Hamburger (Mobile)
+   =========================== */
 .burger {
-  display: inline-flex; /* hidden at >= 960px */
+  display: inline-flex;
   width: 44px;
   height: 44px;
   border: 0;
@@ -106,20 +109,21 @@ button.link {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  justify-self: end;
   border-radius: 8px;
+  z-index: 1001;
 }
+
 .burger:focus-visible {
   outline: 3px solid rgba(230, 43, 30, 0.5);
   outline-offset: 2px;
 }
 
-/* Icon box and bars */
 .burgerBox {
   position: relative;
   width: 24px;
   height: 18px;
 }
+
 .burgerBar {
   position: absolute;
   left: 0;
@@ -128,9 +132,9 @@ button.link {
   border-radius: 2px;
   background: #fff;
   transform-origin: center;
-  transition: transform 180ms ease, opacity 180ms ease, top 180ms ease,
-    bottom 180ms ease;
+  transition: transform 180ms ease, opacity 180ms ease, top 180ms ease, bottom 180ms ease;
 }
+
 .burgerBar:nth-child(1) {
   top: 0;
 }
@@ -141,7 +145,7 @@ button.link {
   bottom: 0;
 }
 
-/* Open state morphs to “X” */
+/* Open state - X */
 .burgerOpen .burgerBar:nth-child(1) {
   top: 8px;
   transform: rotate(45deg);
@@ -156,83 +160,133 @@ button.link {
 }
 
 /* ===========================
-     Mobile drawer (right slide)
-     =========================== */
+   Mobile Drawer - Full Page Modal
+   =========================== */
 .drawer {
   position: fixed;
-  inset: 90px 0 0 0; /* open just under header (match .inner height) */
+  inset: 0;
   pointer-events: none;
-  z-index: 999;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 280ms ease;
 }
 
-/* Dim overlay behind panel */
+.drawer.open {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+/* Overlay */
 .drawerOverlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.55);
-  opacity: 0;
-  transition: opacity 200ms ease;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
 }
 
-/* Right-side panel */
+/* Panel - Full screen centered content */
 .drawerPanel {
   position: absolute;
-  top: 0;
-  right: 0;
-  height: calc(100dvh - 0px);
-  width: min(86vw, 360px);
-  background: rgba(0, 0, 0, 0.9);
-  backdrop-filter: saturate(1.2) blur(6px);
-  transform: translateX(100%);
-  transition: transform 220ms ease;
-  border-left: 1px solid rgba(255, 255, 255, 0.06);
-  display: grid;
-  align-content: start;
+  inset: 0;
+  background: #000000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 24px 60px;
+  opacity: 0;
+  transform: scale(0.96) translateY(20px);
+  transition: opacity 280ms cubic-bezier(0.2, 0.7, 0.2, 1), 
+              transform 280ms cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
-/* Open state */
-.open {
-  pointer-events: auto;
-}
-.open .drawerOverlay {
-  opacity: 1;
-}
 .open .drawerPanel {
-  transform: translateX(0);
+  opacity: 1;
+  transform: scale(1) translateY(0);
 }
 
-/* Drawer nav content */
+/* Drawer Navigation */
 .drawerNav {
-  display: grid;
-  gap: 12px;
-  padding: 18px 16px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 360px;
 }
+
+button.drawerLink {
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  width: 100%;
+}
+
 .drawerLink {
-  color: #fff;
+  color: rgba(255, 255, 255, 0.92);
   text-decoration: none;
   font-weight: 600;
-  padding: 12px 12px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.06);
+  font-size: clamp(1.1rem, 3vw, 1.3rem);
+  padding: 14px 24px;
+  border-radius: 12px;
+  background: transparent;
+  text-align: center;
+  width: 100%;
+  transition: color 220ms ease, background-color 220ms ease;
+  position: relative;
 }
+
+.drawerLink::after {
+  content: "";
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 60px;
+  height: 2px;
+  background: var(--ted-red);
+  transition: transform 220ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
 .drawerLink:hover,
 .drawerLink:focus-visible {
-  background: rgba(255, 255, 255, 0.12);
+  color: var(--ted-red);
+  background: rgba(255, 255, 255, 0.04);
   outline: none;
 }
+
+.drawerLink:hover::after,
+.drawerLink:focus-visible::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
+/* CTA Button */
 .drawerBuy {
   color: #fff;
   background: var(--ted-red);
   text-decoration: none;
-  padding: 12px 14px;
+  padding: 16px 40px;
   border-radius: 999px;
   font-weight: 700;
+  font-size: 1.1rem;
   text-align: center;
+  margin-top: 20px;
+  transition: transform 220ms cubic-bezier(0.2, 0.7, 0.2, 1), 
+              box-shadow 220ms ease;
+  box-shadow: 0 6px 20px rgba(230, 43, 30, 0.35);
+}
+
+.drawerBuy:hover,
+.drawerBuy:focus-visible {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 10px 28px rgba(230, 43, 30, 0.45);
+  outline: none;
 }
 
 /* ===========================
-     Responsive
-     =========================== */
+   Responsive
+   =========================== */
 @media (min-width: 960px) {
   .nav {
     display: flex;
@@ -240,5 +294,32 @@ button.link {
   .burger,
   .drawer {
     display: none;
+  }
+}
+
+/* Mobile landscape adjustments */
+@media (max-width: 959px) and (max-height: 600px) {
+  .drawerPanel {
+    padding: 80px 24px 40px;
+    justify-content: flex-start;
+    overflow-y: auto;
+  }
+  .drawerNav {
+    gap: 12px;
+  }
+  .drawerLink {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+  .drawerBuy {
+    padding: 12px 32px;
+    font-size: 1rem;
+    margin-top: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    height: 35px;
   }
 }

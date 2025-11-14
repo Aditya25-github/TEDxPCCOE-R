@@ -1,142 +1,158 @@
-/* Section: keep your color */
+/* Section */
 .sponsors {
-  background: #0b0b0b;
-  color: #fff;
-  padding: clamp(60px, 8vw, 140px) 16px; /* taller section */
+  --bg: #0b0b0b;
+  --text: #ffffff;
+  --muted: rgba(233, 238, 243, 0.85);
+  --accent: #ff2a13;
+  --accent-soft: #ff6b3d;
+
+  background:
+    radial-gradient(900px 600px at 50% 30%, rgba(255, 64, 32, 0.08), transparent 60%),
+    radial-gradient(700px 500px at 20% -5%, rgba(255, 255, 255, 0.04), transparent 55%),
+    radial-gradient(800px 550px at 80% 105%, rgba(255, 255, 255, 0.03), transparent 60%),
+    var(--bg);
+  color: var(--text);
+  padding: clamp(80px, 10vw, 140px) 20px;
+  overflow: hidden;
+  position: relative;
 }
 
-/* Header with center layout and soft glass banner */
-.sectionHead {
-  max-width: 1120px;
-  margin: 0 auto clamp(28px, 4vw, 40px);
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Header */
+.header {
   text-align: center;
-  padding: 0 8px;
-}
-.sectionTitle {
-  font-weight: 900;
-  font-size: clamp(30px, 6vw, 56px); /* larger like screenshot */
-  margin: 0 0 clamp(10px, 1.6vw, 14px);
-  color: #ffffff;
-  line-height: 1.1;
-  letter-spacing: -0.01em;
-}
-.sectionDesc {
-  display: inline-block;
-  margin: 0;
-  color: rgba(233, 238, 243, 0.92);
-  font-size: clamp(14px, 2vw, 18px);
-  line-height: 1.6;
-  padding: clamp(10px, 2vw, 14px) clamp(14px, 3vw, 22px);
-  border-radius: 14px;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.08),
-    rgba(255, 255, 255, 0.04)
-  ); /* glass look */
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
+  max-width: 700px;
+  margin: 0 auto clamp(50px, 7vw, 80px);
+  padding: 0 16px;
 }
 
-/* Grid: more generous gaps and taller tiles */
-.sponsorGrid {
-  max-width: 1120px;
-  margin: clamp(26px, 4vw, 40px) auto 0;
-  padding: 0 8px;
+.title {
+  font-family: "Inter", -apple-system, system-ui, sans-serif;
+  font-weight: 900;
+  font-size: clamp(2.25rem, 5.5vw, 3.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0 0 clamp(14px, 2vw, 18px);
+  background: linear-gradient(135deg, #ffffff 0%, #e0e7ef 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+}
+
+.accent {
+  background: linear-gradient(135deg, var(--accent), var(--accent-soft));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  font-size: clamp(0.95rem, 2vw, 1.15rem);
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Logo Grid - Clean, no boxes */
+.logoGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: clamp(18px, 3vw, 28px);
-  align-items: stretch;
+  gap: clamp(32px, 5vw, 50px);
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px;
+  place-items: center;
 }
 
-/* Card: keep your colors, just size/spacing/hover polish */
-.sponsorItem {
-  background: #101010; /* unchanged */
-  border: 1px solid rgba(255, 255, 255, 0.06); /* unchanged */
-  border-radius: clamp(12px, 1.8vw, 16px); /* slightly rounder */
-  display: grid;
-  grid-template-rows: auto 1fr auto; /* label, logo, name */
-  justify-items: center;
-  padding: clamp(18px, 3vw, 26px); /* bigger paddings */
-  min-height: clamp(160px, 24vw, 260px); /* larger cards */
-  transition: transform 160ms ease, box-shadow 180ms ease,
-    background-color 180ms ease, border-color 180ms ease;
+/* Logo item - transparent wrapper */
+.logoItem {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   text-decoration: none;
+  position: relative;
+  width: 100%;
+  max-width: clamp(160px, 28vw, 240px);
+  min-height: clamp(70px, 10vw, 100px);
+  
+  /* Fade-in animation */
+  opacity: 0;
+  transform: translateY(20px) scale(0.96);
+  animation: sponsorFadeIn 600ms cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+  
+  transition: transform 280ms cubic-bezier(0.2, 0.7, 0.2, 1),
+              filter 250ms ease;
 }
 
-/* Hover: subtle lift */
-.sponsorItem:hover,
-.sponsorItem:focus {
-  transform: translateY(-4px);
-  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.45);
-  background: #141414; /* unchanged family */
-  border-color: rgba(255, 255, 255, 0.12);
+@keyframes sponsorFadeIn {
+  0% { opacity: 0; transform: translateY(24px) scale(0.94); }
+  60% { opacity: 1; transform: translateY(-3px) scale(1.01); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Logo image - centered and clean */
+.logoImage {
+  width: 100%;
+  max-width: 100%;
+  max-height: clamp(70px, 10vw, 100px);
+  height: auto;
+  object-fit: contain;
+  transition: transform 320ms cubic-bezier(0.2, 0.7, 0.2, 1), 
+              filter 280ms ease,
+              opacity 250ms ease;
+  filter: grayscale(0.2) brightness(1.05);
+  opacity: 0.95;
+}
+
+/* Hover effects - subtle lift and clarity */
+.logoItem:hover,
+.logoItem:focus-visible {
+  transform: translateY(-4px) scale(1.04);
   outline: none;
 }
 
-/* Optional top label (e.g., Title Sponsor) from data attribute */
-.sponsorItem::before {
-  content: attr(data-label); /* set via data-label if provided */
-  display: block;
-  min-height: 1em;
-  margin-bottom: clamp(8px, 1.5vw, 10px);
-  font-size: clamp(12px, 1.8vw, 14px);
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  text-transform: none; /* looks like screenshot */
-  color: rgba(255, 255, 255, 0.85);
+.logoItem:hover .logoImage,
+.logoItem:focus-visible .logoImage {
+  transform: scale(1.05);
+  filter: grayscale(0) brightness(1.1);
+  opacity: 1;
 }
 
-/* Larger logos */
-.sponsorItem img {
-  max-width: clamp(160px, 28vw, 300px); /* bigger width cap */
-  max-height: clamp(90px, 12vw, 140px); /* bigger height cap */
-  width: auto;
-  height: auto;
-  opacity: 0.98; /* near full */
-  filter: none; /* keep brand colors */
-  object-fit: contain;
-  margin: clamp(8px, 1.8vw, 14px) 0;
-}
-
-/* Bottom name line: use title attribute if you don’t pass text */
-.sponsorItem::after {
-  content: attr(data-name);
-  display: block;
-  margin-top: clamp(8px, 1.6vw, 12px);
-  color: rgba(255, 255, 255, 0.9);
-  font-size: clamp(13px, 1.9vw, 16px);
-  font-weight: 700;
-  text-align: center;
+/* Focus ring for accessibility */
+.logoItem:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.4);
+  outline-offset: 6px;
+  border-radius: 8px;
 }
 
 /* Responsive columns */
-@media (min-width: 480px) {
-  .sponsorGrid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-@media (min-width: 768px) {
-  .sponsorGrid {
-    grid-template-columns: repeat(3, 1fr);
-  } /* 3 wide for chunky tiles */
-}
-@media (min-width: 1024px) {
-  .sponsorGrid {
-    grid-template-columns: repeat(4, 1fr);
-    padding: 0 12px;
-  }
-  .sectionHead {
-    padding: 0 12px;
-  }
-}
-@media (min-width: 1440px) {
-  .sponsorGrid {
-    grid-template-columns: repeat(5, 1fr);
-  }
+@media (min-width: 640px) {
+  .logoGrid { grid-template-columns: repeat(3, 1fr); }
 }
 
-/* Focus visibility */
-.sponsorItem:focus-visible {
-  outline: 2px solid #fff;
-  outline-offset: 3px;
+@media (min-width: 900px) {
+  .logoGrid { grid-template-columns: repeat(4, 1fr); }
+}
+
+@media (min-width: 1200px) {
+  .logoGrid { grid-template-columns: repeat(5, 1fr); }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .logoItem,
+  .logoImage {
+    animation: none !important;
+    transition: none !important;
+  }
+  .logoItem { 
+    opacity: 1 !important; 
+    transform: none !important; 
+  }
 }

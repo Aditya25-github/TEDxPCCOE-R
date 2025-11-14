@@ -1,22 +1,27 @@
 .section {
   background: #0b0b0b;
   color: #fff;
-  padding: 64px 20px 80px;
+  padding: clamp(60px, 8vw, 120px) clamp(20px, 5vw, 60px);
+  overflow: hidden;
 }
 
+/* Header */
 .header {
-  margin-bottom: 48px;
+  margin-bottom: clamp(50px, 7vw, 80px);
   text-align: left;
-  max-width: 900px;
-  margin-left: 80px;
+  max-width: 1100px;
+  margin-left: 0;
+  margin-right: auto;
+  padding: 0 clamp(20px, 5vw, 60px);
 }
 
 .title {
-  font-size: 2.8rem;
+  font-size: clamp(2rem, 4.5vw, 3rem);
   font-weight: 700;
-  margin: 0 0 18px;
+  margin: 0 0 clamp(16px, 2.5vw, 24px);
   color: #fff;
-  letter-spacing: -1px;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
 }
 
 .highlight {
@@ -25,56 +30,199 @@
 }
 
 .subtitle {
-  font-size: 1.2rem;
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
   color: #d1d5db;
   margin: 0;
+  line-height: 1.65;
+  max-width: 900px;
 }
 
+/* Features Grid - Optimized for laptop */
 .featuresGrid {
-  display: flex;
-  gap: 100px;
-  justify-content: center;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  margin-top: 50px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(40px, 7vw, 100px);
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 5vw, 60px);
 }
 
 .featureBox {
   background: transparent;
   text-align: left;
   padding: 0;
-  max-width: 340px;
-  flex-grow: 1;
-  min-width: 260px;
+  display: flex;
+  flex-direction: column;
 }
 
 .icon {
-  font-size: 2.4rem;
+  font-size: clamp(2.2rem, 3.5vw, 2.8rem);
   color: #e62b1e;
-  margin-bottom: 12px;
+  margin-bottom: clamp(12px, 2vw, 16px);
   display: block;
 }
 
 .featureTitle {
   font-weight: 700;
-  font-size: 1.1rem;
-  margin: 10px 0 12px 0;
+  font-size: clamp(1.15rem, 2vw, 1.4rem);
+  margin: 0 0 clamp(12px, 2vw, 16px);
   color: #fff;
+  letter-spacing: -0.01em;
 }
 
 .featureDesc {
-  font-size: 1rem;
+  font-size: clamp(0.95rem, 1.6vw, 1.05rem);
   color: #bcbcbc;
-  line-height: 1.6;
+  line-height: 1.7;
+  margin: 0;
 }
 
-@media (max-width: 900px) {
-  .featuresGrid {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 20px;
+/* ===========================
+   Responsive Breakpoints
+   =========================== */
+
+/* Mobile Portrait (≤480px) */
+@media (max-width: 480px) {
+  .section {
+    padding: 50px 20px 70px;
   }
+
   .header {
     text-align: center;
+    padding: 0 20px;
+    margin-bottom: 40px;
+    margin-left: auto;
+  }
+  
+  .featuresGrid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding: 0 20px;
+  }
+  
+  .featureBox {
+    text-align: center;
+  }
+  
+  .icon {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* Mobile Landscape & Small Tablets (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .section {
+    padding: 60px 30px 80px;
+  }
+
+  .header {
+    text-align: center;
+    padding: 0 30px;
+    margin-bottom: 50px;
+    margin-left: auto;
+  }
+  
+  .featuresGrid {
+    grid-template-columns: 1fr;
+    gap: 44px;
+    padding: 0 40px;
+  }
+}
+
+/* Tablets (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .section {
+    padding: 70px 40px 90px;
+  }
+
+  .header {
+    padding: 0 40px;
+    margin-bottom: 60px;
+  }
+  
+  .featuresGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px;
+    padding: 0 40px;
+  }
+}
+
+/* Laptop (1025px - 1440px) - OPTIMIZED */
+@media (min-width: 1025px) and (max-width: 1440px) {
+  .section {
+    padding: 90px 60px 110px;
+  }
+
+  .header {
+    padding: 0 60px;
+    margin-bottom: 70px;
+  }
+  
+  .featuresGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 70px;
+    padding: 0 60px;
+  }
+  
+  .featureDesc {
+    font-size: 1.02rem;
+  }
+}
+
+/* Desktop (1441px - 1920px) */
+@media (min-width: 1441px) and (max-width: 1920px) {
+  .section {
+    padding: 100px 80px 120px;
+  }
+
+  .header {
+    padding: 0 80px;
+    margin-bottom: 80px;
+  }
+  
+  .featuresGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 90px;
+    max-width: 1500px;
+    padding: 0 80px;
+  }
+}
+
+/* Ultra-Wide (≥1921px) */
+@media (min-width: 1921px) {
+  .section {
+    padding: 120px 100px 140px;
+  }
+  
+  .header {
+    max-width: 1200px;
+    padding: 0 100px;
+    margin-bottom: 100px;
+  }
+  
+  .featuresGrid {
+    max-width: 1700px;
+    gap: 110px;
+    padding: 0 100px;
+  }
+  
+  .featureDesc {
+    font-size: 1.1rem;
+  }
+}
+
+/* Landscape Mobile Optimization */
+@media (max-width: 900px) and (orientation: landscape) {
+  .section {
+    padding: 40px 24px 60px;
+  }
+  
+  .header {
+    margin-bottom: 35px;
+  }
+  
+  .featuresGrid {
+    gap: 28px;
   }
 }

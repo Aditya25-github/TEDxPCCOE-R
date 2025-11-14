@@ -139,7 +139,7 @@ export default function Footer() {
 
           <div className={styles.copyright}>
             <p className={styles.copy}>
-              &copy; {currentYear} TEDxPCCOE&amp;R. All rights reserved.
+              &copy; {currentYear} TEDxPCCOER. All rights reserved.
             </p>
           </div>
         </div>

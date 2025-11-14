@@ -66,7 +66,7 @@ export default function Speakers({ speakers }) {
           Speakers
         </h2>
         <p className={styles.sectionDesc}>
-          Meet the voices shaping TEDxPCCOE&amp;R 2025.
+          Meet the voices shaping TEDxPCCOER 2025.
         </p>
       </div>
 

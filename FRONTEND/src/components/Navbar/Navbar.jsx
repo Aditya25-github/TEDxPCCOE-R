@@ -40,7 +40,7 @@ export default function Navbar() {
           aria-label="TEDxPCCOE&R Home"
           onClick={() => setOpen(false)}
         >
-          <img src={logoWhite} alt="TEDxPCCOE&R" className={styles.logo} />
+          <img src={logoWhite} alt="TEDxPCCOER" className={styles.logo} />
         </Link>
 
         {/* Desktop Navigation */}

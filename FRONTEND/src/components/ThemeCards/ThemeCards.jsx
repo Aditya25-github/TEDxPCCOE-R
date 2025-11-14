@@ -8,7 +8,7 @@ export default function ThemeCards() {
     {
       hint: "The power of self-identity and personal truth",
       graphic: (
-        <svg viewBox="0 0 200 180" width="100%" height="180px">
+        <svg viewBox="0 0 200 180" width="100%" height="180px" aria-hidden="true">
           <defs>
             <radialGradient id="consciousnessGlow" cx="50%" cy="50%" r="50%">
               <stop offset="0%" stopColor="#ff2a13" stopOpacity="0.9" />
@@ -20,13 +20,26 @@ export default function ThemeCards() {
               <stop offset="100%" stopColor="#ff6b3d" />
             </linearGradient>
           </defs>
-          
-          {/* Central Consciousness Core */}
+
           <circle cx="100" cy="90" r="35" fill="url(#consciousnessGlow)">
             <animate attributeName="r" values="35;40;35" dur="3s" repeatCount="indefinite" />
           </circle>
-          
-          {/* Neural Network */}
+
+          <text
+            x="100"
+            y="100"
+            fontSize="48"
+            fontWeight="700"
+            fill="#ffffff"
+            textAnchor="middle"
+            dominantBaseline="middle"
+            fontFamily="'Noto Sans Devanagari', 'Noto Serif Devanagari', serif"
+            opacity="0.95"
+          >
+            अ
+            <animate attributeName="opacity" values="0.85;1;0.85" dur="3s" repeatCount="indefinite" />
+          </text>
+
           <g stroke="url(#neuralPath)" strokeWidth="1.5" opacity="0.7">
             <path d="M70,70 Q90,60 110,70 Q130,80 130,100" fill="none">
               <animate attributeName="opacity" values="0.4;0.8;0.4" dur="4s" repeatCount="indefinite" />
@@ -38,8 +51,7 @@ export default function ThemeCards() {
               <animate attributeName="opacity" values="0.4;0.8;0.4" dur="4s" repeatCount="indefinite" begin="2s" />
             </path>
           </g>
-          
-          {/* Floating Thoughts */}
+
           <g>
             <circle cx="60" cy="70" r="4" fill="#ff2a13">
               <animate attributeName="cy" values="70;65;70" dur="3s" repeatCount="indefinite" />
@@ -58,8 +70,7 @@ export default function ThemeCards() {
               <animate attributeName="opacity" values="0.3;0.8;0.3" dur="3s" repeatCount="indefinite" begin="1.5s" />
             </circle>
           </g>
-          
-          {/* Insight Sparks */}
+
           <g>
             <path d="M95,75 L100,70 L105,75 L100,80 Z" fill="#ffffff" opacity="0">
               <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite" />
@@ -70,52 +81,40 @@ export default function ThemeCards() {
               <animateTransform attributeName="transform" type="rotate" values="0 115 100;180 115 100;360 115 100" dur="4s" repeatCount="indefinite" />
             </path>
           </g>
-          
-          {/* Consciousness Waves */}
+
           <circle cx="100" cy="90" r="50" fill="none" stroke="#ff6b3d" strokeWidth="1" opacity="0.4">
             <animate attributeName="r" values="50;60;50" dur="5s" repeatCount="indefinite" />
             <animate attributeName="opacity" values="0.2;0.5;0.2" dur="5s" repeatCount="indefinite" />
           </circle>
         </svg>
-      )
+      ),
     },
     {
       hint: "Finding your voice and sharing it with the world",
       graphic: (
-        <svg viewBox="0 0 200 180" width="100%" height="180px">
+        <svg viewBox="0 0 200 180" width="100%" height="180px" aria-hidden="true">
           <defs>
-            <radialGradient id="voiceAmplification" cx="50%" cy="40%" r="70%">
-              <stop offset="0%" stopColor="#ff2a13" stopOpacity="0.5" />
-              <stop offset="60%" stopColor="#ff6b3d" stopOpacity="0.3" />
-              <stop offset="100%" stopColor="#ff6b3d" stopOpacity="0" />
-            </radialGradient>
             <linearGradient id="soundWaveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stopColor="#ff2a13" stopOpacity="0.8" />
               <stop offset="100%" stopColor="#ff6b3d" stopOpacity="0.8" />
             </linearGradient>
           </defs>
-          
-          {/* Stage Platform */}
+
           <rect x="40" y="130" width="120" height="25" rx="6" fill="#2a2a2a" />
           <rect x="50" y="125" width="100" height="5" rx="2" fill="#444" />
-          
-          {/* Confident Speaker */}
+
           <g transform="translate(100, 100)">
-            {/* Head */}
             <circle r="10" fill="#ff2a13" />
-            {/* Body */}
             <rect x="-5" y="10" width="10" height="30" fill="#ff2a13" />
-            {/* Arms in expressive pose */}
             <path d="M-5,15 L-20,25 L-18,28 M5,15 L20,25 L18,28" stroke="#ff2a13" strokeWidth="3" fill="none" />
-            {/* Legs in confident stance */}
             <path d="M-5,40 L-10,55 L-8,57 M5,40 L10,55 L8,57" stroke="#ff2a13" strokeWidth="3" fill="none" />
           </g>
-          
-          {/* Voice Amplification Waves */}
+
           <g>
             <circle cx="100" cy="100" r="30" fill="none" stroke="url(#soundWaveGradient)" strokeWidth="2" opacity="0.7">
               <animate attributeName="r" values="30;45;30" dur="2s" repeatCount="indefinite" />
               <animate attributeName="opacity" values="0.4;0.8;0.4" dur="2s" repeatCount="indefinite" />
+              <animate attributeName="stroke-width" values="2;3;2" dur="2s" repeatCount="indefinite" />
             </circle>
             <circle cx="100" cy="100" r="50" fill="none" stroke="url(#soundWaveGradient)" strokeWidth="2" opacity="0.5">
               <animate attributeName="r" values="50;65;50" dur="2.5s" repeatCount="indefinite" />
@@ -126,15 +125,11 @@ export default function ThemeCards() {
               <animate attributeName="opacity" values="0.2;0.5;0.2" dur="3s" repeatCount="indefinite" />
             </circle>
           </g>
-          
-          {/* Voice Projection Beam */}
-          <path d="M100,70 Q130,50 160,60 Q180,70 190,80" 
-                stroke="#ff2a13" strokeWidth="4" fill="none" opacity="0.8"
-                strokeLinecap="round">
+
+          <path d="M100,70 Q130,50 160,60 Q180,70 190,80" stroke="#ff2a13" strokeWidth="4" fill="none" opacity="0.8" strokeLinecap="round">
             <animate attributeName="opacity" values="0.5;0.9;0.5" dur="2s" repeatCount="indefinite" />
           </path>
-          
-          {/* Audience Connection */}
+
           <g>
             <circle cx="160" cy="100" r="3" fill="#ffffff" opacity="0.7">
               <animate attributeName="opacity" values="0.3;0.8;0.3" dur="1.5s" repeatCount="indefinite" />
@@ -149,26 +144,13 @@ export default function ThemeCards() {
               <animate attributeName="opacity" values="0.2;0.7;0.2" dur="1.7s" repeatCount="indefinite" begin="0.9s" />
             </circle>
           </g>
-          
-          {/* Stage Lights */}
-          <g>
-            <circle cx="60" cy="70" r="4" fill="#ffd700">
-              <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="100" cy="65" r="5" fill="#ff6b3d">
-              <animate attributeName="opacity" values="0.5;1;0.5" dur="2.5s" repeatCount="indefinite" begin="0.3s" />
-            </circle>
-            <circle cx="140" cy="70" r="4" fill="#ffd700">
-              <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite" begin="0.6s" />
-            </circle>
-          </g>
         </svg>
-      )
+      ),
     },
     {
       hint: "The courage to create your own path forward",
       graphic: (
-        <svg viewBox="0 0 200 180" width="100%" height="180px">
+        <svg viewBox="0 0 200 180" width="100%" height="180px" aria-hidden="true">
           <defs>
             <linearGradient id="journeyPath" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stopColor="#ff2a13" stopOpacity="0.8" />
@@ -184,22 +166,23 @@ export default function ThemeCards() {
               <stop offset="100%" stopColor="#ff6b3d" stopOpacity="0.6" />
             </linearGradient>
           </defs>
-          
-          {/* Horizon Glow */}
+
           <ellipse cx="100" cy="30" rx="120" ry="40" fill="url(#horizonLight)" />
-          
-          {/* Background Mountains */}
-          <path d="M0,120 L25,90 L50,110 L75,80 L100,100 L125,70 L150,90 L175,60 L200,80 L200,180 L0,180 Z" 
-                fill="rgba(255,255,255,0.05)" />
-          
-          {/* Winding Journey Path */}
-          <path d="M20,140 Q45,120 70,130 Q95,110 120,120 Q145,100 170,110 Q185,95 190,100" 
-                stroke="url(#journeyPath)" strokeWidth="5" fill="none" 
-                strokeLinecap="round" strokeLinejoin="round">
-            <animate attributeName="stroke-dashoffset" values="200;0" dur="4s" repeatCount="indefinite" />
+          <path d="M0,120 L25,90 L50,110 L75,80 L100,100 L125,70 L150,90 L175,60 L200,80 L200,180 L0,180 Z" fill="rgba(255,255,255,0.05)" />
+
+          <path
+            d="M20,140 Q45,120 70,130 Q95,110 120,120 Q145,100 170,110 Q185,95 190,100"
+            stroke="url(#journeyPath)"
+            strokeWidth="5"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeDasharray="200"
+            strokeDashoffset="200"
+          >
+            <animate attributeName="stroke-dashoffset" values="200;0;10;0" dur="4s" repeatCount="indefinite" />
           </path>
-          
-          {/* Detailed Footsteps */}
+
           <g>
             <path d="M35,135 L45,135 L48,142 L38,142 Z" fill="#ff2a13" opacity="0.9">
               <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite" />
@@ -214,15 +197,13 @@ export default function ThemeCards() {
               <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite" begin="1.2s" />
             </path>
           </g>
-          
-          {/* Moving Explorer */}
+
           <g transform="translate(50, 135)">
             <circle r="4" fill="#ffffff">
               <animate attributeName="cx" values="0;140;0" dur="8s" repeatCount="indefinite" />
             </circle>
           </g>
-          
-          {/* Progress Milestones */}
+
           <g>
             <circle cx="70" cy="130" r="5" fill="#ff2a13">
               <animate attributeName="r" values="5;7;5" dur="2s" repeatCount="indefinite" />
@@ -234,19 +215,16 @@ export default function ThemeCards() {
               <animate attributeName="r" values="5;7;5" dur="2s" repeatCount="indefinite" begin="1s" />
             </circle>
           </g>
-          
-          {/* Destination Mountain */}
+
           <path d="M150,50 L190,90 L110,90 Z" fill="url(#mountainPeak)" opacity="0.8" />
           <path d="M150,50 L190,90" stroke="#ffffff" strokeWidth="1.5" opacity="0.6" />
           <path d="M150,50 L110,90" stroke="#ffffff" strokeWidth="1.5" opacity="0.6" />
-          
-          {/* Achievement Sun */}
+
           <circle cx="170" cy="45" r="10" fill="#ffd700" opacity="0.9">
             <animate attributeName="r" values="10;12;10" dur="2s" repeatCount="indefinite" />
             <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite" />
           </circle>
-          
-          {/* Floating Opportunities */}
+
           <g>
             <circle cx="50" cy="70" r="2.5" fill="#ff6b3d">
               <animate attributeName="cy" values="70;65;70" dur="3s" repeatCount="indefinite" />
@@ -261,13 +239,13 @@ export default function ThemeCards() {
             </circle>
           </g>
         </svg>
-      )
-    }
+      ),
+    },
   ];
 
   const exploreCard = (index) => {
     if (!exploredCards.includes(index)) {
-      setExploredCards([...exploredCards, index]);
+      setExploredCards((prev) => [...prev, index]);
     }
   };
 
@@ -280,30 +258,26 @@ export default function ThemeCards() {
           Uncover The <span className={styles.accent}>Story</span>
         </h2>
       </div>
-      
+
       <div className={styles.cardsGrid}>
         {themeElements.map((element, index) => (
-          <div 
+          <div
             key={index}
-            className={`${styles.card} ${isExplored(index) ? styles.explored : ''}`}
+            className={`${styles.card} ${isExplored(index) ? styles.explored : ""}`}
             onClick={() => exploreCard(index)}
             role="button"
             tabIndex={0}
-            aria-label={`Explore element ${index + 1}`}
-            onKeyPress={(e) => e.key === 'Enter' && exploreCard(index)}
+            aria-label={`Explore insight ${index + 1}`}
+            onKeyPress={(e) => e.key === "Enter" && exploreCard(index)}
           >
             <div className={styles.cardContent}>
-              <div className={styles.cardGraphic}>
-                {element.graphic}
-              </div>
-              
+              <div className={styles.cardGraphic}>{element.graphic}</div>
+
               <div className={styles.cardHint}>
                 {isExplored(index) ? (
                   <div className={styles.revealedHint}>
                     <p className={styles.hintText}>{element.hint}</p>
-                    <div className={styles.insightIndicator}>
-                      Insight Revealed
-                    </div>
+                    <div className={styles.insightIndicator}>Insight Revealed</div>
                   </div>
                 ) : (
                   <div className={styles.hiddenHint}>
@@ -317,22 +291,19 @@ export default function ThemeCards() {
         ))}
       </div>
 
-      {/* Progress Indicator */}
       <div className={styles.progressContainer}>
         <div className={styles.progressBar}>
-          <div 
+          <div
             className={styles.progressFill}
             style={{ width: `${(exploredCards.length / themeElements.length) * 100}%` }}
-          ></div>
+          />
         </div>
         <div className={styles.progressText}>
-          {exploredCards.length === themeElements.length ? (
-            "All insights revealed. Consider how they connect."
-          ) : exploredCards.length > 0 ? (
-            `${exploredCards.length} of ${themeElements.length} insights discovered`
-          ) : (
-            "Explore each element to reveal insights"
-          )}
+          {exploredCards.length === themeElements.length
+            ? "All insights revealed. Consider how they connect."
+            : exploredCards.length > 0
+            ? `${exploredCards.length} of ${themeElements.length} insights discovered`
+            : "Explore each element to reveal insights"}
         </div>
       </div>
     </section>
