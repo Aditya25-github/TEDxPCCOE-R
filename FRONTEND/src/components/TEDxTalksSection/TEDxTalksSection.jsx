@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./TEDxTalksSection.module.css";
 
 const talks = [
@@ -30,6 +31,7 @@ const talks = [
 
 export default function TEDxTalksSection() {
   const scrollRef = useRef(null);
+  const navigate = useNavigate();
 
   const scroll = (direction) => {
     if (scrollRef.current) {
@@ -68,7 +70,7 @@ export default function TEDxTalksSection() {
       <div className={styles.viewMoreContainer}>
         <button
           className={styles.viewMoreBtn}
-          onClick={() => window.open("YOUR_VIEW_MORE_LINK")}
+          onClick={() => navigate("/talks")}
         >
           View More
         </button>

@@ -8,6 +8,7 @@ export default function FullTeam({ team }) {
   useEffect(() => {
     const data = team || [];
     let timeouts = [];
+    window.scrollTo(0, 0);
     data.forEach((_, index) => {
       timeouts.push(
         setTimeout(() => {
@@ -32,7 +33,7 @@ export default function FullTeam({ team }) {
         </p>
       </div>
 
-      <h3 className={styles.tierTitle}>Tier 1</h3>
+      <h3 className={styles.tierTitle}>Organizing Commitee</h3>
       <div className={styles.gridContainer}>
         {tier1.map((member, index) => (
           <TeamCard
@@ -44,21 +45,19 @@ export default function FullTeam({ team }) {
         ))}
       </div>
 
-      <h3 className={styles.tierTitle}>Tier 2</h3>
-      <div className={styles.sliderContainer}>
-        <ul className={styles.teamSlider}>
-          {tier2.map((member, index) => (
-            <TeamCard
-              key={member.id}
-              member={member}
-              isVisible={visibleCards.includes(index + tier1.length)}
-              animationDelay={(index + tier1.length) * 0.08}
-            />
-          ))}
-        </ul>
+      <h3 className={styles.tierTitle}>Leads</h3>
+      <div className={styles.gridContainer}>
+        {tier2.map((member, index) => (
+          <TeamCard
+            key={member.id}
+            member={member}
+            isVisible={visibleCards.includes(index + tier1.length)}
+            animationDelay={(index + tier1.length) * 0.08}
+          />
+        ))}
       </div>
 
-      <h3 className={styles.tierTitle}>Tier 3</h3>
+      <h3 className={styles.tierTitle}>Faculty Co-Ordinators</h3>
       <div className={styles.gridContainer}>
         {tier3.map((member, index) => (
           <TeamCard

@@ -117,6 +117,16 @@
   background-color: #bb2619;
   outline: none;
 }
+.fullGrid {
+  width: 92vw;
+  max-width: 1350px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 38px 30px;
+  margin: 0 auto 45px auto;
+  align-items: stretch;
+  justify-items: center;
+}
 
 /* RESPONSIVENESS */
 @media (max-width: 900px) {
