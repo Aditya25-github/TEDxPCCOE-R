@@ -99,7 +99,7 @@ export default function Footer() {
                 {SocialIcons.Instagram}
               </a>
               <a
-                href="https://youtube.com/"
+                href="https://www.youtube.com/@tedxpccoer"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="YouTube"

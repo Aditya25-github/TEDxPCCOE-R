@@ -64,7 +64,7 @@ export default function Hero({ scrollToId }) {
               className={styles.btnGhost}
               onClick={() =>
                 window.open(
-                  "https://www.instagram.com/reels/DOTbnK1CJ4r/",
+                  "https://youtu.be/nJLEUxRLWjE?si=gALkyu1KsXQ96X35",
                   "_blank"
                 )
               }
