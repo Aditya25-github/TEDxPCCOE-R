@@ -1,7 +1,6 @@
 import React from "react";
 import Hero from "../../components/Hero/Hero";
 import About from "../../components/About/About";
-import Trailer from "../../components/Trailer/Trailer";
 import Speakers from "../../components/Speakers/Speakers";
 import Schedule from "../../components/Schedule/Schedule";
 import Sponsors from "../../components/Sponsors/Sponsors";

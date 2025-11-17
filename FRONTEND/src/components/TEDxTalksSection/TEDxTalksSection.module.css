@@ -72,6 +72,51 @@
   margin: 0;
   line-height: 1.58;
 }
+.carouselWrapper {
+  position: relative;
+  max-width: 95vw;
+  margin: 0 auto 40px auto;
+  display: flex;
+  align-items: center;
+}
+
+.videosGrid {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 30px;
+  padding: 10px 0;
+  scroll-snap-type: x mandatory;
+}
+
+.videosGrid > div {
+  scroll-snap-align: start;
+  min-width: 320px;
+  max-width: 330px;
+  flex-shrink: 0;
+}
+
+.viewMoreContainer {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.viewMoreBtn {
+  background-color: #e62b1e;
+  color: white;
+  border: none;
+  border-radius: 999px;
+  padding: 12px 28px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.viewMoreBtn:hover,
+.viewMoreBtn:focus-visible {
+  background-color: #bb2619;
+  outline: none;
+}
 
 /* RESPONSIVENESS */
 @media (max-width: 900px) {

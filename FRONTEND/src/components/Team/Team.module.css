@@ -1,4 +1,3 @@
-/* Section background with subtle vignette */
 .team {
   position: relative;
   background: radial-gradient(
@@ -16,7 +15,6 @@
   color: #e9eef3;
   overflow: hidden;
 }
-
 .team::after {
   content: "";
   position: absolute;
@@ -24,8 +22,6 @@
   pointer-events: none;
   box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.65);
 }
-
-/* Head */
 .sectionHead {
   position: relative;
   z-index: 1;
@@ -33,7 +29,6 @@
   margin: 0 auto clamp(24px, 4vw, 36px);
   padding: 0 20px;
 }
-
 .sectionTitle {
   font-weight: 900;
   font-size: clamp(28px, 5.4vw, 44px);
@@ -43,22 +38,31 @@
   color: #fff;
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
 }
-
 .sectionDesc {
   color: rgba(233, 238, 243, 0.8);
   font-size: clamp(14px, 2vw, 18px);
   margin: 0;
 }
 
-/* Slider Container */
+/* TIER 1 AND 3: Grid Layout */
+.teamGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: clamp(24px, 3vw, 40px);
+  max-width: 1120px;
+  margin: 0 auto 36px auto;
+  align-items: start;
+  justify-items: center;
+  padding: 0 10px;
+}
+
+/* TIER 2: Horizontal Scroll/Slider Layout */
 .sliderContainer {
   position: relative;
   z-index: 1;
-  max-width: 100%;
-  margin: 0 auto;
+  max-width: 1120px;
+  margin: 0 auto 36px auto;
 }
-
-/* Horizontal Slider */
 .teamSlider {
   display: flex;
   gap: clamp(16px, 2.4vw, 24px);
@@ -67,56 +71,28 @@
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-  padding: clamp(10px, 2vw, 20px) 20px;
-  margin: 0;
+  padding: clamp(10px, 2vw, 20px) 0;
   list-style: none;
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 74, 61, 0.6) rgba(255, 255, 255, 0.1);
 }
-
-/* Custom Scrollbar */
 .teamSlider::-webkit-scrollbar {
   height: 8px;
 }
-
 .teamSlider::-webkit-scrollbar-track {
   background: rgba(255, 255, 255, 0.1);
   border-radius: 10px;
-  margin: 0 20px;
 }
-
 .teamSlider::-webkit-scrollbar-thumb {
   background: rgba(255, 74, 61, 0.6);
   border-radius: 10px;
   transition: background 0.3s ease;
 }
-
 .teamSlider::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 74, 61, 0.9);
 }
 
-/* Scroll Hint */
-.scrollHint {
-  position: relative;
-  z-index: 1;
-  text-align: center;
-  color: rgba(233, 238, 243, 0.6);
-  font-size: clamp(12px, 1.5vw, 14px);
-  margin: clamp(16px, 3vw, 24px) 0 0;
-  animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%,
-  100% {
-    opacity: 0.5;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-/* Card */
+/* Team Card (works for grid and slider) */
 .teamCard {
   position: relative;
   display: grid;
@@ -132,12 +108,11 @@
   box-shadow: 0 16px 50px rgba(0, 0, 0, 0.35);
   transition: transform 160ms ease, box-shadow 200ms ease,
     border-color 200ms ease, background 200ms ease;
-  min-width: 240px;
+  min-width: 220px;
   max-width: 280px;
   flex-shrink: 0;
   scroll-snap-align: start;
 }
-
 .teamCard::before {
   content: "";
   position: absolute;
@@ -152,17 +127,86 @@
   opacity: 0.65;
 }
 
-/* Animation states */
+.viewMoreContainer {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.viewMoreBtn {
+  background-color: #e62b1e;
+  color: #fff;
+  font-weight: 700;
+  padding: 12px 26px;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: clamp(14px, 1.6vw, 18px);
+  transition: background-color 0.2s ease;
+}
+.viewMoreBtn:hover,
+.viewMoreBtn:focus-visible {
+  background-color: #bb2619;
+}
+
+/* Your grid container for Tier 1 and 3 */
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: clamp(24px, 3vw, 40px);
+  max-width: 1120px;
+  margin: 0 auto 36px auto;
+  padding: 0 10px;
+  justify-items: center;
+}
+
+/* Your slider container for Tier 2 */
+.sliderContainer {
+  max-width: 1120px;
+  margin: 0 auto 36px auto;
+}
+
+.teamSlider {
+  display: flex;
+  gap: clamp(16px, 2.4vw, 24px);
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: clamp(10px, 2vw, 20px) 0;
+}
+
+.teamSlider::-webkit-scrollbar {
+  height: 8px;
+}
+.teamSlider::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+.teamSlider::-webkit-scrollbar-thumb {
+  background: rgba(255, 74, 61, 0.6);
+  border-radius: 10px;
+}
+.teamSlider::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 74, 61, 0.9);
+}
+
+/* Tier titles styling */
+.tierTitle {
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 700;
+  margin: 40px 0 20px;
+  color: #fff;
+  text-align: center;
+}
 .cardHidden {
   opacity: 0;
   transform: scale(0.8) translateY(30px);
   animation: none;
 }
-
 .cardVisible {
   animation: popUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
-
 @keyframes popUp {
   0% {
     opacity: 0;
@@ -177,7 +221,6 @@
     transform: scale(1) translateY(0) rotateX(0deg);
   }
 }
-
 .teamCard:hover {
   transform: translateY(-4px);
   border-color: rgba(255, 255, 255, 0.2);
@@ -188,23 +231,18 @@
   );
   box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
 }
-
-/* Image styling */
 .teamCard img {
   width: 100%;
   height: auto;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 4/3;
   object-fit: cover;
   filter: saturate(0.85) contrast(1.05);
   transition: filter 220ms ease, transform 220ms ease;
 }
-
 .teamCard:hover img {
   filter: saturate(1.1) contrast(1.1);
   transform: scale(1.02);
 }
-
-/* Content */
 .cardBody {
   display: grid;
   gap: 6px;
@@ -215,7 +253,6 @@
     rgba(15, 17, 19, 0.15)
   );
 }
-
 .teamName {
   color: #fff;
   font-weight: 800;
@@ -225,58 +262,43 @@
   letter-spacing: -0.005em;
   transition: text-shadow 200ms ease;
 }
-
 .teamRole {
   color: rgba(233, 238, 243, 0.8);
   font-size: clamp(12px, 1.8vw, 14px);
   margin: 0;
 }
-
-/* Time-to-hover accent */
 .teamCard:hover .teamName {
   text-shadow: 0 2px 12px rgba(255, 74, 61, 0.35);
 }
-
-/* Mobile Styles */
 @media (max-width: 767px) {
   .sectionHead {
     padding: 0 16px;
   }
-
   .teamSlider {
     padding: clamp(10px, 2vw, 20px) 16px;
   }
-
-  .teamCard {
-    min-width: 200px;
-    max-width: 240px;
+  .teamGrid,
+  .teamSlider {
+    gap: 16px;
   }
-
-  .scrollHint {
-    font-size: 12px;
-    padding: 0 16px;
+  .teamCard {
+    min-width: 160px;
+    max-width: 220px;
   }
 }
-
-/* Touch device optimizations */
 @media (hover: none) and (pointer: coarse) {
   .teamCard img {
     filter: saturate(1) contrast(1);
   }
 }
-
-/* Focus states */
 .teamCard:focus-within {
   outline: 2px solid #ff4a3d;
   outline-offset: 2px;
 }
-
-/* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
   .cardVisible {
     animation: fadeInSimple 0.4s ease forwards;
   }
-
   @keyframes fadeInSimple {
     from {
       opacity: 0;
@@ -285,16 +307,10 @@
       opacity: 1;
     }
   }
-
   .teamCard:hover {
     transform: translateY(-2px);
   }
-
   .teamCard:hover img {
     transform: none;
-  }
-
-  .scrollHint {
-    animation: none;
   }
 }

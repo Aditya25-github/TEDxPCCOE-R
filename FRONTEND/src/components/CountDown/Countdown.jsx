@@ -40,13 +40,6 @@ export default function Countdown({ eventDate = "2026-01-22T10:00:00" }) {
           <p className={styles.subtitle}>
             Are you ready to step into the spotlight?
           </p>
-          {/* <p className={styles.eventInfo}>
-            Join us on <strong>January 22, 2026</strong> at{" "}
-            <strong>Ga Di Madgulkar Natyagruha, Pradhikaran, Nigdi</strong>
-          </p>
-          <p className={styles.timing}>
-            Doors Open: <span>10:00 AM</span>
-          </p> */}
         </div>
 
         {/* Countdown Cards */}
@@ -57,9 +50,9 @@ export default function Countdown({ eventDate = "2026-01-22T10:00:00" }) {
           aria-atomic="true"
         >
           <Card value={pad(parts.days)} label="Days" isActive={!isOver} />
-          <Card value={pad(parts.hours)} label="Hours" isActive={!isOver} />
-          <Card value={pad(parts.minutes)} label="Minutes" isActive={!isOver} />
-          <Card value={pad(parts.seconds)} label="Seconds" isActive={!isOver} />
+          <Card value={pad(parts.hours)} label="Hour" isActive={!isOver} />
+          <Card value={pad(parts.minutes)} label="Min" isActive={!isOver} />
+          <Card value={pad(parts.seconds)} label="Sec" isActive={!isOver} />
         </div>
 
         {/* Body Text */}

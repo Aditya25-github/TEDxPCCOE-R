@@ -24,14 +24,26 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 30% 60%, rgba(230, 43, 30, 0.25), transparent 70%),
-              radial-gradient(circle at 80% 40%, rgba(255, 255, 255, 0.05), transparent 70%);
+  background: radial-gradient(
+      circle at 30% 60%,
+      rgba(230, 43, 30, 0.25),
+      transparent 70%
+    ),
+    radial-gradient(
+      circle at 80% 40%,
+      rgba(255, 255, 255, 0.05),
+      transparent 70%
+    );
   animation: pulseBackground 6s infinite alternate;
 }
 
 @keyframes pulseBackground {
-  from { filter: brightness(1) blur(0); }
-  to { filter: brightness(1.2) blur(4px); }
+  from {
+    filter: brightness(1) blur(0);
+  }
+  to {
+    filter: brightness(1.2) blur(4px);
+  }
 }
 
 /* Layout */
@@ -85,6 +97,23 @@
 }
 
 /* Countdown Cards */
+
+.card {
+  background: rgba(255, 255, 255, 0.11);
+  border-radius: 28px;
+  box-shadow: 0 12px 42px 0 rgba(230, 43, 30, 0.16),
+    0 1.5px 5px 0 rgba(255, 255, 255, 0.08),
+    0 0 0 2px rgba(255, 255, 255, 0.15) inset;
+  border: 1.5px solid rgba(255, 255, 255, 0.22);
+  min-width: 100px;
+  padding: 38px 28px 32px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: box-shadow 0.4s cubic-bezier(0.4, 1.7, 0.7, 1.4),
+    background 0.4s cubic-bezier(0.4, 1.7, 0.7, 1.4);
+}
+
 .cards {
   display: flex;
   justify-content: center;
@@ -93,14 +122,14 @@
   animation: slideUp 1s ease-out both;
 }
 
-.card {
-  background: var(--card-bg);
-  backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  padding: 30px 24px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+.cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scroll-behavior: smooth;
 }
 
 .card:hover {
@@ -127,8 +156,12 @@
 }
 
 @keyframes glowPulse {
-  from { text-shadow: 0 0 8px rgba(230, 43, 30, 0.4); }
-  to { text-shadow: 0 0 16px rgba(230, 43, 30, 0.9); }
+  from {
+    text-shadow: 0 0 8px rgba(230, 43, 30, 0.4);
+  }
+  to {
+    text-shadow: 0 0 16px rgba(230, 43, 30, 0.9);
+  }
 }
 
 .label {
@@ -151,21 +184,60 @@
   font-size: 1.05rem;
   line-height: 1.6;
 }
+.cards::-webkit-scrollbar {
+  height: 6px;
+}
+.cards::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+.cards::-webkit-scrollbar-thumb {
+  background: rgba(230, 43, 30, 0.5);
+  border-radius: 3px;
+}
 
 /* Animations */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-15px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes slideUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-  .cards { gap: 12px; }
-  .value { font-size: 2.5rem; }
-  .title { font-size: 2.2rem; }
+  .cards {
+    gap: 8px;
+  }
+  .card {
+    min-width: 50px;
+  }
+  .value {
+    font-size: 2.5rem;
+  }
+  .title {
+    font-size: 2.2rem;
+  }
+}
+
+@media (min-width: 769px) {
+  .cards {
+    flex-wrap: wrap;
+    overflow-x: visible;
+  }
 }

@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import Background from "../Background/Background";
 import styles from "./Hero.module.css";
 import heroImage from "../../assets/hero1.jpg";
+import { useNavigate } from "react-router-dom";
 import Portal from "../Portal/Portal.jsx"; // <-- import portal
 
 export default function Hero({ scrollToId }) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 100);
@@ -51,8 +53,21 @@ export default function Hero({ scrollToId }) {
             </button>
 
             <button
+              className={styles.btnPrimary}
+              type="button"
+              onClick={() => navigate("/apply")}
+            >
+              Apply Now
+            </button>
+
+            <button
               className={styles.btnGhost}
-              onClick={() => scrollToId("TedxTalks")}
+              onClick={() =>
+                window.open(
+                  "https://www.instagram.com/reels/DOTbnK1CJ4r/",
+                  "_blank"
+                )
+              }
             >
               Glimpses
             </button>

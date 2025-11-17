@@ -603,7 +603,7 @@
 
 .ticketPopup {
   position: fixed;
-  bottom: 650px;
+  bottom: 550px;
   left: 50%;
   transform: translateX(-50%);
   background-color: rgba(255, 0, 0, 0.9);
