@@ -1,151 +1,454 @@
+:root{
+  --tedx-red: #E62B1E;           /* TED Red (Pantone 485 C equivalent) */
+  --tedx-red-variant: #EB0028;   /* Variant used by some TEDx materials */
+  --tedx-black: #0b0b0b;         /* Stage black */
+  --tedx-deep: #0f0f14;          /* Deep neutral */
+}
+
+/* Background: stage-black base + TED red accents + subtle grid + vignette */
 .bgWrap {
+  background-color: var(--tedx-black);
+  background-image:
+    /* soft red spotlight top-left */
+    radial-gradient(1200px 800px at 12% 10%, rgba(235,0,40,0.18), rgba(235,0,40,0.0) 55%),
+    /* soft red spotlight bottom-right */
+    radial-gradient(900px 600px at 88% 86%, rgba(235,0,40,0.12), rgba(235,0,40,0.0) 60%),
+    /* angled micro-grid for subtle structure */
+    linear-gradient(135deg, rgba(255,255,255,0.06) 1px, transparent 1px),
+    linear-gradient(135deg, rgba(255,255,255,0.04) 1px, transparent 1px),
+    /* deep diagonal color wash */
+    linear-gradient(135deg, #0b0b0b 0%, #111318 38%, #16131a 62%, #1a1218 100%),
+    /* vignette for contrast */
+    radial-gradient(1000px 600px at 50% 40%, rgba(0,0,0,0) 60%, rgba(0,0,0,0.45) 100%);
+  background-blend-mode: screen, screen, overlay, multiply, normal, multiply;
+  background-size:
+    auto,
+    auto,
+    18px 18px,      /* grid cell size 1 */
+    36px 36px,      /* grid cell size 2 */
+    auto,
+    auto;
+  color: #ffffff;
+  padding: clamp(60px, 8vw, 120px) clamp(12px, 5vw, 60px);
+  overflow: hidden;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0;
-  background-color: #120002;
+  box-shadow: inset 0 60px 100px rgba(0, 0, 0, 0.45);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* Header alignment: centered for this page */
 .header {
-  margin: 40px 0 32px 0;
+  margin-bottom: clamp(50px, 6vw, 80px);
+  text-align: center;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 clamp(12px, 5vw, 60px);
+}
+
+.title,
+.header h1 {
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  font-weight: 700;
+  margin: 0 0 clamp(16px, 2.5vw, 24px);
+  color: #fff;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
   text-align: center;
 }
 
-.red {
-  color: #e62b1e;
+/* Red/highlight token */
+.red,
+.highlight {
+  color: var(--tedx-red);
   font-weight: 800;
-  font-size: 2.7rem;
-  letter-spacing: -2px;
 }
 
-.header h1 {
-  font-size: 3.1rem;
-  color: #fff;
-  font-weight: 700;
-  margin: 0 0 8px 0;
-  letter-spacing: -1px;
-}
-
+/* Subtitle */
 .subtitle {
-  font-family: "Georgia", serif;
-  color: #fff;
-  font-size: 2.1rem;
-  font-weight: 400;
-  margin-bottom: 24px;
-  text-shadow: 1px 2px 4px #680909;
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  color: #d1d5db;
+  margin: 0;
+  line-height: 1.65;
+  max-width: 900px;
+  text-align: center;
 }
 
-/* --- MAIN SERVICES GRID --- */
+/* Service Button Grid */
 .servicesGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 28px;
-  width: 95vw;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
   max-width: 1100px;
-  padding: 10px 0 24px 0;
-  margin: 0 auto 32px auto;
-  justify-items: center;
-  align-items: stretch;
+  margin: 0 auto;
+  padding: 0 clamp(10px, 5vw, 30px);
 }
 
 .serviceCard {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  background: rgba(255, 255, 255, 0.98);
-  border-radius: 22px;
-  box-shadow: 0 8px 36px rgba(230, 43, 30, 0.13);
+  background: rgba(255, 255, 255, 0.11);
+  border-radius: 24px;
+  box-shadow: 0 7px 32px rgba(230, 43, 30, 0.11), 0 0 2px rgba(230,43,30,0.19) inset;
   text-decoration: none;
-  padding: 24px 26px 20px 26px;
-  width: 100%;
-  min-width: 220px;
-  max-width: 330px;
-  transition: transform 0.12s, box-shadow 0.2s;
+  color: #fff;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  transition: box-shadow 0.22s cubic-bezier(0.4, 1.7, 0.7, 1.4),
+    background 0.22s cubic-bezier(0.4, 1.7, 0.7, 1.4);
+  padding: 26px 22px 22px 22px;
+  min-height: 148px;
   cursor: pointer;
-  min-height: 160px;
+  border: 1.2px solid rgba(255, 255, 255, 0.12);
 }
 
 .serviceCard:hover,
-.serviceCard:focus {
-  transform: translateY(-4px) scale(1.04);
-  box-shadow: 0 12px 48px rgba(230, 43, 30, 0.19);
+.serviceCard:focus-visible {
+  background: rgba(255, 255, 255, 0.16);
+  color: var(--tedx-red);
+  box-shadow: 0 10px 44px rgba(230, 43, 30, 0.18), 0 0 3px rgba(230,43,30,0.32) inset;
+  outline: none;
 }
 
 .cardIcon {
-  font-size: 2.2rem;
-  color: #e62b1e;
-  margin-bottom: 14px;
+  font-size: 2.15rem;
+  color: var(--tedx-red);
+  flex-shrink: 0;
+  margin-right: 10px;
+  border-radius: 50%;
+  background: rgba(230, 43, 30, 0.10);
+  padding: 12px;
   display: flex;
   align-items: center;
-  border-radius: 50%;
-  background: rgba(230, 43, 30, 0.08);
-  padding: 12px;
+  margin-bottom: 5px;
 }
 
 .cardContent h3 {
   margin: 0 0 7px 0;
-  font-size: 1.09rem;
+  font-size: 1.12rem;
   font-weight: 700;
-  color: #191818;
+  color: #fff;
 }
 
 .cardContent p {
   margin: 0;
-  font-size: 0.98rem;
-  color: #44232e;
+  font-size: 1rem;
+  color: #e0c8c8;
   font-weight: 400;
-  letter-spacing: 0.01em;
 }
 
-/* --- RESPONSIVENESS --- */
-@media (max-width: 1200px) {
-  .servicesGrid {
-    max-width: 900px;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+/* Laptop-only: disable page scroll (typical 1024–1440px widths) */
+@media screen and (min-width: 1024px) and (max-width: 1440px) {
+  html, body {
+    height: 100vh;
+    overflow: hidden !important;   /* blocks both axes */
+  }
+  .bgWrap {
+    height: 100vh;
+    overflow: hidden;
   }
 }
 
+/* Responsive tweaks */
 @media (max-width: 900px) {
   .servicesGrid {
-    max-width: 650px;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 18px;
+    max-width: 750px;
+    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   }
   .serviceCard {
-    min-width: 0;
-    max-width: 100%;
-    font-size: 0.95rem;
-    padding: 19px 13px 14px 13px;
+    min-height: 100px;
+    padding: 15px 13px 12px 13px;
+    border-radius: 14px;
   }
-}
-
-@media (max-width: 700px) {
+  .title,
   .header h1 {
     font-size: 1.5rem;
   }
   .subtitle {
     font-size: 1rem;
   }
+}
+
+@media (max-width: 600px) {
+  .header {
+    margin-bottom: 30px;
+    text-align: center;
+    padding: 0;
+  }
   .servicesGrid {
-    width: 99vw;
-    max-width: 490px;
+    max-width: 99vw;
     grid-template-columns: 1fr 1fr;
-    gap: 14px;
+    gap: 10px;
+    padding: 0 12px;
+  }
+  .serviceCard {
+    min-height: 90px;
+    border-radius: 11px;
+    padding: 12px;
   }
 }
 
-@media (max-width: 500px) {
-  .servicesGrid {
-    grid-template-columns: 1fr;
-    max-width: 350px;
-    gap: 10px;
-  }
-  .serviceCard {
-    padding: 13px 7px 8px 7px;
-    border-radius: 13px;
+@media (max-width: 480px) {
+  .bgWrap {
+    padding: 50px 12px 70px;
   }
   .header {
-    margin: 18px 0 12px 0;
+    text-align: center;
+    padding: 0 12px;
+    margin-bottom: 24px;
+    margin-left: auto;
+  }
+  .servicesGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 0 10px;
+  }
+  .serviceCard {
+    text-align: left;
+    min-height: 88px;
+    padding: 10px;
+  }
+  .cardIcon {
+    margin-left: 0;
+    margin-right: 8px;
+  }
+}
+
+@media (max-width: 420px) {
+  .servicesGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    padding: 0 8px;
+  }
+  .serviceCard {
+    min-height: 88px;
+    padding: 9px;
+  }
+  .cardIcon {
+    font-size: 1.9rem;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 650px) {
+  .servicesGrid {
+    grid-template-columns: 1fr;
+    gap: 13px;
+  }
+  .serviceCard {
+    min-height: 120px;
+    padding: 16px 13px 13px 13px;
+    border-radius: 17px;
+  }
+  .title {
+    font-size: 1.5rem;
+  }
+  .subtitle {
+    font-size: 1rem;
+  }
+}
+
+/* Larger device adjustments */
+@media (min-width: 481px) and (max-width: 768px) {
+  .bgWrap {
+    padding: 60px 30px 80px;
+  }
+  .header {
+    text-align: center;
+    padding: 0 30px;
+    margin-bottom: 50px;
+    margin-left: auto;
+  }
+  .servicesGrid {
+    grid-template-columns: 1fr;
+    gap: 44px;
+    padding: 0 40px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .bgWrap {
+    padding: 70px 40px 90px;
+  }
+  .header {
+    padding: 0 40px;
+    margin-bottom: 60px;
+  }
+  .servicesGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px;
+    padding: 0 40px;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1440px) {
+  .bgWrap {
+    padding: 90px 60px 110px;
+  }
+  .header {
+    padding: 0 60px;
+    margin-bottom: 70px;
+  }
+  .servicesGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 70px;
+    padding: 0 60px;
+  }
+  .cardContent p {
+    font-size: 1.02rem;
+  }
+}
+
+@media (min-width: 1441px) and (max-width: 1920px) {
+  .bgWrap {
+    padding: 100px 80px 120px;
+  }
+  .header {
+    padding: 0 80px;
+    margin-bottom: 80px;
+  }
+  .servicesGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 90px;
+    max-width: 1500px;
+    padding: 0 80px;
+  }
+}
+
+@media (min-width: 1921px) {
+  .bgWrap {
+    padding: 120px 100px 140px;
+  }
+  .header {
+    max-width: 1200px;
+    padding: 0 100px;
+    margin-bottom: 100px;
+  }
+  .servicesGrid {
+    max-width: 1700px;
+    gap: 110px;
+    padding: 0 100px;
+  }
+  .cardContent p {
+    font-size: 1.1rem;
+  }
+}
+
+/* Landscape Mobile Optimization */
+@media (max-width: 900px) and (orientation: landscape) {
+  .bgWrap {
+    padding: 40px 24px 60px;
+  }
+  .header {
+    margin-bottom: 35px;
+  }
+  .servicesGrid {
+    gap: 28px;
+  }
+}
+
+/* Mobile-first base improvements */
+:root{
+  --touch-min: 48px; /* recommended tap target size */
+}
+
+/* Make cards easier to tap on mobile */
+.serviceCard {
+  min-height: var(--touch-min);
+  padding: 16px 14px;
+  gap: 12px;
+  -webkit-tap-highlight-color: rgba(235,0,40,0.15);
+}
+
+/* Ensure icon + card meet touch size; increase icon padding on small screens */
+.cardIcon {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 10px;
+  border-radius: 999px;
+}
+
+/* Improve text legibility on small screens */
+.cardContent h3 { font-size: 1.05rem; line-height: 1.25; }
+.cardContent p  { font-size: 0.98rem; line-height: 1.5; }
+
+/* Prevent accidental rubber-band and scroll chaining on mobile */
+html, body {
+  overscroll-behavior-y: none;          /* stop pull-to-refresh/bounce */
+  touch-action: manipulation;           /* improve tap responsiveness */
+}
+
+/* iOS momentum scrolling for internal scroll areas if needed */
+.servicesGrid, .bgWrap {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Small phones: compact grid + full-bleed spacing */
+@media (max-width: 420px) {
+  .bgWrap { padding: 40px 12px 56px; }
+  .header { margin-bottom: 18px; padding: 0 6px; }
+
+  /* Switch to 1 column if space is tight */
+  .servicesGrid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    max-width: 100%;
+    padding: 0;
+  }
+
+  .serviceCard {
+    padding: 14px 12px;
+    border-radius: 12px;
+  }
+
+  .title, .header h1 {
+    font-size: clamp(1.35rem, 6.5vw, 1.6rem);
+    line-height: 1.2;
+  }
+  .subtitle {
+    font-size: clamp(0.95rem, 3.6vw, 1rem);
+    line-height: 1.55;
+  }
+}
+
+/* Typical phones: 2-column only if enough width per card; otherwise 1-column */
+@media (min-width: 421px) and (max-width: 600px) {
+  .servicesGrid {
+    grid-template-columns: repeat(2, minmax(150px, 1fr));
+    gap: 12px;
+    padding: 0 8px;
+  }
+  .serviceCard { padding: 16px 12px; }
+  .cardIcon    { min-width: 46px; min-height: 46px; }
+}
+
+/* Phablets/smaller tablets portrait */
+@media (min-width: 601px) and (max-width: 768px) {
+  .bgWrap { padding: 56px 20px 72px; }
+  .servicesGrid {
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+    gap: 16px;
+    padding: 0 12px;
+  }
+  .serviceCard { padding: 18px 14px; }
+}
+
+/* Landscape phones: reduce vertical padding to keep content in view */
+@media (max-width: 900px) and (orientation: landscape) {
+  .bgWrap { padding: 28px 18px 40px; }
+  .header { margin-bottom: 20px; }
+  .servicesGrid { gap: 14px; }
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
   }
 }
