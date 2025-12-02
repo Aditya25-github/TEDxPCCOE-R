@@ -51,18 +51,18 @@ export default function Home() {
       </section>
 
       {/* 🔹 Speakers Section */}
-      <section id="speakers">
+      {/* <section id="speakers">
         <Speakers speakers={SPEAKERS} />
-      </section>
+      </section> */}
 
       {/* 🔹 Remaining Sections */}
-      <section id="schedule">
+      {/* <section id="schedule">
         <Schedule slots={SLOTS} />
-      </section>
+      </section> */}
 
-      <section id="sponsors">
+      {/* <section id="sponsors">
         <Sponsors sponsors={SPONSORS} />
-      </section>
+      </section> */}
 
       <section id="Team">
         <Team team={TEAM} />
