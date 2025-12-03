@@ -11,7 +11,7 @@ import {
 
 const services = [
   {
-    label: "Apply to Speak at TEDxPCCOER",
+    label: "Hurry Apply now to Speak at TEDxPCCOER",
     icon: <FaMicrophone />,
     link: "https://docs.google.com/forms/d/e/1FAIpQLScenzeRvNFsDYcp2F6tCVzTW53czels_TKyZH9p5dUyvSsHDg/viewform",
     desc: "Become a TEDx speaker and share ideas worth spreading.",
@@ -29,7 +29,7 @@ const services = [
     desc: "Join our show line-up as a performer or entertainer.",
   },
   {
-    label: "Join Our Team — Recruitment Form",
+    label: "Join Our Team - Recruitment Form",
     icon: <FaUserPlus />,
     link: "https://docs.google.com/forms/d/e/1FAIpQLSeYQE2msOTc1L2V2H_KDJRBpX4dD5tzQW3Trt0Np7BZ1yHGXQ/alreadyresponded",
     desc: "Become a part of organizing TEDxPCCOER.",
