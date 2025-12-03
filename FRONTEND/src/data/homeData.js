@@ -160,7 +160,7 @@ export const TEAM = [
     id: 10,
     name: "Vedant Mahadik",
     role: "Production",
-    photo: "https://api.dicebear.com/9.x/micah/svg?seed=VedantMahadik",
+    photo: "./vedant.jpeg",
     tier: 2,
   },
   {
@@ -209,7 +209,7 @@ export const TEAM = [
     id: 17,
     name: "Harshada Pandure",
     role: "Content",
-    photo: "https://api.dicebear.com/9.x/micah/svg?seed=HarshadaPandure",
+    photo: "./harshada.jpeg",
     tier: 2,
   },
   {
