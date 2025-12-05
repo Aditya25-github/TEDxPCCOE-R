@@ -118,7 +118,7 @@ export const TEAM = [
     id: 4,
     name: "Karan Malore",
     role: "EPM",
-    photo: "https://api.dicebear.com/9.x/micah/svg?seed=KaranMalore",
+    photo: "./karan.png",
     tier: 2,
   },
   {
@@ -188,7 +188,7 @@ export const TEAM = [
     id: 14,
     name: "Raajas Nanderkar",
     role: "Cultural",
-    photo: "https://api.dicebear.com/9.x/micah/svg?seed=RaajasNanderkar",
+    photo: "./raajas.png",
     tier: 2,
   },
   {
@@ -223,7 +223,7 @@ export const TEAM = [
     id: 19,
     name: "Amey Mule",
     role: "Event",
-    photo: "https://api.dicebear.com/9.x/micah/svg?seed=AmeyMule",
+    photo: "./amey.png",
     tier: 2,
   },
   {
@@ -239,14 +239,14 @@ export const TEAM = [
     id: 21,
     name: "Dr Minal Bodke",
     role: "Faculty Coordinator",
-    photo: "https://api.dicebear.com/9.x/micah/svg?seed=DrMinalBodke",
+    photo: "./minal.png",
     tier: 3,
   },
   {
     id: 22,
     name: "Dr Dipali Dhake",
     role: "Faculty Coordinator",
-    photo: "https://api.dicebear.com/9.x/micah/svg?seed=DrDipaliDhake",
+    photo: "./dipali.png",
     tier: 3,
   },
 
