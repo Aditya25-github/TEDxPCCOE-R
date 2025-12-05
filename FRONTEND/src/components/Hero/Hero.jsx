@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Background from "../Background/Background";
 import styles from "./Hero.module.css";
 import heroImage from "../../assets/hero1.jpg";
-import { useNavigate } from "react-router-dom";
+import { href, useNavigate } from "react-router-dom";
 import Portal from "../Portal/Portal.jsx"; // <-- import portal
 
 export default function Hero({ scrollToId }) {
@@ -14,11 +14,6 @@ export default function Hero({ scrollToId }) {
     const timer = setTimeout(() => setIsLoaded(true), 100);
     return () => clearTimeout(timer);
   }, []);
-
-  const handleGetTicketClick = () => {
-    setShowPopup(true);
-    setTimeout(() => setShowPopup(false), 2000);
-  };
 
   return (
     <Background type="image" src={heroImage} brightness={0.6}>
@@ -47,7 +42,12 @@ export default function Hero({ scrollToId }) {
 
             <button
               className={styles.btnPrimary}
-              onClick={handleGetTicketClick}
+              onClick={() =>
+                window.open(
+                  "https://in.bookmyshow.com/events/tedxpccoer/ET00473851?webview=true",
+                  "_blank"
+                )
+              }
             >
               Get Ticket
             </button>
