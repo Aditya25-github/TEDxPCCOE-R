@@ -49,7 +49,7 @@ export default function Hero({ scrollToId }) {
                 )
               }
             >
-              Get Ticket
+              Buy Ticket
             </button>
 
             <button
