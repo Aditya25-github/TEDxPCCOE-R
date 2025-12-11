@@ -138,7 +138,7 @@ export const TEAM = [
   {
     id: 7,
     name: "Sejal Rathod",
-    role: "Sponserships",
+    role: "Sponsorships",
     photo: "./sejal.png",
     tier: 2,
   },
