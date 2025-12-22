@@ -32,7 +32,7 @@ const services = [
   {
     label: "Join Our Team — Recruitment Form",
     icon: <FaUserPlus />,
-    link: "https://docs.google.com/forms/d/e/1FAIpQLSeYQE2msOTc1L2V2H_KDJRBpX4dD5tzQW3Trt0Np7BZ1yHGXQ/alreadyresponded",
+    link: "https://docs.google.com/forms/d/e/1FAIpQLSdwNv-DEZ3UbupypfnX18OKeCqMRWWx2s550fA1KoN8CSw9qw/viewform",
     desc: "Become a part of organizing TEDxPCCOER.",
   },
   {
