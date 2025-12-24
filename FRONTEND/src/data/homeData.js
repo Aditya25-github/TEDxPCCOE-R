@@ -150,6 +150,13 @@ export const TEAM = [
     tier: 2,
   },
   {
+    id: 16,
+    name: "Aayush Adgaonkar",
+    role: "Logistics",
+    photo: "./aayush.png",
+    tier: 2,
+  },
+  {
     id: 9,
     name: "Pratik Todkar",
     role: "Technical",
@@ -199,13 +206,6 @@ export const TEAM = [
     tier: 2,
   },
   {
-    id: 16,
-    name: "Aayush Adgaonkar",
-    role: "Logistics",
-    photo: "./aayush.png",
-    tier: 2,
-  },
-  {
     id: 17,
     name: "Harshada Pandure",
     role: "Content",
@@ -231,6 +231,20 @@ export const TEAM = [
     name: "Ashish Gaikward",
     role: "Documentation",
     photo: "./ashish.png",
+    tier: 2,
+  },
+  {
+    id: 21,
+    name: "Parth Shinde",
+    role: "Accounts",
+    photo: "./parth.png",
+    tier: 2,
+  },
+  {
+    id: 22,
+    name: "Sarthak Pawar",
+    role: "Systems",
+    photo: "./sarthak.png",
     tier: 2,
   },
 
