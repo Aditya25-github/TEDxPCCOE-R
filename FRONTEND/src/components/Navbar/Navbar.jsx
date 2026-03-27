@@ -137,6 +137,12 @@ export default function Navbar() {
             </button>
             <button
               className={styles.drawerLink}
+              onClick={() => handleNav("/", "Team")}
+            >
+              Team
+            </button>
+            <button
+              className={styles.drawerLink}
               onClick={() => handleNav("/", "speakers")}
             >
               Speakers

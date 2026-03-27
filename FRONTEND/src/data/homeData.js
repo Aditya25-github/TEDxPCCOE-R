@@ -152,7 +152,7 @@ export const TEAM = [
     id: 4,
     name: "Karan Malore",
     role: "EPM",
-    photo: "https://api.dicebear.com/9.x/micah/svg?seed=KaranMalore",
+    photo: "./karan.png",
     tier: 2,
   },
   {
@@ -172,7 +172,7 @@ export const TEAM = [
   {
     id: 7,
     name: "Sejal Rathod",
-    role: "Sponserships",
+    role: "Sponsorships",
     photo: "./sejal.png",
     tier: 2,
   },
@@ -181,6 +181,13 @@ export const TEAM = [
     name: "Shriraj Dongre",
     role: "Design",
     photo: "./shriraj.png",
+    tier: 2,
+  },
+  {
+    id: 16,
+    name: "Aayush Adgaonkar",
+    role: "Logistics",
+    photo: "./aayush.png",
     tier: 2,
   },
   {
@@ -222,7 +229,7 @@ export const TEAM = [
     id: 14,
     name: "Raajas Nanderkar",
     role: "Cultural",
-    photo: "https://api.dicebear.com/9.x/micah/svg?seed=RaajasNanderkar",
+    photo: "./raajas.png",
     tier: 2,
   },
   {
@@ -230,13 +237,6 @@ export const TEAM = [
     name: "Prerna Yesugade",
     role: "Promotions",
     photo: "./prerana.png",
-    tier: 2,
-  },
-  {
-    id: 16,
-    name: "Aayush Adgaonkar",
-    role: "Logistics",
-    photo: "./aayush.png",
     tier: 2,
   },
   {
@@ -257,7 +257,7 @@ export const TEAM = [
     id: 19,
     name: "Amey Mule",
     role: "Event",
-    photo: "https://api.dicebear.com/9.x/micah/svg?seed=AmeyMule",
+    photo: "./amey.png",
     tier: 2,
   },
   {
@@ -267,20 +267,34 @@ export const TEAM = [
     photo: "./ashish.png",
     tier: 2,
   },
+  {
+    id: 21,
+    name: "Parth Shinde",
+    role: "Accounts",
+    photo: "./parth.png",
+    tier: 2,
+  },
+  {
+    id: 22,
+    name: "Sarthak Pawar",
+    role: "Systems",
+    photo: "./sarthak.png",
+    tier: 2,
+  },
 
   // Level 2 (Faculty Coordinators)
   {
     id: 21,
     name: "Dr Minal Bodke",
     role: "Faculty Coordinator",
-    photo: "https://api.dicebear.com/9.x/micah/svg?seed=DrMinalBodke",
+    photo: "./minal.png",
     tier: 3,
   },
   {
     id: 22,
     name: "Dr Dipali Dhake",
     role: "Faculty Coordinator",
-    photo: "https://api.dicebear.com/9.x/micah/svg?seed=DrDipaliDhake",
+    photo: "./dipali.png",
     tier: 3,
   },
 

@@ -290,21 +290,29 @@
   .team {
     padding: 22px 0 8px 0;
   }
+
   .sectionHead {
     margin-bottom: 16px;
   }
+
+  /* 🔥 3 CARDS PER ROW */
   .gridContainer {
-    grid-template-columns: 1fr;
-    gap: 9px;
-    padding: 0 2px;
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr); /* ✅ 3 columns */
+    gap: 10px;
+    padding: 0 6px;
+    overflow: visible !important;
   }
-  .sliderContainer,
-  .teamSlider {
-    padding: 0 0 10px 0;
-  }
+
   .teamCard {
-    padding: 0;
     border-radius: 9px;
+    min-width: auto; /* prevent forced large cards */
+    max-width: 100%;
+  }
+
+  .teamCard img {
+    aspect-ratio: 1 / 1; /* square images look better for small cards */
+    object-fit: cover;
   }
 }
 
