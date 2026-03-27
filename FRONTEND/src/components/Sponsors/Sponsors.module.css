@@ -59,35 +59,117 @@
   font-weight: 500;
 }
 
-/* Logo Grid - Clean, no boxes */
-.logoGrid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: clamp(32px, 5vw, 50px);
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 16px;
-  place-items: center;
+/* Tiered Groups */
+.tierGroup {
+  margin-bottom: clamp(60px, 8vw, 100px);
 }
 
-/* Logo item - transparent wrapper */
+.tierGroup:last-child {
+  margin-bottom: 0;
+}
+
+.tierTitle {
+  font-family: "Inter", -apple-system, system-ui, sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  color: #ffffff;
+  text-align: center;
+  margin: 0 0 clamp(24px, 4vw, 40px);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  position: relative;
+}
+
+.tierTitle::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-soft));
+  margin: 12px auto 0;
+  border-radius: 1px;
+}
+
+/* Platinum/Gold - CENTERED LOGOS */
+.platinumGrid,
+.goldGrid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: clamp(32px, 5vw, 48px);
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Regular Logo Grid for others */
+.logoGridWithNames {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: clamp(28px, 4vw, 40px);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.sponsorWithName {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-height: 140px;
+}
+
+.sponsorName {
+  font-family: "Inter", -apple-system, system-ui, sans-serif;
+  font-weight: 600;                    /* Semi-bold for clarity */
+  font-size: clamp(0.85rem, 1.3vw, 1rem);  /* Slightly larger */
+  color: #e5e7eb;                      /* Softer white */
+  text-align: center;
+  margin: 0;
+  line-height: 1.35;
+  max-width: 100%;
+  padding: 4px 6px;
+  letter-spacing: -0.01em;             /* Modern tightness */
+  text-transform: capitalize;          /* Proper casing */
+  /* border-radius: 4px; */
+  /* background: rgba(255, 255, 255, 0.03);  Subtle glass effect */
+  backdrop-filter: blur(10px);
+  /* border: 1px solid rgba(255, 255, 255, 0.06); */
+}
+
+
+/* Logo item */
 .logoItem {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
   position: relative;
-  width: 100%;
-  max-width: clamp(160px, 28vw, 240px);
-  min-height: clamp(70px, 10vw, 100px);
-  
-  /* Fade-in animation */
   opacity: 0;
   transform: translateY(20px) scale(0.96);
   animation: sponsorFadeIn 600ms cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
-  
   transition: transform 280ms cubic-bezier(0.2, 0.7, 0.2, 1),
               filter 250ms ease;
+}
+
+/* Platinum logos - BIGGER & CENTERED */
+.platinumGrid .logoItem {
+  max-width: clamp(280px, 42vw, 360px);
+  min-height: clamp(130px, 16vw, 160px);
+}
+
+/* Gold logos - MEDIUM & CENTERED */
+.goldGrid .logoItem {
+  max-width: clamp(220px, 34vw, 300px);
+  min-height: clamp(100px, 13vw, 130px);
+}
+
+/* Associate logos - REGULAR */
+.logoGridWithNames .logoItem {
+  max-width: clamp(160px, 28vw, 240px);
+  min-height: clamp(70px, 10vw, 100px);
+  width: 100%;
 }
 
 @keyframes sponsorFadeIn {
@@ -96,11 +178,10 @@
   100% { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* Logo image - centered and clean */
+/* Logo image */
 .logoImage {
   width: 100%;
   max-width: 100%;
-  max-height: clamp(70px, 10vw, 100px);
   height: auto;
   object-fit: contain;
   transition: transform 320ms cubic-bezier(0.2, 0.7, 0.2, 1), 
@@ -110,7 +191,19 @@
   opacity: 0.95;
 }
 
-/* Hover effects - subtle lift and clarity */
+.platinumGrid .logoImage {
+  max-height: clamp(130px, 16vw, 160px);
+}
+
+.goldGrid .logoImage {
+  max-height: clamp(100px, 13vw, 130px);
+}
+
+.logoGridWithNames .logoImage {
+  max-height: clamp(70px, 10vw, 100px);
+}
+
+/* Hover effects */
 .logoItem:hover,
 .logoItem:focus-visible {
   transform: translateY(-4px) scale(1.04);
@@ -124,24 +217,38 @@
   opacity: 1;
 }
 
-/* Focus ring for accessibility */
 .logoItem:focus-visible {
   outline: 2px solid rgba(255, 255, 255, 0.4);
   outline-offset: 6px;
   border-radius: 8px;
 }
 
-/* Responsive columns */
+/* Responsive */
 @media (min-width: 640px) {
-  .logoGrid { grid-template-columns: repeat(3, 1fr); }
+  .logoGridWithNames { 
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+  }
 }
 
 @media (min-width: 900px) {
-  .logoGrid { grid-template-columns: repeat(4, 1fr); }
+  .logoGridWithNames { 
+    grid-template-columns: repeat(4, 1fr); 
+  }
 }
 
 @media (min-width: 1200px) {
-  .logoGrid { grid-template-columns: repeat(5, 1fr); }
+  .logoGridWithNames { 
+    grid-template-columns: repeat(5, 1fr); 
+  }
+}
+
+/* Mobile tweaks */
+@media (max-width: 639px) {
+  .sponsors { padding: clamp(40px, 8vw, 80px) 16px; }
+  .header { margin-bottom: clamp(30px, 5vw, 50px); }
+  .tierGroup { margin-bottom: clamp(40px, 6vw, 60px); }
+  .platinumGrid,
+  .goldGrid { gap: clamp(24px, 6vw, 32px); }
 }
 
 /* Reduced motion */
@@ -154,5 +261,35 @@
   .logoItem { 
     opacity: 1 !important; 
     transform: none !important; 
+  }
+}
+/* Mobile: Force 2 columns for Partners & Associates */
+@media (max-width: 639px) {
+  .logoGridWithNames {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: clamp(20px, 4vw, 28px);
+  }
+  
+  .sponsorWithName {
+    min-height: 120px;
+  }
+  
+  .logoItem {
+    max-width: 140px;
+    min-height: 60px;
+  }
+  
+  .sponsorName {
+    font-size: 0.8rem;
+    padding: 2px 4px;
+  }
+}
+
+/* Ensure Platinum/Gold stay centered on mobile */
+@media (max-width: 639px) {
+  .platinumGrid,
+  .goldGrid {
+    flex-direction: column;
+    gap: 20px;
   }
 }

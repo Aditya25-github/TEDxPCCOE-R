@@ -29,9 +29,9 @@ export default function Home() {
       </section>
 
       {/* 🔹 Countdown Section */}
-      <section id="countdown">
+      {/* <section id="countdown">
         <Countdown />
-      </section>
+      </section> */}
 
       {/* 🔹 Theme Section */}
       <section id="theme">
@@ -55,15 +55,6 @@ export default function Home() {
         <Speakers speakers={SPEAKERS} />
       </section>
 
-      {/* 🔹 Remaining Sections */}
-      {/* <section id="schedule">
-        <Schedule slots={SLOTS} />
-      </section> */}
-
-      <section id="sponsors">
-        <Sponsors sponsors={SPONSORS} />
-      </section>
-
       <section id="Team">
         <Team team={TEAM} />
       </section>
@@ -74,6 +65,10 @@ export default function Home() {
 
       <section id="gallery">
         <Gallery gallery={GALLERY} />
+      </section>
+
+      <section id="sponsors">
+        <Sponsors sponsors={SPONSORS} />
       </section>
 
       {/* 🔹 Contact Section */}
