@@ -1,74 +1,81 @@
+import steepgraphLogo from "../sponsors/steepgraph-logo.png";
+import sbooch from "../sponsors/sbooch.png";
+import lasegreto from "../sponsors/lasegreto.jpg";
+import florence from "../sponsors/florence.jpeg";
+import bookmyshow from "../sponsors/book my show.jpg";
+import tiptop from "../sponsors/tiptop.jpg";
+import collegerivals3 from "../sponsors/collegerivals3.png";
+import thefreamewall from "../sponsors/thefreamewall.png";
+import travelplanner from "../sponsors/travelplanner.png";
+import startupnews from "../sponsors/startupnews.png";
+import redbull from "../sponsors/redbull.png";
+import aecc from "../sponsors/aecc.jpg";
+import sayaji from "../sponsors/sayaji.png";
+import dione from "../sponsors/dione.png";
+import redindian from "../sponsors/redindian.png";
+import thedesertbar from "../sponsors/thedesertbar.png";
+import xx from "../sponsors/xx.png";
+import enterperneursofindia from "../sponsors/enterperneursofindia.png";
+import skytea from "../sponsors/skytea.png";
+import progaming from "../sponsors/progaming.png";
+import meltandmoulds from "../sponsors/meltandmoulds.png";
+import toing from "../sponsors/toing.png";
+import niaura from "../sponsors/niaura.png";
+import curatedtrunk from "../sponsors/curatedtrunk.png";
+import caters from "../sponsors/caters.png";
+import backyardplams from "../sponsors/backyardpalms.jpg";
+import yoobee from "../sponsors/yoobee.png";
+import artisannglow from "../sponsors/artisannglow.png";
+import vsl from "../sponsors/vsl.jpg";
+import evokeholidays from "../sponsors/evokeholidays.png";
+
+import akhilsachdeva from "../speakers/Akhil Sachdeva 340x340px.jpg";
+import HimanshuZalavadiya from "../speakers/Himanshu Zalavadiya 340x340px.jpg";
+import KrantiRedkar from "../speakers/Kranti Redkar 340x340px.jpg";
+import MajPrajaktaDesai from "../speakers/Maj Prajakta Desai 340x340px.jpg";
+import RanjitBajaj from "../speakers/Ranjit Bajaj 340x340px.jpg";
+import TarunMishra from "../speakers/Tarun Mishra 340x340px.jpg";
 export const SPEAKERS = [
   {
     id: 1,
-    name: "Speaker One",
-    title: "Coming soon",
-    topic: "Coming soon",
-    bio: "Comming Soon",
-    photo: "https://api.dicebear.com/9.x/micah/svg?seed=Vivian",
+    name: "Akhil Sachdeva",
+    title: "Singer and Music Composer",
+    photo: akhilsachdeva,
     video: "",
   },
   {
     id: 2,
-    name: "Speaker Two",
-    title: "Coming soon",
-    topic: "Coming soon",
-    bio: "Comming Soon",
-    photo: "https://api.dicebear.com/9.x/micah/svg?seed=Maria",
+    name: "Ranjit Bajaj",
+    title: "Professional Footballer and Sports Entrepreneur",
+    photo: RanjitBajaj,
     video: "",
   },
   {
     id: 3,
-    name: "Speaker Three",
-    title: "Coming soon",
-    topic: "Coming soon",
-    bio: "Comming Soon",
-    photo: "https://api.dicebear.com/9.x/micah/svg?seed=Ryan",
+    name: "Kranti Redkar",
+    title: "Actress and Film Producer",
+    photo: KrantiRedkar,
     video: "",
   },
   {
     id: 4,
-    name: "Speaker Four",
-    title: "Coming soon",
-    topic: "Coming soon",
-    bio: "Comming Soon",
-    photo: "https://api.dicebear.com/9.x/micah/svg?seed=Sara",
+    name: "Himanshu Zalavadiya",
+    title: "Tech Entrepreneur and business strategist",
+    photo: HimanshuZalavadiya,
     video: "",
   },
   {
     id: 5,
-    name: "Speaker Five",
-    title: "Coming soonr",
-    topic: "Coming soonl",
-    bio: "Comming Soon",
-    photo: "https://api.dicebear.com/9.x/micah/svg?seed=Aidan",
+    name: "Maj Prajakta Desai",
+    title: "First women UAV pilot",
+    photo: MajPrajaktaDesai,
     video: "",
   },
   {
     id: 6,
-    name: "Speaker Six",
-    title: "Coming soon",
-    topic: "Coming soon",
-    bio: "Comming Soon",
-    photo: "https://api.dicebear.com/9.x/micah/svg?seed=Liam",
-    video: "",
-  },
-  {
-    id: 7,
-    name: "Speaker Seven",
-    title: "Coming soon",
-    topic: "Coming soon",
-    bio: "Comming Soon",
-    photo: "https://api.dicebear.com/9.x/micah/svg?seed=Chase",
-    video: "",
-  },
-  {
-    id: 8,
-    name: "Speaker Eight",
-    title: "Coming soonr",
-    topic: "Coming soon",
-    bio: "Comming Soon",
-    photo: "https://api.dicebear.com/9.x/micah/svg?seed=Andrea",
+    name: "Tarun Mishra",
+    title: "Community social worker",
+    photo: TarunMishra,
     video: "",
   },
 
@@ -84,10 +91,37 @@ export const SLOTS = [
   { time: "16:00", title: "Closing" },
 ];
 
-export const SPONSORS = [
-  { id: 1, name: "Platinum Co.", logo: "https://api.dicebear.com/9.x/icons/svg?seed=Avery", url: "#" },
-  { id: 2, name: "Gold Co.", logo: "https://api.dicebear.com/9.x/icons/svg?seed=Eden", url: "#" },
-  { id: 3, name: "Silver Co.", logo: "https://api.dicebear.com/9.x/icons/svg?seed=Katherine", url: "#" },
+  export const SPONSORS = [
+    { id: 1, name: "Platinum Co.", logo: steepgraphLogo, url: "#"},
+  { id: 2, name: "Gold Co.", logo: sbooch, url: "#" },
+  { id: 3, name: "Bronze Co.", logo: lasegreto, url: "#" },
+  { id: 4, name: "eco-friendly partner", logo: florence, url: "#" },
+  { id: 5, name: "ticketing partner", logo: bookmyshow, url: "#" },
+  { id: 6, name: "hospitality partner", logo: tiptop, url: "#" },
+  { id: 7, name: "gaming partner", logo: collegerivals3, url: "#" },
+  { id: 8, name: "gifting partner", logo: thefreamewall, url: "#" },
+{ id: 9, name: "travel partner", logo: travelplanner, url: "#" },
+{ id: 10, name: "media partner", logo: startupnews, url: "#"},
+{ id: 11, name: "breverage partner", logo: redbull, url: "#" },
+{ id: 12, name: "education partner", logo: aecc, url: "#" },
+{ id: 13, name: "logistics partner", logo: sayaji, url: "#" },
+{ id: 14, name: "jewelry partner", logo: dione, url: "#" },
+{ id: 15, name: "snacks partner", logo: redindian, url: "#"},
+{ id: 16, name: "desert partner", logo: thedesertbar, url: "#" },
+{ id: 17, name: "merchandise partner", logo: xx, url: "#" },
+{ id: 18, name: "magazine partner", logo: enterperneursofindia, url: "#" },
+{ id: 19, name: "associate partner", logo: skytea, url: "#" },
+{ id: 20, name: "associate partner", logo: progaming, url: "#" },
+{ id: 21, name: "associate partner", logo: meltandmoulds, url: "#" },
+{ id: 22, name: "associate partner", logo: toing, url: "#"},
+{ id: 23, name: "associate partner", logo: niaura, url: "#" },
+{ id: 24, name: "associate partner", logo: curatedtrunk, url: "#" },
+{ id: 25, name: "associate partner", logo: caters, url: "#" },
+{ id: 26, name: "associate partner", logo: backyardplams, url: "#" },
+{ id: 27, name: "associate partner", logo: yoobee, url: "#" },
+{ id: 28, name: "associate partner", logo: artisannglow, url: "#" },
+{ id: 29, name: "associate partner", logo: vsl, url: "#" },
+{ id: 30, name: "associate partner", logo: evokeholidays, url: "#" },
 ];
 
 export const TEAM = [

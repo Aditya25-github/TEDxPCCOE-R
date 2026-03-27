@@ -108,11 +108,14 @@
   background: linear-gradient(180deg, #1a1a1a, #0f0f0f);
 }
 .cardFigure img {
+ .cardFigure img {
   width: 100%;
   height: 100%;
-  object-fit: contain;       /* preserves the illustration proportions */
+  object-fit: cover;        /* Crops to fill frame, no letterboxing */
+  object-position: center;  /* Keeps faces centered */
   image-rendering: -webkit-optimize-contrast;
   transition: transform .4s ease;
+}
 }
 .card:hover .cardFigure img { transform: scale(1.05); }
 
