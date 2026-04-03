@@ -40,7 +40,7 @@ export default function Hero({ scrollToId }) {
               About Event
             </button>
 
-            <button
+            {/* <button
               className={styles.btnPrimary}
               onClick={() =>
                 window.open(
@@ -50,7 +50,7 @@ export default function Hero({ scrollToId }) {
               }
             >
               Buy Ticket
-            </button>
+            </button> */}
 
             <button
               className={styles.btnPrimary}
@@ -64,7 +64,7 @@ export default function Hero({ scrollToId }) {
               className={styles.btnGhost}
               onClick={() =>
                 window.open(
-                  "https://youtu.be/nJLEUxRLWjE?si=gALkyu1KsXQ96X35",
+                  "https://youtu.be/Jph7gV9NMOw",
                   "_blank"
                 )
               }

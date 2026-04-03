@@ -29,9 +29,9 @@ export default function Home() {
       </section>
 
       {/* 🔹 Countdown Section */}
-      {/* <section id="countdown">
+      <section id="countdown">
         <Countdown />
-      </section> */}
+      </section>
 
       {/* 🔹 Theme Section */}
       <section id="theme">
