@@ -303,9 +303,9 @@ export const TEAM = [
 
 
 export const GALLERY = [
-  { id: 1, src: "DSC02794.JPG", alt: "TEDx stage photo" },
+  { id: 1, src: "DSC01777.JPG", alt: "TEDx stage photo" },
   { id: 2, src: "DSC02786.JPG ", alt: "Audience cheering" },
-  { id: 3, src: "DSC02791.JPG", alt: "Speaker on stage" },
+  // { id: 3, src: "DSC02791.JPG", alt: "Speaker on stage" },
     { id: 11, src: "DSC02617.JPG"},
   { id: 12, src: "DSC02502.JPG"},
   { id: 13, src: "DSC02627.JPG"},
